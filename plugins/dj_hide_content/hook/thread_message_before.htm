@@ -1,0 +1,24 @@
+<style>
+.dj_hide{
+    padding:10px 5px;
+    border: 1px dashed #f60;
+    border-radius:4px;
+}
+</style>
+<?php
+$pattern = '`(\[djhide]([\s\S]*?)\[/djhide])`';
+$re = preg_match($pattern, $first['message_fmt'], $matches);
+if($re){
+    $hide_content = '<i class="icon-lock"></i>&nbsp;该内容被隐藏，只有指定用户组可见';
+    $gids = setting_get('dj_gids');
+    if($gids){
+        $gids = explode('-', $gids);
+        if(in_array($gid, $gids)){
+            $hide_content = $matches[2];
+        }
+    }
+    $replacement = '<div class="dj_hide alert-warning">'.$hide_content.'</div>';
+    $first['message_fmt'] = str_replace($matches[1], $replacement, $first['message_fmt']);
+}
+
+?>

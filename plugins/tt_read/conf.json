@@ -1,0 +1,14 @@
+{
+    "name": "阅读权限Plus",
+    "brief": "阅读权限，登录可见，回帖可见。",
+    "version": "1.51",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": {
+        "post_post_end.php": 1000,
+        "thread_create_thread_end.php": 1000
+    },
+    "overwrites_rank": [],
+    "dependencies": []
+}

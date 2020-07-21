@@ -1,0 +1,23 @@
+<?php
+if(isset($route) && in_array($route, array('index', 'forum'))) {
+    $forum_config_ids = kv_get('sky_thumb_list_forum_ids');
+    if($forum_config_ids) {
+        if( $forum_config_ids['sky_thumb_list_fid']) {
+            $forum_ids = explode(',', $forum_config_ids['sky_thumb_list_fid']);
+            if(is_array($forum_ids) && in_array($fid, $forum_ids)) {
+                //图片列表
+                include _include(APP_PATH.'plugin/sky_thumb_list/htm/thumb_list.htm');
+                return ;
+            }
+        }
+        if( $forum_config_ids['sky_txt_thumb_list_fid']) {
+            $forum_ids = explode(',', $forum_config_ids['sky_txt_thumb_list_fid']);
+            if(is_array($forum_ids) && in_array($fid, $forum_ids)) {
+                //图文列表
+                include _include(APP_PATH.'plugin/sky_thumb_list/htm/thumb_txt_list.htm');
+                return ;
+            }
+        }
+    }
+}
+?>

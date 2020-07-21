@@ -1,0 +1,47 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+
+<?php if(isset($msg)): ?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    配置成功！<b id="wait">2</b>&nbsp;秒。
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<script>
+    (function(){
+        var wait = document.getElementById('wait')
+        var interval = setInterval(function(){
+            var time = --wait.innerHTML;
+            if(time <= 0) {
+                $(".alert").hide('slow');
+                clearInterval(interval);
+            };
+        }, 1000);
+    })();
+</script>
+<?php endif; ?>
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <form style="font-size:16px;" action="<?=url('plugin-setting-dj_hide_content')?>" method="POST">
+            <div class="form-group row">
+                <div class="col-sm-2">选择用户组：</div>
+                <div class="col-sm-10">
+                    <?php foreach($grouplist as $v): ?>
+                    <?php 
+                        $checked = (in_array($v['gid'], $gids) ? 'checked=true' : '');
+                        $disabled= (1 == $v['gid'] ? 'disabled':'');
+                    ?>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="gid_<?=$v['gid']?>" name="gid[]" value="<?=$v['gid']?>" <?=$checked?> <?=$disabled?> >
+                        <label class="form-check-label" for="gid_<?=$v['gid']?>"><?=$v['name']?></label>
+                    </div>
+                    <?php endforeach; ?>
+                    <div class="col-sm-12" style="margin-top:10px;">
+                        <button type="submit" class="btn btn-primary">确认选择</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>

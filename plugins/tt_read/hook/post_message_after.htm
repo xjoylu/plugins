@@ -1,0 +1,10 @@
+<?php if($isfirst&&$group['allowPostRead']=="1") { ?>
+<div class="form-group row"><label class="col-sm-2 form-control-label"><?php echo lang('permission');?> : </label><div class="col-sm-10"><?php echo $input['readp_status'];?></div></div>
+<div class="form-group row" id="readp_group">
+<select name="user_group_select" id="user_group_select" style="height:33px;top:2px;left:12px;position:relative;">
+    <?php foreach($grouplist as $__group) { ?>
+        <option id="op_<?php echo $__group['gid'];?>" value="<?php echo $__group['name'];?>" data-active="<?php echo $__group['readp'];?>"><?php echo '['.$__group['readp'],'] '.$__group['name'];?></option>
+    <?php }?>
+</select>
+<input maxlength="3" type="text" class="form-control col-sm-2" name="readp" placeholder="0" id="pnumber" value="<?php echo $pnumber;?>" style="display: inline-block; margin-top:2px; margin-left:15px;"/></div><div style="margin-bottom:5px;"><button type="button" class="btn btn-primary" onclick="try{ UM.getEditor('message').setContent('[ttlogin]<?php echo lang("read_input_content_here");?>[/ttlogin]',true)  } catch(err) {document.getElementById('message').innerHTML+='[ttlogin]<?php echo lang("read_input_content_here");?>[/ttlogin]';}"><?php echo lang("insert_login_content");?></button>&nbsp;<button type="button" class="btn btn-primary" onclick="try{ UM.getEditor('message').setContent('[ttreply]<?php echo lang("read_input_content_here");?>[/ttreply]',true)  } catch(err) {document.getElementById('message').innerHTML+='[ttreply]<?php echo lang("read_input_content_here");?>[/ttreply]';}"><?php echo lang("insert_reply_content");?></button>&nbsp;<button type="button" class="btn btn-primary" onclick="try{ UM.getEditor('message').setContent('[ttread]<?php echo lang("read_input_content_here");?>[/ttread]',true)  } catch(err) {document.getElementById('message').innerHTML+='[ttread]<?php echo lang("read_input_content_here");?>[/ttread]';}"><?php echo lang("insert_component_content");?></button></div>
+<?php } ?>

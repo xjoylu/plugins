@@ -1,0 +1,58 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+
+<div class="row">
+	<div class="col-lg-10 offset-lg-1">
+		<div class="card">
+			<div class="card-block">
+				<form action="<?php echo url("plugin-setting-sg_hide");?>" method="post" id="form">
+					<h4 class="card-title">登陆/回复可见设置</h4>
+					<div class="form-group row">
+						<label class="m-l-1"><?php echo $input['hide1']; ?>开启游客隐藏全文</label>
+						<label class="m-l-3"><?php echo $input['hide2']; ?>开启游客隐藏图片</label>
+						<label class="m-l-3"><?php echo $input['hide3']; ?>开启回复/登陆可见</label>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 m-l-1">不限制的用户组：</label>
+						<div class="col-sm-6">
+							<?php echo $input['hide4']; ?>
+						</div>
+					</div>
+					<p>
+					<?php foreach($grouplist as $_gid=>$_group) { ?><label class="m-r-1"><?php echo $_group['name']; ?>ID：<?php echo $_group['gid']; ?></label><?php } ?>   
+					</p>
+					<p class="text-center">
+						<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+						<a role="button" class="btn btn-secondary btn-block m-t-1" href="javascript:history.back();"><?php echo lang('back');?></a>
+					</p>
+				</form>
+			</div>
+			<p class="m-a-1"><font color='#ff0000'>注意：开启回复登陆可见后请禁用官方自带的编辑器，但不能删除。<br>开启后在编辑器的代码选项里会多出登陆可见和回复可见选项。<br>安装好后请清空tmp目录。</font></p>
+		</div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+
+var jform = $("#form");
+var jsubmit = $("#submit");
+var referer = '<?php echo http_referer();?>';
+jform.on('submit', function(){
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serialize();
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message);
+			jsubmit.text(message).delay(2000).button('reset').location(referer);
+			return;
+		} else {
+			$.alert(message);
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+
+</script>

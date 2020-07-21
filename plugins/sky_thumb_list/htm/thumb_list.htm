@@ -1,0 +1,66 @@
+<div class="threadlist-img row">
+    <?php
+    if($threadlist) {
+        $have_allowtop = 0;
+        foreach($threadlist as &$_thread) {
+            $_thread['allowtop'] = forum_access_mod($_thread['fid'], $gid, 'allowtop');
+            if($_thread['allowtop']) $have_allowtop = 1;
+        }
+    }
+    ?>
+    <?php if($threadlist) { foreach($threadlist as &$_thread) { ?>
+    <div class="col-xl-4 col-md-4 col-sm-6 col-xs-6 <?php echo $_thread['top_class'];?>" data-href="<?php echo url("thread-$_thread[tid]");?>" data-tid="<?php echo $_thread['tid'];?>">
+        <div class="card forum-card">
+            <a href="<?php echo url("thread-$_thread[tid]");?>">
+                <img class="card-img-top sky_adipoli" alt="<?php echo $_thread['subject'];?>" title="<?php echo $_thread['subject'];?>"  src="<?php echo $_thread['thumbs'][0]['filename'];?>" height="150">
+            </a>
+            <div class="card-block">
+                <p class="subject font-weight-bold">
+                    <!--{hook thread_list_inc_top_icon_before.htm}-->
+                    <?php if($_thread['top'] > 0) { ?>
+                    <i class="icon-top-<?php echo $_thread['top']; ?>"></i>
+                    <?php } ?>
+                    <!--{hook thread_list_inc_subject_top_after.htm}-->
+
+                    <!--{hook thread_list_inc_subject_before.htm}-->
+                    <a href="<?php echo url("thread-$_thread[tid]");?>"><?php echo $_thread['subject'];?></a>
+                    <!--{hook thread_list_inc_subject_after.htm}-->
+
+                    <!--{hook thread_list_inc_filetype_icon_before.htm}-->
+                    <?php if($_thread['files'] > 0) { ?><i class="icon small filetype other"></i><?php } ?>
+                    <!--{hook thread_list_inc_filetype_icon_after.htm}-->
+
+                    <!--{hook thread_list_inc_lock_icon_before.htm}-->
+                    <?php if($_thread['closed'] > 0) { ?><i class="icon-lock"></i><?php } ?>
+                    <!--{hook thread_list_inc_lock_icon_after.htm}-->
+                </p>
+                <p class="card-text">
+                    <!-- 主题列表头像 -->
+                    <a href="<?php echo url("user-$_thread[uid]");?>" tabindex="-1">
+                        <img class="avatar-xs m-r-xs" src="<?php echo $_thread['user_avatar_url'];?>"><?php echo $_thread['username'];?></a><span class="date m-l-xs"><?php echo $_thread['create_date_fmt'];?></span>
+                    <!--{hook thread_list_inc_avatar_after.htm}-->
+                </p>
+                <p class="card-text">
+                    <!--{hook thread_list_inc_view_before.htm}-->
+                    <span class="m-r-xs"><i class="icon-eye"></i> <?php echo $_thread['views'];?></span>
+                    <!--{hook thread_list_inc_view_after.htm}-->
+
+                    <!--{hook thread_list_inc_posts_before.htm}-->
+                    <span><i class="icon-commenting"></i> <?php echo $_thread['posts'];?></span>
+                    <!--{hook thread_list_inc_posts_after.htm}-->
+
+                    <?php if($have_allowtop) { ?>
+                        <?php if($_thread['allowtop']) { ?>
+                        <input type="checkbox" name="modtid" class="pull-right" value="<?php echo $_thread['tid']; ?>" />
+                        <?php } ?>
+                    <?php } ?>
+                </p>
+            </div>
+        </div>
+    </div>
+    <?php }} else { ?>
+    <li>
+        <div><?php echo lang('none');?></div>
+    </li>
+    <?php } ?>
+</div>

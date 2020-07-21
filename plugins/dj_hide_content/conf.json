@@ -1,0 +1,11 @@
+{
+    "name": "地精-内容用户组可见",
+    "brief": "隐藏内容可设置为指定的用户组可见",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

@@ -1,0 +1,15 @@
+<script>
+    $(function(){
+        $('#hide-content-ok').on('click', function(){
+            var html = $('#message-text').val();
+            if(!html){
+                $.alert('输入内容不能为空');
+                return false;
+            }
+            html = '[djhide]'+html+'[/djhide]';
+            var ue = UM.getEditor('message');
+            ue.execCommand('inserthtml', html);
+            $('#dj_hide_content').modal('hide');
+        })
+    })
+</script>
