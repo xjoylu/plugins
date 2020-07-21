@@ -1,0 +1,20 @@
+<script type="text/javascript" src="plugin/jianjianxu_simditor/simditor/js/module.min.js"></script>
+<script type="text/javascript" src="plugin/jianjianxu_simditor/simditor/js/hotkeys.min.js"></script>
+<script type="text/javascript" src="plugin/jianjianxu_simditor/simditor/js/uploader.min.js"></script>
+<script type="text/javascript" src="plugin/jianjianxu_simditor/simditor/js/simditor.min.js"></script>
+<script>
+    var up_url = '<?php echo url('attach-simditor');?>'
+    var editor = new Simditor({
+        textarea: $('#message'),
+        placeholder: '',
+        pasteImage: true,
+        toolbarFloat: true,
+        toolbar: ['bold', 'italic', 'underline', 'strikethrough', 'color',
+            'ol', 'ul', 'code', 'link', 'image', 'hr', 'alignment'],
+        upload: {
+            url: up_url,
+            fileKey: "onefile"
+        },
+        indentWidth:100
+    });
+</script>

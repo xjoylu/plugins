@@ -1,0 +1,10 @@
+{
+	"name":"Simditor编辑器",
+	"brief":"Simditor编辑器非常简洁，符合xiuno的风格。<br>Simditor编辑器官网：https://simditor.tower.im/。<br>插件原作者：vikingleo。<br>我在他的基础上改了一下上传的问题，插件有问题或者侵权了请联系QQ：47421450",
+	"version":"1.0",
+	"bbs_version":"4.0",
+	"installed":1,
+	"enable":1,
+	"hooks_rank":[],
+	"dependencies":[]
+}

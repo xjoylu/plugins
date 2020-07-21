@@ -1,0 +1,191 @@
+/********* tmo - www.tmopal.com UMEditor UI v1.1 *********/
+.edui-container{
+	border-color: #ced4da !IMPORTANT;
+}
+.edui-container .edui-toolbar{
+	background-color: #fff !IMPORTANT;
+	border-color: #eee !IMPORTANT;
+}
+.edui-container .form-control:focus{
+	box-shadow:none;
+}
+
+.edui-btn-toolbar .edui-btn .edui-icon, .edui-toolbar .edui-separator {
+    background-image: none !IMPORTANT;
+}
+.edui-btn-toolbar .edui-btn .edui-icon {
+    height: 0 !IMPORTANT;
+    width: 10px !IMPORTANT;
+}
+.edui-btn-toolbar .edui-btn {
+    padding: 1rem 16px 1rem 12px !IMPORTANT;
+	margin: 0 !IMPORTANT;
+}
+.edui-btn-toolbar .edui-combobox {
+    padding: 3px !IMPORTANT;
+}
+.edui-btn-toolbar .edui-btn.edui-hover, .edui-btn-toolbar .edui-btn.edui-active {
+    border-width: 0 !IMPORTANT;
+    background-color: #EEE !IMPORTANT;
+}
+.edui-toolbar .edui-btn{
+	opacity: .6;
+}
+.edui-toolbar .edui-btn:hover {
+    opacity: 1;
+	cursor: pointer;
+}
+span.edui-button-label {
+    text-transform: uppercase;
+    font-size: 13px !IMPORTANT;
+}
+.edui-btn-toolbar .edui-combobox {
+    margin: 6px !IMPORTANT;
+    border-radius: 50px;
+}
+.edui-combobox .edui-button-label{
+	width: initial !IMPORTANT;
+	padding-left: 6px !IMPORTANT;
+}
+
+.edui-btn-toolbar .edui-combobox:hover {
+    border-width: 1px !IMPORTANT;
+	border-color: #c9d8db !IMPORTANT;
+	height: initial !IMPORTANT;
+}
+.edui-btn-toolbar .edui-splitbutton.edui-hover .edui-btn{
+	background-color: transparent !IMPORTANT;
+}
+.edui-splitbutton .edui-caret {
+    margin: -3px 0 0 -15px;
+}
+.edui-btn-toolbar .edui-btn.edui-hover, .edui-btn-toolbar .edui-btn.edui-active {
+    height: 40px;
+}
+.edui-toolbar .edui-btn-toolbar{
+	opacity: 1;
+	padding:0 !IMPORTANT;
+	margin-bottom: -6px;
+}
+.edui-combobox-menu{
+	    margin-top: 11px;
+}
+.edui-popup{
+	    margin-left: 6px;
+}
+.edui-btn-name-paragraph.edui-combobox {
+    margin-left: -6px !IMPORTANT;
+}
+.edui-splitbutton-color-label {
+    top: 30px;
+}
+.edui-btn-xnimg input {
+    width: 38px !IMPORTANT;
+    height: 40px !IMPORTANT;
+    cursor: pointer;
+}
+@media (max-width: 576px){
+	.edui-toolbar .edui-btn-toolbar{
+	 height: 40px;
+	 margin-bottom: 0;
+  }
+}
+@media (min-width: 576px){
+	.edui-toolbar .edui-btn-toolbar{
+	 height: 40px;
+	 margin-bottom: 0;
+  }
+}
+
+@media (min-width: 768px){
+	.edui-toolbar .edui-btn-toolbar{
+	 height: 40px;
+	 margin-bottom: 0;
+  }
+}
+
+@media (min-width: 992px){
+  .edui-toolbar .edui-btn-toolbar{
+	 height: 85px;
+	 margin-bottom: 0;
+  }
+}
+@media (min-width: 1200px){
+   .edui-toolbar .edui-btn-toolbar{
+	 height: 40px;
+  }
+}
+.edui-btn {
+    font: normal normal normal 14px/1 FontAwesome;
+}
+.edui-btn-source:before {
+    content: "\f1dc";
+}
+.edui-icon-undo:before {
+    content: "\f0e2";
+}
+.edui-icon-redo:before {
+    content: "\f01e";
+}
+.edui-icon-removeformat:before {
+    content: "\f12d";
+}
+.edui-icon-bold:before {
+    content: "\f032";
+}
+.edui-icon-italic:before {
+    content: "\f033";
+}
+.edui-icon-underline:before {
+    content: "\f0cd";
+}
+.edui-icon-forecolor:before {
+    content: "\f031";
+}
+.edui-icon-justifyleft:before {
+    content: "\f036";
+}
+.edui-icon-justifycenter:before {
+    content: "\f037";
+}
+.edui-icon-justifyright:before {
+    content: "\f038";
+}
+.edui-icon-link:before {
+    content: "\f0c1";
+}
+.edui-icon-unlink:before {
+    content: "\f127";
+}
+.edui-icon-video:before {
+    content: "\f008";
+}
+.edui-icon-xnimg:before {
+    content: "\f03e";
+}
+.edui-icon-fullscreen:before {
+    content: "\f0b2";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
