@@ -1,0 +1,10 @@
+{
+    "name": "jiih：简约单栏",
+    "brief": "简约单栏。",
+    "version": "0.1",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}
