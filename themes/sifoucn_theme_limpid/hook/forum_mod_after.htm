@@ -1,0 +1,17 @@
+<?php
+
+echo setting_get('forum_mod_after_htm');
+
+?>
+<?php
+	$_forumlist = thread__find(array('fid'=>$forum['fid']), array('views'=>-1), 1, 5);
+			thread_list_access_filter($_threadlist, $gid);
+?>
+<div class="card">
+	<div class="card-header">热门主题</div>
+	<ul class="break-all list">
+	<?php foreach($_forumlist as $_fthread) { ?>
+		<li class="item"><a href="<?php echo url("thread-$_fthread[tid]");?>" target="_blank" title="<?php echo $_thread['subject'];?>"><?php echo $_fthread['subject'];?></a></li>
+	<?php } ?>
+	</ul>
+</div>

@@ -1,0 +1,142 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<style type="text/css">
+.sifoucn .card{margin-bottom: 1rem; border: 0; background: #FFF;}
+.sifoucn .card > .card-header {padding: 0.75rem;color: #454d55;font-size: 14px;border-bottom: 1px solid #dee2e6;background-image: linear-gradient(0deg, #e9ecef, #f8f9fa);}
+.nav-tabs{border-bottom: 1px solid #f0f2f7;}
+.nav-tabs .nav-item{float: left; display: inline-block; padding: 0 0.75rem;}
+.nav-tabs .nav-link{position: relative; display: inline-block; padding: 14px 0; font-size: 14px; line-height: 22px; text-align: center;border: 0; border-radius: 0;}
+.nav-tabs .nav-link.active:after{position: absolute; right: 0; bottom: -1px; left: 0; height: 3px; background: #343a40; content: "";}
+.sifoucn .card-body{padding: 0 0.75rem;}
+</style>
+<div class="row">
+	<div class="col-lg-10 sifoucn mx-auto">
+		<div class="card">
+			<div class="card-header">模板编辑器</div>
+			<div class="card-box">
+				<form action="<?php echo url("plugin-setting-sifoucn_theme_limpid");?>" method="post" id="form">
+					<ul class="nav nav-tabs" role="tablist" id="myTab">
+						<li class="nav-item active"><a href="#tab1"  class="nav-link">首页</a></li>
+						<li class="nav-item"><a href="#tab2"  class="nav-link">列表页</a></li>
+						<li class="nav-item"><a href="#tab3"  class="nav-link">内容页</a></li>
+						<li class="nav-item"><a href="#tab4"  class="nav-link">尾页</a></li>
+					</ul>
+					<div class="tab-content card-body">
+						<div class="tab-pane show" id="tab1">
+							<img src="../plugin/sifoucn_theme_limpid/example/example1.png" class="img-fluid my-3" />
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">首页头部：</label>
+								<div class="col-sm-10">
+									<textarea name="index_main_start_htm" class="form-control" style="height: 100px;" placeholder="&lt;div class=&quot;card card-banner ht90&quot;&gt; ... &lt;/div&gt;"><?php echo $setting['index_main_start_htm'];?></textarea>
+									<span class="text-muted">注：广告图宽835px 高90px</span>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">首页右侧：</label>
+								<div class="col-sm-10">
+									<textarea name="index_site_brief_after_htm" class="form-control" style="height: 100px;" placeholder="&lt;div class=&quot;card card-banner&quot;&gt; ... &lt;/div&gt;"><?php echo $setting['index_site_brief_after_htm'];?></textarea>
+									<span class="text-muted">注：右侧广告图宽270px 高200px</span>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="tab2">
+							<img src="../plugin/sifoucn_theme_limpid/example/example2.png" class="img-fluid my-3" />
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">列表页头部：</label>
+								<div class="col-sm-10">
+									<textarea name="forum_breadcrumb_before_htm" class="form-control" style="height: 100px;" placeholder="&lt;div class=&quot;card card-banner ht90&quot;&gt; ... &lt;/div&gt;"><?php echo $setting['forum_breadcrumb_before_htm'];?></textarea>
+									<span class="text-muted">注：顶部广告图宽835px 高90px</span>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">列表页右侧：</label>
+								<div class="col-sm-10">
+									<textarea name="forum_mod_after_htm" class="form-control" style="height: 100px;" placeholder="&lt;div class=&quot;card card-banner&quot;&gt; ... &lt;/div&gt;"><?php echo $setting['forum_mod_after_htm'];?></textarea>
+									<span class="text-muted">注：右侧广告图宽270px 高200px</span>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="tab3">
+							<img src="../plugin/sifoucn_theme_limpid/example/example3.png" class="img-fluid my-3" />
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">内容页右侧：</label>
+								<div class="col-sm-10">
+									<textarea name="thread_user_after_htm" class="form-control" style="height: 100px;" placeholder="&lt;div class=&quot;card card-banner&quot;&gt; ... &lt;/div&gt;"><?php echo $setting['thread_user_after_htm'];?></textarea>
+									<span class="text-muted">注：右侧广告图宽270px 高200px</span>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="tab4">
+							<img src="../plugin/sifoucn_theme_limpid/example/example4.png" class="img-fluid my-3" />
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">页面底部：</label>
+								<div class="col-sm-10">
+									<textarea name="footer_start_htm" class="form-control" style="height: 100px;"><?php echo $setting['footer_start_htm'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">页脚左侧：</label>
+								<div class="col-sm-10">
+									<textarea name="footer_footer_left_end_htm" class="form-control" style="height: 50px;" placeholder=" - 海口XX责任有限公司"><?php echo $setting['footer_footer_left_end_htm'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">页脚右侧：</label>
+								<div class="col-sm-10">
+									<textarea name="footer_footer_right_end_htm" class="form-control" style="height: 50px;" placeholder=" - 琼ICP备88888888号-1"><?php echo $setting['footer_footer_right_end_htm'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 form-control-label">统计代码：</label>
+								<div class="col-sm-10">
+									<textarea name="footer_end_htm" class="form-control" style="height: 100px;"><?php echo $setting['footer_end_htm'];?></textarea>
+									<span class="text-muted">注：一般放统计代码，建议采用异步加载提高速度，找到统计代码中的关键的 URL，然后引入：</span><br>
+									<kbd>&lt;script&gt;$.require('https://hm.baidu.com/hm.js?38e521ad5fb62b974841a4e0b774566e');&lt;/script&gt;</kbd>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-content card-body">
+						<div class="form-group row">
+							<label class="col-sm-2 form-control-label"></label>
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+								<a role="button" class="btn btn-secondary btn-block mt-3" href="javascript:history.back();"><?php echo lang('back');?></a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+var jform = $("#form");
+var jsubmit = $("#submit");
+var referer = '<?php echo http_referer();?>';
+jform.on('submit', function(){
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serialize();
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message);
+			jsubmit.text(message).delay(2000).button('reset').location(referer);
+			return;
+		} else {
+			$.alert(message);
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+$(function () {
+    $('#myTab a:first').tab('show');
+    $('#myTab a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+    });
+})
+</script>

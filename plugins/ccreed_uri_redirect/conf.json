@@ -1,0 +1,11 @@
+{
+    "name": "外站链接跳转",
+    "brief": "外站链接延时跳转、提示以及美化。由<a href=\"https://www.ccreed.com/user-1.htm\" style=\"color:red\" target=\"_blank\">代码信条-夜琉璃</a>制作，QQ：2813361953。",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

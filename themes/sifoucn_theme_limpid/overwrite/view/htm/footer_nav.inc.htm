@@ -1,0 +1,21 @@
+<footer class="text-muted small pt-3 pb-3 bg-dark" id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<!--{hook footer_footer_left_start.htm}-->
+				Copyright &copy; 2001-2019 <a href="https://www.comlimi.com/" target="_blank" class="text-muted"><b>Comlimi</b></a>
+				<!--{hook footer_footer_left_end.htm}-->
+			</div>
+			<div class="col text-right">
+				<!--{hook footer_footer_right_start.htm}-->
+				Processed: <b><?php echo substr(microtime(1) - $starttime, 0, 5);?></b>, SQL: <b><?php echo count($db->sqls);?></b>
+				<!--{hook footer_footer_right_end.htm}-->
+			</div>
+		</div>
+	</div>
+</footer>
+<div id="scrolltop" class="d-none d-lg-block">
+	<ul>
+		<li class="totop" style=" display: none;"><i class="top-ico"></i></li>
+	</ul>
+</div>

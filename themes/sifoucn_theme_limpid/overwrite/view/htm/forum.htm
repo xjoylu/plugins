@@ -1,0 +1,132 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<!--{hook forum_start.htm}-->
+
+<div class="row">
+
+	<!--{hook forum_breadcrumb_before.htm}-->
+	<?php if(empty($hide_breadcrumb)) { ?>
+	<div class="col-lg-100">
+		<div id="pt" class="clearfix">
+			<div class="place z">
+				<a href="./" class="nvhm" title="<?php echo lang('index_page');?>" target="_blank"></a>
+				<em>›</em>
+				<a href="<?php echo url("forum-$fid");?>"><?php echo $forum['name'];?></a>
+				<!--{hook forum_breadcrumb.htm}-->
+			</div>
+		</div>
+	</div>
+	<?php } ?>
+	<!--{hook forum_breadcrumb_after.htm}-->
+
+	<div class="col-lg-9 main sifoucn">
+		
+		<?php if($forum['announcement']) { ?>
+		<div class="card d-none d-lg-block card-mod-info">
+			<div class="card-body">
+				<div id="top-announce">
+				<?php if($forum['announcement']) { ?><i class="icon-bullhorn fa-fw"></i><?php echo $forum['announcement'];?><?php  } ?>
+				</div>
+			</div>
+		</div>
+		<?php  } ?>
+	
+		<div class="card card-threadlist">
+			<div class="card-th d-flex justify-content-between">
+				<div class="z tf">
+					<ul class="list-unstyled">
+						<li class="nav-item">
+							<a class="nav-link <?php echo $active == 'default' ? 'active' : '';?>" href="<?php echo url("forum-$fid");?>"><?php echo lang('new_thread');?></a>
+						</li>
+						<!--{hook forum_thread_list_nav_item_after.htm}-->
+					</ul>
+				</div>
+				<!--{hook forum_thread_list_dropdown_before.htm}-->
+				<div class="text-right text-small card-header-dropdown">
+					<div class="btn-toolbar" role="toolbar">
+						<div class="dropdown btn-group">
+							<a href="#" class="selector" id="ordery_dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<?php echo $orderby == 'tid' ? lang('thread_create_date') : lang('post_create_date');?> <i class="icon icon-sort"></i>
+								<!--{hook forum_thread_list_dropdown_toggle.htm}-->
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="ordery_dropdown_menu">
+							    <a class="dropdown-item" href="<?php echo url("forum-$fid-1", array('orderby'=>'tid') + $extra);?>"><i class="icon text-primary <?php echo $orderby == 'tid' ? 'icon-check' : '';?>"></i>&nbsp; <?php echo lang('thread_create_date');?></a>
+							    <a class="dropdown-item" href="<?php echo url("forum-$fid-1", array('orderby'=>'lastpid') + $extra);?>"><i class="icon text-primary <?php echo $orderby == 'lastpid' ? 'icon-check' : '';?>"></i>&nbsp; <?php echo lang('post_create_date');?></a>
+							    <!--{hook forum_thread_list_dropdown_menu.htm}-->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--{hook forum_thread_list_dropdown_after.htm}-->
+			</div>
+			<?php if($gid > 0 && $gid < 5) { ?>
+			<div class="card-th d-flex justify-content-between">
+				<div class="y">
+					<?php include _include(APP_PATH.'view/htm/thread_list_mod.inc.htm');?>
+				</div>
+			</div>
+			<?php } ?>
+			<div class="card-box">
+				<ul class="list-unstyled threadlist mb-0">
+					<!--{hook forum_threadlist_before.htm}-->
+					<?php include _include(APP_PATH.'view/htm/thread_list.inc.htm');?>
+					<!--{hook forum_threadlist_after.htm}-->
+				</ul>
+			</div>
+			<!--{hook forum_page_before.htm}-->
+				<?php if($pagination) { ?><nav class="card-pgs"><ul class="pagination y flex-wrap"><?php echo $pagination; ?></ul></nav><?php } ?>
+			<!--{hook forum_page_after.htm}-->
+		</div>
+
+	</div>
+	<div class="col-lg-3 d-none d-lg-block aside">
+		<div class="card card-forum-info">
+			<div class="card-body">
+				<a href="<?php echo url("forum-$fid");?>" target="_blank"><div src="<?php echo $forum['icon_url'];?>" style="background-image: url(<?php echo $forum['icon_url'];?>);" class="forum-icon"></div></a>
+				<div class="forum-info">
+					<a href="<?php echo url("forum-$fid");?>" target="_blank" class="forumname"><?php echo $forum['name'];?></a>
+					<div class="forumbrief"><?php echo mb_substr($forum['brief'],0,26,'utf-8').'...';?></div>
+				</div>
+				<!--{hook forum_brief_before.htm}-->
+				<!--{hook forum_brief_after.htm}-->
+			</div>
+			<div class="stat-list">
+				<div class="item"><div class="title"><?php echo lang('threads');?></div><div class="count"><?php echo $forum['threads'];?></div></div>
+				<div class="item"><div class="title"><?php echo lang('today_posts');?></div><div class="count"><?php echo $forum['todayposts'];?></div></div>
+				<div class="item"><div class="title"><?php echo lang('today_threads');?></div><div class="count"><?php echo $forum['todaythreads'];?></div></div>
+				<!--{hook forum_todaythreads_after.htm}-->
+			</div>
+		</div>
+		
+		<!--{hook forum_mod_before.htm}-->
+		<?php if($forum['modlist']) { ?>
+		<div class="card card-mod-info">
+			<div class="card-header"><?php echo lang('forum_moderator');?></div>
+			<div class="card-body">
+				<?php if($forum['modlist']) { ?>
+				<div class="row">
+					<?php foreach ($forum['modlist'] as $mod) { ?>
+					<div class="plm text-center">
+						<a href="<?php echo url("user-$mod[uid]");?>"><img src="<?php echo $conf['view_url'];?>img/avatar.png" alt="..." width="42" height="42" class="img-circle"></a><br>
+						<a href="<?php echo url("user-$mod[uid]");?>" class="small text-muted text-nowrap"><?php echo $mod['username'];?></a>
+					</div>
+					<?php } ?>
+				</div>
+				<?php  } ?>
+			</div>
+		</div>
+		<?php  } ?>
+		<!--{hook forum_mod_after.htm}-->
+	</div>
+</div>
+
+
+<!--{hook forum_end.htm}-->
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+$('li[data-active="fid-<?php echo $fid;?>"]').addClass('active');
+</script>
+
+<!--{hook forum_js.htm}-->
