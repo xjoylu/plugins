@@ -1,0 +1,14 @@
+{
+    "name": "积分插件",
+    "brief": "积分插件免费版。积分规则、兑换、消费记录、积分查询面板。",
+    "version": "0.99",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": {
+        "post_post_end.php": -10,
+        "thread_create_thread_end.php": -10
+    },
+    "overwrites_rank": [],
+    "dependencies": []
+}

@@ -1,0 +1,88 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <form action="<?php echo url("plugin-setting-aci_mdeditor");?>" method="post" id="form">
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">是否启用自动下载外部图片：</label>
+                        <div class="col-sm-9">
+                            <?php echo $auto_down; ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">是否开启七牛上传：</label>
+                        <div class="col-sm-9">
+                            <?php echo $qiniu_open; ?>
+                        </div>
+                    </div>
+
+                    <?php if($aci_md_config['qiniu_open']==1){?>
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">自定义长尾词：</label>
+                        <div class="col-sm-9">
+                            <?php echo $qiniu_bucket; ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">forum列表title规则：</label>
+                        <div class="col-sm-9">
+                            <?php echo $qiniu_access; ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">forum列表title规则：</label>
+                        <div class="col-sm-9">
+                            <?php echo $qiniu_secret; ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">forum列表title规则：</label>
+                        <div class="col-sm-9">
+                            <?php echo $qiniu_url; ?>
+                        </div>
+                    </div>
+                    <?php }?>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>...">
+                                <?php echo lang('confirm');?>
+                            </button>
+                            <a role="button" class="btn btn-secondary btn-block mt-3" href="javascript:history.back();">
+                                <?php echo lang('back');?>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+    var jform = $("#form");
+    var jsubmit = $("#submit");
+    var referer = '<?php echo url("plugin-setting-aci_mdeditor");?>';
+    jform.on('submit', function () {
+        jform.reset();
+        jsubmit.button('loading');
+        var postdata = jform.serialize();
+        $.xpost(jform.attr('action'), postdata, function (code, message) {
+            if (code == 0) {
+                $.alert(message);
+                jsubmit.text(message).delay(1000).button('reset').location(referer);
+            } else {
+                $.alert('提交失败');
+                jsubmit.button('reset');
+            }
+        });
+        return false;
+    });
+</script>

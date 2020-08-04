@@ -1,0 +1,52 @@
+
+		<div class="card card-block">
+			<div class="card-body">
+				<?php include _include(APP_PATH.'plugin/GG_thread_favorite/model/user.favorite.func.php'); ?>
+				<?php $gg_check_favorite = gg_check_favorite($uid, $tid); ?>
+				<?php if($gg_check_favorite){ ?>
+				<i class="icon icon-heart" style="cursor:pointer;color:#ea413c;" title="取消收藏" id="GG_del_favorite" onclick="GG_favorite_del()"></i>
+				<?php }else{ ?>
+				<i class="icon icon-heart-o" style="cursor:pointer;" title="收藏本帖" id="GG_add_favorite" onclick="GG_favorite_add()"></i>
+				<?php } ?>
+				<span style="display:inline-block;margin-left:10px;" id="GG_favorite_show">
+					<span id="GG_favorite_show_inner">
+						<?php $gg_favorites = gg_favorite_find_by_tid($tid); ?>
+						<?php if(!empty($gg_favorites)){ ?>
+						<?php foreach($gg_favorites as $gg_favorite){ ?>
+						<?php $gg_favorite_user = db_find_one('user', array('uid'=>$gg_favorite['uid']), array(), array('username'));?>
+						<?php echo $gg_favorite_user['username'];?> 
+						<?php } ?>
+						等<?php echo count($gg_favorites);?>人收藏了本帖
+						<?php }else{ ?>
+						还没有人收藏过本帖~
+						<?php } ?>
+					</span>
+				</span>
+			</div>
+		</div>
+		<script>
+			function GG_favorite_add(){
+				$.xpost('<?php echo url("my-favorite");?>','action=add&tid=<?php echo $tid;?>',function(code,msg){
+					if(code==1){
+						$('#GG_add_favorite').removeClass('icon-heart-o').addClass('icon-heart').css('color','#ea413c').attr('onclick','GG_favorite_del()').attr('id','GG_del_favorite').attr('title','取消收藏');
+						$('#GG_favorite_show').load(' #GG_favorite_show_inner');
+					}else if(code==0){
+						$.alert(msg);
+					}else{
+						$.alert('请先登录');
+					}
+				});
+			}
+			function GG_favorite_del(){
+				$.xpost('<?php echo url("my-favorite");?>','action=del&tid=<?php echo $tid;?>',function(code,msg){
+					if(code==1){
+						$('#GG_del_favorite').removeClass('icon-heart').addClass('icon-heart-o').css('color','#000').attr('onclick','GG_favorite_add()').attr('id','GG_add_favorite').attr('title','收藏本帖');
+						$('#GG_favorite_show').load(' #GG_favorite_show_inner');
+					}else if(code==0){
+						$.alert(msg);
+					}else{
+						$.alert('请先登录');
+					}
+				});
+			}
+		</script>

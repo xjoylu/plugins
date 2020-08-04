@@ -1,0 +1,5 @@
+<ul id="tag" data-tid="<?php echo $tid; ?>" >
+	<?php foreach ( $list as $k ){ ?>
+	<li data-tag="<?php echo $k['tagid'] ?>"><a href='<?php echo url("tag-$k[tagid]") ?>'><i class="icon-tag"></i><?php echo $k['name'] ?></a></li>
+	<?php } ?>
+</ul>

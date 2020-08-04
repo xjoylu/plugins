@@ -1,0 +1,112 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<div class="row">
+	<div class="col-lg-10 mx-auto">
+		<div class="card">			<div class="card-body" >		       <h4 class="card-title mb-3">xiuno用户交流渠道</h4>			   <div class="alert alert-warning" role="alert">                  官方网站：www.8c5.cn <a href="http://www.8c5.cn" target="_blank" style="text-decoration: none">点击进入</a><br>                  客服微信/QQ：312215120<br>		          QQ交流分享群：146126201  <a target='_blank' href='//shang.qq.com/wpa/qunwpa?idkey=419e79c4fd427f516556b1e496a6ab3691e575bd5fbd765f569f50eaa1c32e84'><img border='0' src='//pub.idqqimg.com/wpa/images/group.png' alt='xiuno插件-8c5.cn' title='xiuno插件-8c5.cn'></a><br>		          我们的服务范围：xiuno功能插件，xiuno模板主题开发，xiuno网站体系建设，为您提供一站式服务！				</div>		    </div>
+			<div class="card-body">
+				<form action="<?php echo url('plugin-setting-a8c5_carousel');?>" method="post" id="form">
+					<h4 class="card-title">轮播图片设置</h4>
+					<div class="table-responsive arrlist">
+						<table class="table" style="min-width: 800px">
+							<thead>
+								<tr align="center">
+									<th width="40">ID</th>
+									<th>名称</th>
+									<th>链接</th>
+									<th width="200">图片地址</th>																		<th width="60">图片高度</th>
+									<th width="40">排序</th>
+									<th>删除</th>
+								</tr>
+								<thead>
+									<tbody>
+										<?php foreach($slidelist as $arr) { ?>
+										<?php $rowid = $arr['slideid'];?>
+										<tr align="center" rowid="<?php echo $rowid; ?>">
+											<td><input type="text" class="form-control text-center" style="width: 30px;" name="rowid[<?php echo $rowid;?>]" value="<?php echo $rowid; ?>" placeholder="ID" /></td>
+											<td><input type="text" class="form-control" name="name[<?php echo $rowid;?>]" value="<?php echo $arr['name']; ?>" placeholder="名称" /></td>
+											<td><input type="text" class="form-control" name="url[<?php echo $rowid;?>]" value="<?php echo $arr['url']; ?>" placeholder="链接" /></td>
+											<td><input type="text" class="form-control" style="width: 200px;" name="slidepic[<?php echo $rowid;?>]" value="<?php echo $arr['slidepic']; ?>" placeholder="图片地址" /></td>																						<td><input type="text" class="form-control" style="width:60px;" name="picheight[<?php echo $rowid;?>]" value="<?php echo $arr['picheight']; ?>" placeholder="高度" /></td>
+											<td><input type="text" class="form-control  text-center" style="width: 30px;" name="rank[<?php echo $rowid;?>]" value="<?php echo $arr['rank']; ?>" placeholder="顺序" /></td>
+											<td><a class="btn row_delete  text-center"  role="btn">删除</a></td>
+										</tr>
+										<?php } ?>
+										<tr align="center" rowid="<?php echo !empty($rowid) ? $rowid : 0; ?>" class="d-none">
+											<td><input type="text" class="form-control text-center" style="width: 30px;" name="rowid[0]" value="" placeholder="ID" /></td>
+											<td><input type="text" class="form-control" name="name[0]" value="" placeholder="名称" /></td>
+											<td><input type="text" class="form-control" name="url[0]" value="" placeholder="链接" /></td>
+											<td><input type="text" class="form-control" style="width: 200px;" name="slidepic[0]" value="" placeholder="图片地址" /></td>																						<td><input type="text" class="form-control" style="width: 60px;" name="picheight[0]" value="" placeholder="高度" /></td>
+											<td><input type="text" class="form-control text-center" style="width: 30px;" name="rank[0]" value="" /></td>
+											<td><a class="btn row_delete" role="btn">删除</a></td>
+										</tr>
+									</tbody>
+						</table>
+					</div>
+					<p><a role="button" class="btn row_add">[+]增加一行</a></p>
+					<p class="text-center">
+						<button type="submit" class="btn btn-primary" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+	var maxid = <?php echo $maxid;?>;
+
+	var jform = $("#form");
+	var jsubmit = $("#submit");
+	var jarrlist = $('.arrlist');
+	jform.base64_encode_file(); // 对文件进行 base64 编码，处理文件上传，很方便
+
+	jform.on('submit', function() {
+		jform.reset();
+		var postdata = jform.serialize();
+		jsubmit.button('loading');
+		$.xpost(jform.attr('action'), postdata, function(code, message) {
+			if (code == 0) {
+				$.alert(message);
+				jsubmit.text(message).delay(3000).location();
+				return;
+			} else {
+				alert(message);
+				jsubmit.button('reset');
+			}
+		});
+		return false;
+	});
+
+	// 删除
+	var jdelete = $('a.row_delete');
+	jarrlist.on('click', 'a.row_delete', function() {
+		var jthis = $(this);
+		var jtr = jthis.parents('tr');
+		var rowid = jtr.attr('rowid');
+		if (jform.find('tbody').find('tr').length <= 2) {
+			$.alert('不能删除系统保留的版块。');
+			return;
+		}
+		jtr.remove();
+		return false;
+	});
+	// 增加
+	var jadd = $('a.row_add');
+	jadd.on('click', function() {
+		var jclone = jarrlist.find('tr').last().clone();
+		jclone.insertAfter(jarrlist.find('tr').last()).removeClass('d-none');
+		var jrowid = jclone.find('input[name^="rowid"]');
+		//var rowid = xn.intval(jrowid.val()) + 1;
+		var rowid = ++maxid;
+		jrowid.val(rowid);
+		jclone.attr('rowid', rowid);
+
+		// 清空值
+		jclone.find('input').not('[name^="rowid"]').val('');
+
+		// 修改 [] 中的值为 rowid
+		jclone.find('input').attr_name_index(rowid);
+
+		return false;
+	});
+
+	$('#nav_pc li.plugin, #nav_mobile li.plugin').addClass('active');
+</script>

@@ -1,0 +1,13 @@
+{
+    "name": "用户组升级增强版",
+    "brief": "本插件可设置用户升级方式及发帖、回帖所得积分和金币奖励、每日首帖奖励等。<br><br><b>【V1.8】</b>更新说明<br>1.各版块奖励分开设置<br>2.达到积分不升级问题修复<br>3.代码优化<br><br>插件为<a target='_blank' href='http://cha.sgahz.net/'>查鸽信息网</a>制作。<br>联系QQ：5886425",
+    "version": "1.8",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": {
+        "thread_create_thread_end.php": -100,
+        "post_post_end.php": -100
+    },
+    "dependencies": []
+}

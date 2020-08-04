@@ -1,0 +1,22 @@
+<ul class="nav nav-top" role="navigation" id="nav-top">
+	<!--{hook header_nav_forum_start.htm}-->
+	<li class="nav-item"><a class="nav-link" fid="0" href=".">全部</a></li>	
+	<!--{hook header_nav_home_link_after.htm}-->
+	<?php foreach($forumlist_show as $_forum) { ?>
+	<!--{hook header_nav_forumlist_loop_start.htm}-->
+	<li class="nav-item">
+		<a class="nav-link" fid="<?php echo $_forum['fid'];?>" href="<?php echo url("forum-$_forum[fid]");?>"> <?php echo $_forum['name'];?></a>
+	</li>
+	<!--{hook header_nav_forumlist_loop_end.htm}-->
+	<?php } ?>
+	<!--{hook header_nav_forum_end.htm}-->
+</ul>
+
+
+
+		
+
+
+ 
+
+

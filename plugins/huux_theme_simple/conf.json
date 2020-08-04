@@ -1,0 +1,11 @@
+{
+    "name": "大白简约主题",
+    "brief": "纯css单文件，压缩后仅有2.64kb<br />(FOR 4.0.3 正式版)",
+    "version": "1.0",
+    "bbs_version": "4.0.3",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

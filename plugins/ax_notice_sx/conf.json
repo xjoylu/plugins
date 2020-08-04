@@ -1,0 +1,13 @@
+{
+    "name": "私信消息版",
+    "brief": "本插件依赖与官方消息插件，重要：安装此插件之前要先安装消息插件，否则报错！",
+    "version": "1.0",
+    "bbs_version": "4.0.3",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": {
+        "huux_notice": "1.9"
+    }
+}

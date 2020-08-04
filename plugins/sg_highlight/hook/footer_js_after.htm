@@ -1,0 +1,18 @@
+<script>
+// 版主管理：高亮
+<?php $sg_highlight = kv_get('sg_highlight');?>
+$('.mod-button button.sg_highlight').on('click', function() {
+	var modtid = $('input[name="modtid"]').checked();
+	if(modtid.length == 0) return $.alert(lang.please_choose_thread);
+	var radios = xn.form_radio('sg_highlight', {"0": "取消高亮", "1": "<span style=\"color:<?php echo $sg_highlight['highlight2']; ?>;\"><?php echo $sg_highlight['highlight1']; ?></span>","2": "<span style=\"color:<?php echo $sg_highlight['highlight4']; ?>;\"><?php echo $sg_highlight['highlight3']; ?></span>", "3": "<span style=\"color:<?php echo $sg_highlight['highlight6']; ?>;\"><?php echo $sg_highlight['highlight5']; ?></span>", "4": "<span style=\"color:<?php echo $sg_highlight['highlight8']; ?>;\"><?php echo $sg_highlight['highlight7']; ?></span>", "5": "<span style=\"color:<?php echo $sg_highlight['highlight10']; ?>;\"><?php echo $sg_highlight['highlight9']; ?></span>"});
+	$.confirm("设置主题为高亮", function() {
+		var tids = xn.implode('_', modtid);
+		var sg_highlight = $('input[name="sg_highlight"]').checked();
+		var postdata = {sg_highlight: sg_highlight};
+		$.xpost(xn.url('mod-sg_highlight-'+tids), postdata, function(code, message) {
+			if(code != 0) return $.alert(message);
+			$.alert(message).delay(1000).location('');
+		});
+	}, {'body': '<p>选择高亮：'+radios+'</p>'});
+})
+</script>

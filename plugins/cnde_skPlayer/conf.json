@@ -1,0 +1,12 @@
+{
+    "name": "skPlayer播放器",
+    "brief": "一款简约好看的HTML5音乐播放器  支持自配置音乐文件 or 指定网易云音乐歌单两种方式。如需在切换页面时不中断音乐播放，主题需有pjax效果",
+    "version": "1.0",
+    "author": "piao",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

@@ -1,0 +1,12 @@
+<?php 
+if($thread['highlight'] == '1' || $thread['highlight'] == '2' || $thread['highlight'] == '3' || $thread['highlight'] == '4' || $thread['highlight'] == '5') {
+$sg_highlight = kv_get('sg_highlight');
+switch ($thread['highlight']) {
+case '1': 	$color = $sg_highlight['highlight2']; 	break;
+case '2': 	$color = $sg_highlight['highlight4']; 	break;
+case '3': 	$color = $sg_highlight['highlight6']; 	break;
+case '4': 	$color = $sg_highlight['highlight8']; 	break;
+case '5': 	$color = $sg_highlight['highlight10']; 	break;
+}
+$thread['subject']="<span style=color:$color;>$thread[subject]</span>";
+}?>

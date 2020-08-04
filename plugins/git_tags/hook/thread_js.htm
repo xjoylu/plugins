@@ -1,0 +1,4 @@
+<?php if (!empty($uid)){ $kv = kv_cache_get('git_tags'); if( $kv['lock']==1 || $gid==1 || $uid==$thread['uid'] ){ ?>
+<!-- 增删标签 ( 若是全局锁, 则只允许作者编辑, 作者锁同样放通权限 ) -->
+<script src="plugin/git_tags/view/js/tag.js?v2"></script>
+<?php }} ?>

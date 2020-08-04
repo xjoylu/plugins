@@ -1,0 +1,15 @@
+{
+    "name": "帖子附件增强Lite",
+    "brief": "显示帖子附件大小、附件下载次数及附件图片预览。<br/><br /><span class='text-success'>更新</span>：更新语言包，解决js及css等可能出现的问题。",
+    "version": "1.2.7",
+    "author": "deatil",
+    "id": "haya_post_attach_lite",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": {
+        "model_post_file_list_html_start.php": 150
+    },
+    "overwrites_rank": [],
+    "dependencies": []
+}

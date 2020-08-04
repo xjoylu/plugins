@@ -1,0 +1,13 @@
+{
+    "name": "默认哈希头像",
+    "brief": "注册后，根据Email的哈希值生成哈希图像作为该用户的默认头像。",
+    "version": "1.0.0",
+    "author": "冰剑",
+    "id": "jan_identicon",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

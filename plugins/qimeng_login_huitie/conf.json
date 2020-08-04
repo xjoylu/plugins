@@ -1,0 +1,10 @@
+{
+    "name": "游客引导回帖框",
+    "brief": "游客状态浏览帖子，需要回帖必须注册登录后再进行回帖操作！",
+    "version": "1.1",
+    "bbs_version": "4.0.3",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

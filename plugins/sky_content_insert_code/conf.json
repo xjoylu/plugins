@@ -1,0 +1,10 @@
+{
+    "name": "根据附件生成代码",
+    "brief": "上传视频附件会在内容区域字段生成播放代码。<br>支持自定义附件类型和代码格式",
+    "version": "1.0",
+    "bbs_version": "4.0.3",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

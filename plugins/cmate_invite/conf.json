@@ -1,0 +1,10 @@
+{
+    "name": "邀请插件",
+    "brief": "可以链接邀请他人并增加邀请数",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

@@ -1,0 +1,10 @@
+{
+    "name": "仿v2ex主题",
+    "brief": "基于xiuno制作的仿v2ex主题",
+    "version": "1.0",
+    "bbs_version": "4.0.3",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

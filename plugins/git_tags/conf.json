@@ -1,0 +1,11 @@
+{
+    "name": "标签(TAGS) - Git版",
+    "brief": "一款用途上完全不同的帖子标签插件，可以给主题任意加标签, 并且有标签主题列表页，可以跟TAG增强版插件一起使用。<br><a style='font-size:12px;' href='https://gitee.com/soyoumi/git_tags' target='_blank'>协作完善<a>",
+    "version": "1.0.0",
+    "bbs_version": "4.3",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

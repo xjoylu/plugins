@@ -1,0 +1,1 @@
+include APP_PATH.'plugin/jan_identicon/Identicon.php';

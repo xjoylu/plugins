@@ -1,0 +1,30 @@
+<template include="./view/htm/my.template.htm">
+<slot name="my_body"><div class="col-md-6 mx-auto">
+    <div class="input-group mb-3"id="email_div"><div class="input-group-prepend"><span class="input-group-text"><?php echo lang('email') ;?></span></div><input type="text" class="form-control" placeholder="email" id="e__mail" value="<?php echo $user['email'];?>"></div>
+    <div class="input-group mb-3"id="email_status_div"><div class="input-group-prepend"><span class="input-group-text"><?php echo lang('close_status') ;?></span></div><input type="text" class="form-control" placeholder="email" id="email_status" value="<?php echo lang('email_status'.$user['email_v']);?>" disabled="disabled" style="background-color: white;"></div>
+    <div class="input-group mb-3" style="display:none;" id="code_txb"><div class="input-group-prepend"><span class="input-group-text"><?php echo lang('verify_code') ;?></span></div><input type="text" class="form-control" placeholder="000000" id="email_verify" value=""></div><hr>
+    <div style="text-align: center;" id="d_submit"><button type="button" id="submit" class="btn btn-outline-primary" data-active="<?php echo url('my-email');?>"><?php echo lang('set_email');?></button></div>
+    <div style="text-align: center;display:none;" id="d_verify"><button type="button" id="verify" class="btn btn-outline-primary" data-active="<?php echo url('my-email');?>"><?php echo lang('verify_email');?></button></div>
+</div></slot></template>
+<script>
+    $('a[data-active="my-email"]').addClass('active');
+</script>
+<script>
+var je_mail = $("#e__mail"); var jsubmit = $("#submit"); var jverify = $("#verify"); var jdiv_submit=$("#d_submit");var jdiv_verify=$("#d_verify"); var jcodetxb=$("#code_txb");var jemail=$("#email_div");var jemail_status=$("#email_status_div");jverifycode=$("#email_verify");
+jsubmit.on('click',function(){
+    $.confirm('您确定要更改邮箱吗?<br><br>提交后状态将暂时变为未验证状态，需要等待您从新的邮箱接收验证邮件，以完成修改。邮箱将作为找回密码的唯一凭据，请谨慎修改！',function(){
+        jsubmit.button('loading');
+        var postdata = "email="+je_mail.val(); postdata+="&op=0";
+        $.xpost(jsubmit.attr('data-active'), postdata, function(code, message) {
+            if(code == 0) {jdiv_submit.fadeOut();jdiv_verify.fadeIn();jcodetxb.fadeIn();jemail.fadeOut();jemail_status.fadeOut(); $.alert(message);jsubmit.button(message).delay(3000).button('reset');
+            } else  {$.alert(message);jsubmit.button('reset'); } });
+    });
+});
+jverify.on('click',function(){
+    jverify.button('loading');
+    var postdata = "code="+jverifycode.val(); postdata+="&op=1";
+    $.xpost(jverify.attr('data-active'), postdata, function(code, message) {
+        if(code == 0) { $.alert(message);setTimeout(function(){location.reload();},1000);
+        } else {$.alert(message);jverify.button('reset'); } });
+});
+</script>

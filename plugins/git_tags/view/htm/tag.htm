@@ -1,0 +1,60 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<!--{hook forum_start.htm}-->
+
+<div class="row">
+	<!-- 内容栏 --> 
+	<div class="col-lg-9 main">
+		<ol class="breadcrumb d-none d-md-flex"><?php echo $tag['name']; ?></ol>
+		<div class="card card-threadlist">
+			<div class="card-body">
+				<ul class="list-unstyled threadlist mb-0">
+					<?php if($list) { foreach($list as $k) { ?>
+					<?php $user = user_read_cache($k['uid']); ?>
+					<li class="media thread tap" data-href="<?php echo url("thread-$k[tid]");?>" data-tid="<?php echo $k['tid'];?>">
+						<a href="<?php echo url("user-$k[uid]");?>" tabindex="-1" class="ml-1 mt-1 mr-3">
+							<img class="avatar-3" src="<?php echo $user['avatar_url'];?>">
+						</a>
+						<div class="media-body">
+							<div class="subject break-all">
+								<a href="<?php echo url("thread-$k[tid]");?>"><?php echo $k['subject'];?></a>
+								<?php if($k['files'] > 0) { ?><i class="icon small filetype other"></i><?php } ?>
+								<?php if($k['closed'] > 0) { ?><i class="icon-lock"></i><?php } ?>
+							</div>
+							<div class="d-flex justify-content-between small mt-1">
+								<div>
+									<span class="username text-grey mr-1 hidden-sm" uid="<?php echo $k['uid'];?>"><?php echo $user['username'];?></span>
+									<span class="views text-grey mr-1 hidden-sm"><i class="icon-eye"></i><?php echo $k['views'];?></span>
+								</div>
+							</div>
+						</div>
+					</li>
+
+					<?php }} else { ?>
+					<li><div><?php echo lang('none');?></div></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+		<!-- 翻页 -->
+		<nav class="my-3">
+			<ul class="pagination justify-content-center flex-wrap">
+				<?php echo pagination(url("tag-{$tag['tagid']}-{page}"), $tag['link'], $page, $pagesize); ?>
+			</ul>
+		</nav>
+	</div>
+
+	<!-- 侧边栏 -->
+	<div class="col-lg-3 d-none d-lg-block aside">
+
+		<!--{hook tag_side_before.htm}-->
+
+		<?php include _include(APP_PATH.'plugin/git_tags/view/htm/inc_cloud.htm');?>
+
+		<!--{hook tag_side_after.htm}-->
+	</div>
+</div>
+
+<!--{hook forum_end.htm}-->
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+<!--{hook forum_js.htm}-->

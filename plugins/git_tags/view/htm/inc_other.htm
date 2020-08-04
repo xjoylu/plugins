@@ -1,0 +1,9 @@
+<?php $other = db_find('thread', array('uid'=>$thread['uid']), array('lastpid'=>-1),1,6); ?>
+<div id="other" class="card">
+	<h5><span class="icon-slack"></span> 作者主题 </h5>
+	<ul>
+		<?php foreach ( $other as $k ){ $tids = $k["tid"]; ?>
+		<li><a href='<?php echo url("thread-$tids") ?>'><?php echo $k['subject']; ?></a></li>
+		<?php } ?>
+	</ul>
+</div>

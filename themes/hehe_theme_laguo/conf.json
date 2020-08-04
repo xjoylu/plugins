@@ -1,0 +1,10 @@
+{
+    "name": "小清新模板laguo.net",
+    "brief": "此风格过于小清新，用户可以根据自己喜好自行修改css。",
+    "version": "1.0",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

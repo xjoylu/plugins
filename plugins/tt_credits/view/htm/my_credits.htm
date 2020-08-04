@@ -1,0 +1,13 @@
+<template include="./plugin/tt_credits/view/htm/my_credits.template.htm">
+	<slot name="my_body"><div class="col-md-6 mx-auto">
+			<p><?php echo lang('user_group');?>: <?php echo $user['groupname'];?></p>
+			<hr>
+		    <div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" style="width:80px;display:block;"><i class="icon-flask" aria-hidden="true"></i> <?php echo lang('credits1');?></span></div><input type="text" class="form-control" disabled style="background-color: white;" value="<?php echo $user['credits'];?>"></div>
+            <div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" style="width:80px;display:block;"><i class="icon-diamond" aria-hidden="true"></i> <?php echo lang('credits2');?></span></div><input type="text" class="form-control" disabled style="background-color: white;" value="<?php echo $user['golds'];?>"></div>
+            <div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" style="width:80px;display:block;"><i class="icon-jpy" aria-hidden="true"></i> <?php echo lang('credits3');?></span></div><input type="text" class="form-control" disabled style="background-color: white;" value="<?php echo $user['rmbs']/100.0;?>"></div>
+		<!--{hook my_credits_after.htm}-->
+	</div></slot></template>
+<script>
+    $('a[data-active="my-credits"]').addClass('active');
+</script>
+<!--{hook my_credits_script_after.htm}-->

@@ -1,0 +1,11 @@
+{
+    "name": "主题高亮",
+    "brief": "支持五种颜色高亮设置，标题加颜色，后台自定颜色。<br>插件为<a target='_blank' href='http://cha.sgahz.net/'>查鸽信息网</a>制作。<br>联系QQ：5886425",
+    "version": "1.7",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

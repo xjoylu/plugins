@@ -1,0 +1,16 @@
+<?php
+	$taglist = '';
+	$page = '1';
+	$pagesize = '12';
+	$data = db_find('git_tags_thread', array('tid'=>$tid), array(), $page, $pagesize);
+	if($data){
+		$tagid = arrlist_values($data, 'tagid');
+		$tag = db_find('git_tags',array('tagid'=>$tagid), array(), $page, $pagesize);
+		foreach($tag as $k){ $taglist .= $k['name'].' '; }
+	}
+?>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><i class="icon-tags"></i></span></div>
+	<input type="text" class="form-control" placeholder="标签" aria-label="标签" aria-describedby="basic-addon1" name="tag_post" value="<?php echo $taglist;?>">
+</div>

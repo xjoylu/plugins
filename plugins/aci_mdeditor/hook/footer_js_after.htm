@@ -1,0 +1,16 @@
+<script src="../plugin/aci_mdeditor/ace/ace.js<?php echo $static_version;?>"></script>
+<script src="../plugin/aci_mdeditor/js/bootstrap-markdown-editor.js<?php echo $static_version;?>"></script>
+<script src="../plugin/aci_mdeditor/js/marked.min.js<?php echo $static_version;?>"></script>
+<script>
+    var currenturl = window.location.href;
+    if (currenturl.indexOf("post-create") >= 0 || currenturl.indexOf("post-update") >= 0 || currenturl.indexOf(
+            "thread-create") >= 0) {
+        $('#message').markdownEditor({
+            fullscreen: true,
+            preview: true,
+            onPreview: function (content, callback) {
+                callback( marked(content) );
+            }
+        });
+    }
+</script>

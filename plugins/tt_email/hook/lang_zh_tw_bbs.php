@@ -1,0 +1,7 @@
+'email'=>'郵箱',
+'email_status0'=>'未驗證',
+'email_status1'=>'已驗證',
+'email_status2'=>'等待驗證碼',
+'set_email'=>'設置郵箱',
+'verify_email'=>'驗證郵箱',
+'verify_code'=>'驗證碼',

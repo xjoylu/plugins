@@ -1,0 +1,135 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+
+<style>
+.c-indicator { position: absolute; top: 0; left: 0; display: block; width: 1rem; height: 1rem; font-size: 65%; line-height: 1rem; color: #eee; user-select: none; background-color: #eee; background-repeat: no-repeat; background-position: center center; -webkit-background-size: 50% 50%; background-size: 50% 50%; }
+.c-radio .c-indicator { border-radius: 50%; }
+.c-input>input { position: absolute; z-index: -1; opacity: 0; }
+.c-input>input:checked~.c-indicator { color: #fff; background-color: #ffa7bf; }
+.c-input+.c-input { margin-left: 1rem; }
+.c-input { display: inline; padding-left: 1.5rem; color: #555; }
+.c-input, .input-group, .input-group-btn, .input-group-btn>.btn { position: relative; }
+.bd-example { position: relative; padding: 1rem; margin: 1rem -1rem; border: solid #f7f7f9; border-width: .2rem 0 0; }
+.bd-example::after { content: ""; display: table; clear: both; }
+.bd-example p b { color:#ffa7bf; }
+.card textarea { margin:0; border:none; background:#f1f1f1; line-height:32px; font-size:.8rem; color:#555; padding:0 .8rem; width:100%; border-radius: 3px}
+</style>
+<div class="row">
+	<div class="col-lg-10 offset-lg-1">
+		<div class="card">
+			<div class="card-body">
+				<form action="<?php echo url("plugin-setting-git_tags");?>" method="post" id="form">
+					<h4 class="card-title">TAG 设置</h4>
+					<div class="bd-example" data-example-id="">
+						<h5 class="card-title" title="锁定后除作者外都不可编辑标签">全局锁</h5>
+						<label class="c-input c-radio">
+							<input id="radio11" name="lock" type="radio" value="1" <?php if($kv['lock']==1){echo 'checked';}; ?> >
+							<span class="c-indicator"></span>
+							开放
+						</label>
+						<label class="c-input c-radio">
+							<input id="radio22" name="lock" type="radio" value="2" <?php if($kv['lock']==2){echo 'checked';}; ?> >
+							<span class="c-indicator"></span>
+							锁定
+						</label>
+					</div>
+
+					<div class="bd-example" data-example-id="">
+						<h5 class="card-title" title="限制标签长度, 英文长度1字符, 中文长度3字符">字数限制</h5>
+						<label class="c-input c-radio">
+							<input id="radio1" name="limit" type="radio" value="12" <?php if($kv['limit']==12){echo 'checked';}; ?> >
+							<span class="c-indicator"></span>
+							2 - 12 个字符限制
+						</label>
+						<label class="c-input c-radio">
+							<input id="radio2" name="limit" type="radio" value="24" <?php if($kv['limit']==24){echo 'checked';}; ?> >
+							<span class="c-indicator"></span>
+							2 - 24 个字符限制
+						</label>
+						<label class="c-input c-radio" >
+							<input id="radio3" name="limit" type="radio" value="42" <?php if($kv['limit']==42){echo 'checked';}; ?> >
+							<span class="c-indicator"></span>
+							2 - 42 个字符限制
+						</label>
+					</div>
+
+					<div class="bd-example" data-example-id="">
+						<h5 class="card-title" title="需要过滤的短语, 以英文空格分词, 请勿设置过多">回避词</h5>
+						<textarea id="exampleTextarea" rows="4" name="stop"><?php echo $kv['stop']; ?></textarea>
+					</div>
+
+					<div class="bd-example" data-example-id="">
+						<h5 class="card-title">关于</h5>
+						<p class="m-a-1 small">TAG锁开启时, 则所有会员都可以编辑和删除标签, 锁定则只允许作者和管理员编辑 (当前作者锁未实装)</p>
+						<p class="m-a-1 small">按业务场景调整允许的字数范围, 1 中文等于 3 字母</p>
+						<p class="m-a-1 small">回避词非 <b>危险字符过滤</b> 亦非 <b>脏词过滤字典</b>, 请勿添加过多词汇, 否则效率低下</p>
+					</div>
+
+					<style>
+					#Developer { padding:2rem 1rem; margin: 1rem 0; background:#eee; border-radius: 5px }
+					#Developer h5 { padding:0 10px; color:#999; font-weight: 500 }
+					#Developer p { padding:10px; color:#aaa; }
+					#Developer p a { color:#ffa7bf; font-weight: 600}
+					#Developer ul{ margin:0; padding:0px; list-style-type: none }
+					#Developer ul li { margin:5px; border-radius: 5px; background:#fcfcfc; float: left; border:1px solid #E3E9ED; }
+					#Developer ul li a { display: block; padding:10px; }
+					#Developer ul li img { width:62px; margin-right:10px; border-radius: 50%; -webkit-filter: grayscale(10%);filter: grayscale(10%); }
+					#Developer ul li span { font-size: 1rem; color:#a89fb2; }
+
+					#Developer a:hover { text-decoration:none; }
+					#Developer ul:after{ content: ""; display: block; height: 0; clear: both; visibility: hidden; }
+					#Developer ul li:hover { background:#fff; border:solid 1px #fad1df; }
+					#Developer ul li:hover span { color: #ffa7bf; }
+					#Developer ul li:hover img { -webkit-filter: grayscale(0%);filter: grayscale(0%); }
+					</style>
+					<div id="Developer">
+						<h5>开源合作项目 <i class="icon icon-connectdevelop"></i></h5>
+						<ul>
+							<li><a href="https://bbs.xiuno.com/thread-21013.htm" target="_Blank"><img src="../plugin/git_tags/view/img/user_soyoumi.png"><span>@聂云风情</span></a></li>
+							<li><a href="https://bbs.xiuno.com/thread-21013.htm" target="_Blank"><img src="../plugin/git_tags/view/img/user_shitou.png"><span>@shitou</span></a></li>
+							<li><a href="https://bbs.xiuno.com/thread-21013.htm" target="_Blank"><img src="../plugin/git_tags/view/img/user_last.png"><span>@Last</span></a></li>
+							<li><a href="https://bbs.xiuno.com/thread-21013.htm" target="_Blank"><img src="../plugin/git_tags/view/img/user_none.png"><span>期待<b>你</b>的加入</span></a></li>
+						</ul>
+						<p>
+							项目地址 <a href="https://gitee.com/soyoumi/git_tags/" target="_Blank">https://gitee.com/soyoumi/git_tags/</a><br>
+							错误反馈与建议 :  企鹅群625244937<br>
+						</p>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-11 center">
+							<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+							<a role="button" class="btn btn-secondary btn-block m-t-1" href="javascript:history.back();"><?php echo lang('back');?></a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+$('.c-checkbox').prop('indeterminate', true);
+
+var jform = $("#form");
+var jsubmit = $("#submit");
+var referer = '<?php echo http_referer();?>';
+jform.on('submit', function(){
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serialize();
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message);
+			jsubmit.text(message).delay(2000).button('reset').location(referer);
+			return;
+		} else {
+			$.alert(message);
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+
+</script>

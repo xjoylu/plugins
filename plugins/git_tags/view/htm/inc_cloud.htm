@@ -1,0 +1,16 @@
+<?php
+$tagCloud = cache_get('tagCloud');
+if(empty($tagCloud)){
+	// 缓存10分钟更新一次(标签过少时,删标签后未及时更新可能出现标签不存在)
+	$tagCloud = db_find('git_tags', array(), array('link'=>-1), 1, 20);
+	cache_set('tagCloud', $tagCloud, 600);
+}
+?>
+<div id="taghot" class="card">
+	<h5><span class="icon-tags"></span>TAG</h5>
+	<ul>
+		<?php foreach ( $tagCloud as $k ){ ?>
+		<li><a href='<?php echo url("tag-$k[tagid]") ?>'><?php echo $k['name'] ?></a></li>
+		<?php } ?>
+	</ul>
+</div>

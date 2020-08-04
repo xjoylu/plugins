@@ -1,0 +1,11 @@
+{
+    "name": "Markdown编辑器",
+    "brief": "基于Ace editor和parsedown编辑器，支持上传插入图片",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

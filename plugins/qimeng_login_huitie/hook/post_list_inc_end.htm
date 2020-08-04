@@ -1,0 +1,38 @@
+<!-- QiMeng 游客引导回帖框 -->
+<ul class="list-unstyled postlist">
+    <?php if(empty($uid)) { ?>
+        <li class="post newpost media">
+            <a href="/#huitie" class="mr-3" tabindex="-1">
+                <img class="avatar-3" src="plugin/qimeng_login_huitie/images/logo_icon.png"></a>
+            <div class="media-body">
+                <div class="d-flex justify-content-between small text-muted">
+                    <div>
+                        <div>
+                            <?php echo $conf[ 'sitename'];?></div>
+                    </div>
+                    <div>
+                        <span class="floor" id="newfloor">
+                            <?php echo ($thread[ 'posts'] + 2);?></span>
+                        <?php echo lang( 'floor');?></div>
+                </div>
+                <div>         
+				  <table height="95" align="center" class="mt-1 qimeng-contro">
+				    <tr>
+                    <td width="1025" height="95"><?php include _include(APP_PATH.'plugin/qimeng_login_huitie/hook/qimeng_index.php');?></td>
+                  </tr></table>  	
+                        <div class="text-muted mt-2 small">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <a class="btn btn-sm btn-secondary" href="<?php echo url(" post-create-$tid ");?>" id="advanced_reply">
+                                        <?php echo lang( 'post_create');?></a>
+                                </div>
+                                <div>
+                                    <a class="icon-mail-forward text-muted" href="<?php echo url(" post-create-$tid ");?>" id="advanced_reply">
+                                        <?php echo lang( 'advanced_reply');?></a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </li>
+        <?php } ?></ul>

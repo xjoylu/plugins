@@ -1,0 +1,11 @@
+{
+    "name": "电子邮箱email认证",
+    "brief": "电子邮箱email认证，解决xiuno注册后无法修改e-mail，QQ登录后e-mail为乱码的问题。免费版！",
+    "version": "0.99",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

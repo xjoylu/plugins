@@ -1,0 +1,1 @@
+db_delete('gg_favorite_thread', array('tid'=>$tid));
