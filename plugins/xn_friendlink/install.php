@@ -18,10 +18,10 @@ $sql = "CREATE TABLE IF NOT EXISTS {$tablepre}friendlink (
   url char(64) NOT NULL DEFAULT '',
   PRIMARY KEY (linkid),
   KEY type (type)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4
 ";
 $r = db_exec($sql);
 
-$sql = "INSERT INTO {$tablepre}friendlink SET name='Xiuno BBS', url='https://bbs.xiuno.com/'";
+$sql = "INSERT INTO {$tablepre}friendlink SET name='Xiuno BBS', url='https://github.com/jiix/xiunobbs'";
 $r = db_exec($sql);
 ?>
