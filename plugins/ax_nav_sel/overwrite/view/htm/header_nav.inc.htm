@@ -1,0 +1,153 @@
+
+	<!-- 
+		轻论坛导航：默认头部
+		Bootstrap 4.0 推荐的 PC/Mobile 公共写法 
+		优点：公用性强
+		缺点：结构稍微有点复杂
+	-->
+	
+	<!--{hook header_nav_start.htm}-->
+	<header class="navbar navbar-expand-lg navbar-dark bg-dark" id="header">
+		<div class="container">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="navbar_collapse" aria-expanded="false" aria-label="<?php echo lang('toggler_menu');?>">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<!--{hook header_nav_logo_before.htm}-->
+			
+			<a class="navbar-brand text-truncate" href="<?php echo $header['mobile_link'];?>">
+				<img src="<?php echo $conf['logo_mobile_url'];?>" class="logo-2">
+				<?php if($header['mobile_title']) { ?>
+					<span class="hidden-lg"><?php echo $header['mobile_title'];?></span>
+				<?php } ?>
+			</a>
+			
+			<!--{hook header_nav_logo_after.htm}-->
+			
+			<?php if(empty($uid)) { ?>
+				<a class="navbar-brand hidden-lg" href="<?php echo url('user-login');?>" aria-label="<?php echo lang('login');?>"> <i class="icon-user icon"></i></a>
+			<?php } else { ?>
+				<a class="navbar-brand hidden-lg" href="<?php echo url("thread-create-$fid");?>" aria-label="<?php echo lang('thread_create');?>"><i class="icon-edit icon"></i></a>
+			<?php } ?>
+			
+			<!--{hook header_nav_user_icon_after.htm}-->
+
+<style type="text/css">
+	.navbar-nav > li .dropdown-menu {
+		margin: 0;
+	}
+	.navbar-nav > li:hover .dropdown-menu {
+		display: block;
+		background: #3d4557 ;
+		text-align: center;	
+	}
+	.navbar-nav > li:hover .dropdown-menu li{
+		padding-top: 0.65rem; 
+		padding-bottom: 0.65rem;	
+	}
+	.navbar-nav > li:hover .dropdown-menu a{
+		color: rgba(255, 255, 255, 0.75);
+		font-size: 0.85rem;
+	}
+
+	.navbar-nav > li:hover .dropdown-menu li:hover{
+		background: #242e47;
+	}
+	.dropdown-menu{ min-width: 100% !important; }
+
+	 .demo1{
+            position: relative;
+        }
+        .demo1:before{
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0px;
+            width: 0;
+            height: 2px;
+            background: #db6c4a;
+            transition: all .3s;
+        }
+        .demo1:hover:before{
+            width: 100%;
+            left: 0;
+            right: 0;
+        }
+	@media (max-width: 992px){
+	#nav > ul:first-child > li:not(:first-child) {
+    		padding-left: 0 !important;
+	}
+}
+</style>
+
+<?php 
+	function isphone(){
+	$touch_arr = array("mobile","android","wap","uc","wml","vnd","adr","mqqbrowser","nokiaBrowser","playbook", "blackberry","bb10","ipad","iphone");
+	$useragent = $_SERVER["HTTP_USER_AGENT"];//获取浏览器User-Agent (UA)
+	$th = str_ireplace($touch_arr,'',$useragent);
+	if($useragent == $th){
+		return 0;
+	}else{
+		return 1;
+	}
+}
+$p = isphone();
+?>
+			
+			<div class="collapse navbar-collapse" id="nav">
+				<!-- 左侧：版块 -->
+				<ul class="navbar-nav mr-auto">
+<?php $linklist = db_find('ax_nav_sel', array('note'=>0), array('rank'=>-1));?>
+
+	<?php if($linklist){foreach ($linklist as $link) { ?>
+
+	<?php $linktarget = '_blank';$link['target'] !=0 && $linktarget = '_self';?>	
+	
+	<?php 
+		if($link['url'] == ''){
+			$url = "javascript:void(0)";
+		}else{
+			$url = $link['url'];
+		}
+	?>
+
+					<li class="dropdown" ><a href="<?php echo $url;?>" class="nav-link demo1"  target="<?php echo $linktarget ?>"><?php echo $link['name']?><span class="caret"></span></a>
+					
+
+<?php $tt = db_find('ax_nav_sel', array('note'=>$link['linkid'])); ?>
+						<?php if($tt){?>
+						<ul class="dropdown-menu">
+							<?php foreach($tt as $v){?>
+							<?php $l = '_blank';$v['target'] !=0 && $l = '_self';?>
+							<li><a href="<?php echo $v['url']?>" target="<?php echo $l ?>"><?php echo $v['name']?></a></li>
+							<?php }?>
+						</ul>
+						<?php }?>
+				   	</li>
+				   	
+  <?php }}?> 			
+  
+				</ul>
+		
+					<li class="nav-item nav-link" id="tt_sign_mobile2">签到</li>
+				<!-- 右侧：用户 -->
+				<ul class="navbar-nav">
+					<!--{hook header_nav_user_start.htm}-->
+				<?php if(empty($uid)) { ?>
+					<li class="nav-item"><a class="nav-link" href="<?php echo url('user-login');?>"><i class="icon-user"></i> <?php echo lang('login');?></a></li>
+					<!--<li class="nav-item"><a class="nav-link" href="<?php echo url('user-create');?>"><?php echo lang('register');?></a></li>-->
+				<?php } else { ?>
+					<li class="nav-item username"><a class="nav-link" href="<?php echo url('my');?>"><img class="avatar-1" src="<?php echo $user['avatar_url'];?>"> <?php echo $user['username'];?></a></li>
+					<!-- 管理员 -->
+					<?php if($gid == 1) { ?>
+					<li class="nav-item"><a class="nav-link" href="admin/"><i class="icon-home"></i> <?php echo lang('admin_page');?></a></li>
+					<?php } ?>
+					<!--{hook header_nav_admin_page_after.htm}-->
+					<li class="nav-item"><a class="nav-link" href="<?php echo url('user-logout');?>"><i class="icon-sign-out"></i> <?php echo lang('logout');?></a></li>
+				<?php } ?>
+					<!--{hook header_nav_user_end.htm}-->
+				</ul>
+			</div>
+		</div>
+	</header>
+	<!--{hook header_nav_end.htm}-->

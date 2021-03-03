@@ -1,0 +1,172 @@
+{include h}
+<link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="{#WWW}Plugin/XianD_Pay/static/css/style.css" rel="stylesheet">
+
+<!-- import Vue.js -->
+<script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+<!-- import stylesheet -->
+<link href="https://cdn.bootcss.com/iview/2.14.0/styles/iview.css" rel="stylesheet">
+<!-- import iView -->
+<script src="https://cdn.bootcss.com/iview/2.14.0/iview.min.js"></script>
+<!-- import axios -->
+<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+
+<div id="app" class="pay-view">
+    <h4>{$this->conf['title']}金币充值</h4>
+    <div class="pay-gold mt-3">当前账户金币数量：{$gold}</div>
+    <div class="pay-div mt-3">
+        <span>充值金额: <input type="number" id="money" value="1" placeholder="请输入充值金额"></span>
+        <span>获得金币: <input type="number" id="gold" value="{$plugin_inc['proportion']}" disabled></span>
+    </div>
+    <div class="mt-3">充值比例: 1元 = <span id="proportion">{$plugin_inc['proportion']}</span>金币</div>
+    <div class="mt-5" id="pay-action">
+        <button value="alipay" class="btn btn-primary">支付宝</button>
+        <button disabled value="qqpay" class="btn btn-success">QQ(即将开放)</button>
+        <button disabled value="wxpay" class="btn btn-info">微信(即将开放)</button>
+    </div>
+    <form style="display: none;" id="pay-submit" action="{php HYBBS_URL('my','payApi');}" method=post target="_blank">
+        <input name="WIDout_trade_no" value="{$orderNum}">
+        <input name="WIDsubject" id="payGold" value="充值金币100">
+        <input name="WIDtotal_fee" id="payMoney" value="1">
+        <input name="type" id="payType" value="alipay">
+    </form>
+
+    <h4 class="mt-5 mb-2">金币充值记录</h4>
+    <i-table :columns="columns" :loading="loading" :data="orderList"></i-table>
+    <Page total="{$page_count}" class="page-item" :pageSize="pageSize" @on-change="pageChange"></Page>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            pageSize: 10,
+            columns: [
+                {
+                    title: '订单号',
+                    key: 'trade_no',
+                    width: 160,
+                    align: "center"
+                },
+                {
+                    title: '充值金额',
+                    key: 'money',
+                    align: "center"
+                },
+                {
+                    title: '获得金币',
+                    key: 'gold',
+                    align: "center"
+                },
+                {
+                    title: '支付方式',
+                    key: 'type',
+                    align: "center",
+                    render: (h, params) => {
+                        let tmpStr = "";
+                        if (params.row.type === '0') {
+                            tmpStr = "支付宝";
+                        } else if (params.row.type === '1') {
+                            tmpStr = "微信";
+                        } else if (params.row.type === '2') {
+                            tmpStr = "QQ钱包";
+                        } else if (params.row.type === '3') {
+                            tmpStr = "后台充值";
+                        }
+                        return h('div',{},tmpStr)
+                    }
+                },
+                {
+                    title: '下单时间',
+                    key: 'add_time',
+                    width: 160,
+                    align: "center"
+                },
+                {
+                    title: '支付时间',
+                    key: 'pay_time',
+                    width: 160,
+                    align: "center"
+                },
+                {
+                    title: '状态',
+                    key: 'status',
+                    width: 90,
+                    align: "center",
+                    render: (h, params) => {
+                        let tmpStr = "";
+                        if(params.row.status === '0'){
+                            tmpStr = "未支付";
+                        }else if(params.row.status === '1'){
+                            tmpStr = "已支付";
+                        }
+                        return h('div',{
+                            style:{
+                                padding: '5px',
+                                color: '#fff',
+                                borderRadius: '3px',
+                                background: params.row.status === '0' ? "#ed3f14" : "#2d8cf0"
+                            }
+                        },tmpStr)
+                    }
+                },
+            ],
+            orderList: [],
+            loading: true,
+            index: 1
+        },
+        async mounted() {
+            await this.getOrderList();
+        },
+        methods: {
+            async pageChange(index) {
+                this.index = index;
+                await this.getOrderList();
+            },
+
+            getOrderList() {
+                return new Promise((resolve, reject) => {
+                    axios.get(`/u/getOrderList?index=${this.index}`).then( (res) => {
+                        this.loading = false;
+                        this.orderList = res.data;
+                    }).catch( (error) => {
+                        this.loading = false;
+                        console.log(error);
+                    });
+                });
+            }
+        }
+    });
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        let r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+    if(getUrlParam('status')) {
+        if(getUrlParam('status') === 'success') {
+            vm.$Notice.success({title: '支付成功'});
+        }else {
+            vm.$Notice.error({title: '支付失败'});
+        }
+    }
+    let money = 1;
+    $('#money').bind('input propertychange', function () {
+        money = $(this).val();
+        $('#gold').val($(this).val() * $('#proportion').text());
+    });
+
+    let payType = 'alipay';
+    $('#pay-action').on('click', function (e) {
+        if(money == '') {
+            alert('金额不能为空');
+            return false;
+        }
+        payType = e.target.value;
+        $('#payType').val(payType);
+        $('#payMoney').val(money);
+        $('#payGold').val(`充值金币${money * $('#proportion').text()}`);
+        $('#pay-submit').submit();
+    });
+</script>
+{include f}

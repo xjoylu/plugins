@@ -1,0 +1,10 @@
+{
+    "name": "生命不息、倒腾不止",
+    "brief": "博客主题！",
+    "version": "1.0.3",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

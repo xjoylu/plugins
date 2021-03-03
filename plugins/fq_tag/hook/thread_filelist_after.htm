@@ -1,0 +1,21 @@
+
+<?php
+$from_tag='';
+$arr = db_sql_find("SELECT * FROM bbs_fq_tag_thread where tid='$tid'");
+
+if($arr === FALSE || count($arr)==0) {
+	$from_tag='';
+} else {
+	$tag_arry = array_map('array_shift',$arr); //得到多个标签ID
+	echo '<br><i class="icon-tags icon-1x" aria-hidden="true"></i>';
+	for($i=0;$i<count($tag_arry);$i++){
+	   $arrlist = db_find_one('fq_tag', array('tagid'=>$tag_arry[$i]));
+	   if($i==0){
+	      echo  '<a style="font-size:12px;color: #bfa56d;" href="./?forum-'.$fid.'-1-t-'.$tag_arry[$i].'.htm">'.$arrlist['name'].'</a>';
+	   }else{
+	      echo  ',<a style="font-size:12px;color: #bfa56d;" href="./?forum-'.$fid.'-1-t-'.$tag_arry[$i].'.htm">'.$arrlist['name'].'</a>';
+	   } 
+
+	}
+}
+?>

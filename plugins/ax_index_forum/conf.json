@@ -1,0 +1,11 @@
+{
+    "name": "自媒体论坛主题",
+    "brief": "首页板块化，最新主题，最新回复，以及板块dz风格<br>作者：迷途。",
+    "version": "1.2",
+    "bbs_version": "4.0.3",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

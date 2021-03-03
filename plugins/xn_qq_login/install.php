@@ -17,6 +17,7 @@ $sql = "CREATE TABLE IF NOT EXISTS {$tablepre}user_open_plat (
 ) ENGINE=MyISAM AUTO_INCREMENT=8805 DEFAULT CHARSET=utf8";
 
 $r = db_exec($sql);
+$r === FALSE AND message(-1, '创建表结构失败'); // 中断，安装失败。
 
 // 初始化
 $kv = kv_get('qq_login');

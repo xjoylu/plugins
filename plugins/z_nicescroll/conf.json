@@ -1,0 +1,10 @@
+{
+    "name": "NiceScroll滚动条控件",
+    "brief": "Nicescroll滚动条插件是一个非常强大的基于jQuery的滚动条插件,不需要增加额外的css,几乎全浏览器兼容.详细用法请自行搜索或参阅官网https://nicescroll.areaaperta.com<br><span class='small text-success'>注:由于自带滚动缓冲效果与'平滑滚动插件'重复,安装后可将其卸载</span>",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

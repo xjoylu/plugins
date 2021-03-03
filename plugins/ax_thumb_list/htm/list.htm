@@ -1,0 +1,120 @@
+					<!--{hook thread_list_inc_start.htm}-->
+					<?php 
+					if($threadlist) { 
+						$have_allowtop = 0;
+						foreach($threadlist as &$_thread) {
+							$_thread['allowtop'] = forum_access_mod($_thread['fid'], $gid, 'allowtop');
+							if($_thread['allowtop']) $have_allowtop = 1;
+						}
+					}
+					?>
+
+
+					<?php if($threadlist) { foreach($threadlist as &$_thread) { ?>
+<?php  
+$imglist = ax_imglist($_thread['tid']);
+$num = count($imglist);
+$img = $imglist[0];
+?>					
+
+<?php if($num == 0){?>
+<article class="abob apa clear pore album" _hover-ignore="1">
+	<h3 class="hamab title s-h4 s-noma s-amat s-hapat noov">
+		<a href="<?php echo url("thread-$_thread[tid]");?>"><?php echo $_thread['subject'];?></a>
+	</h3>
+	<h5 class="s-poab s-pole s-poto s-ama s-small">
+		<a href="<?php echo url("forum-$_thread[fid]")?>" title="<?php echo ax_forum_name($_thread['fid'])?>" class="cates pore round inlock"><?php echo ax_forum_name($_thread['fid'])?></a> 
+		<?php if(!empty($_thread['taglist'])) { foreach($_thread['taglist'] as $tag) { ?>
+			<a href="<?php echo url("forum-$_thread[fid]-$page", array('tagids'=>$tag['tagid']));?>" class="hamal"><?php echo $tag['name'];?></a>
+		<?php  }} ?>
+	</h5>
+
+		<p class="s-hide"><?php echo ax_message($_thread['tid'])?><a href="<?php echo url("thread-$_thread[tid]");?>" title="阅读所有" class="more amal" rel="nofollow">阅读所有</a></p>
+	
+	<footer class="amat grey clear s-hamat s-small s-noli">
+		<span class="kico-eye amar s-noma" _hover-ignore="1">
+		<dfn class="noaf">阅读：</dfn><?php echo $_thread['views']?></span> 
+		<span class="kico-ping amar s-noma">
+		<dfn class="noaf">评论：</dfn><?php echo $_thread['posts']?>
+		</span> 
+		<time class="kico-calendar flor s-flon s-noma"><?php echo $_thread['create_date_fmt'];?></time> 	
+	</footer>
+</article>
+<?php }elseif($num == 1){?>
+
+	<article class="abob apa clear pore illus" _hover-ignore="1">
+	<h3 class="hamab title s-h4 s-noma s-amat s-hapat noov">
+		<a href="<?php echo url("thread-$_thread[tid]");?>"><?php echo $_thread['subject'];?></a>
+	</h3>
+	<a href="<?php echo url("thread-$_thread[tid]");?>" title="<?php echo $_thread['subject'];?>">
+	<img src="<?php echo $img;?>" alt="" class="s-poab pori poto flol amar s-ama kandyCover kandyFrame" width="180" height="180" style="background-image: url(<?php echo $img;?>);" _hover-ignore="1">
+	</a>	
+	<section _hover-ignore="1">
+		<h5 class="s-poab s-pole s-poto s-ama s-small">
+		<a href="<?php echo url("forum-$_thread[fid]")?>" title="<?php echo ax_forum_name($_thread['fid'])?>" class="cates pore round inlock"><?php echo ax_forum_name($_thread['fid'])?></a> 
+		<?php if(!empty($_thread['taglist'])) { foreach($_thread['taglist'] as $tag) { ?>
+			<a href="<?php echo url("forum-$_thread[fid]-$page", array('tagids'=>$tag['tagid']));?>" class="hamal"><?php echo $tag['name'];?></a>
+		<?php  }} ?>
+		</h5>
+		<p class="amav s-hide" _hover-ignore="1"><?php echo ax_message($_thread['tid'])?><a href="<?php echo url("thread-$_thread[tid]");?>" title="阅读所有" class="more amal" rel="nofollow">阅读所有</a></p>
+	</section>
+	<footer class="amat grey clear s-hamat s-small s-noli">
+		<span class="kico-eye amar s-noma" _hover-ignore="1">
+		<dfn class="noaf">阅读：</dfn><?php echo $_thread['views']?></span> 
+		<span class="kico-ping amar s-noma">
+		<dfn class="noaf">评论：</dfn><?php echo $_thread['posts']?>
+		</span> 
+		<time class="kico-calendar flor s-flon s-noma"><?php echo $_thread['create_date_fmt'];?></time> 	
+	</footer>
+</article>				
+<?php } elseif($num >=4){?>
+
+
+<article class="abob apa clear pore album" _hover-ignore="1">
+	<h3 class="hamab title s-h4 s-noma s-amat s-hapat noov">
+		<a href="<?php echo url("thread-$_thread[tid]");?>"><?php echo $_thread['subject'];?></a>
+	</h3>
+	<h5 class="s-poab s-pole s-poto s-ama s-small">
+		<a href="<?php echo url("forum-$_thread[fid]")?>" title="<?php echo ax_forum_name($_thread['fid'])?>" class="cates pore round inlock"><?php echo ax_forum_name($_thread['fid'])?></a> 
+		<?php if(!empty($_thread['taglist'])) { foreach($_thread['taglist'] as $tag) { ?>
+			<a href="<?php echo url("forum-$_thread[fid]-$page", array('tagids'=>$tag['tagid']));?>" class="hamal"><?php echo $tag['name'];?></a>
+		<?php  }} ?>
+	</h5>
+	<section>
+		<p class="cols s-hamav">
+		<?php foreach($imglist as $k=>$v){?>
+		<?php if($k == 4){ break;}?>
+		<a href="<?php echo url("thread-$_thread[tid]");?>" class="col s-cole">
+		<img src="<?php echo $v;?>" class="wide high kandyCover  kandyFrame" alt="<?php echo $_thread['subject'];?>" width="184" height="92" style="background-image: url(<?php echo $v;?>);" _hover-ignore="1">
+		</a>
+		<?php }?>				
+		</p>
+		<p class="s-hide"><?php echo ax_message($_thread['tid'])?><a href="<?php echo url("thread-$_thread[tid]");?>" title="阅读所有" class="more amal" rel="nofollow">阅读所有</a></p>
+	</section>
+	<footer class="amat grey clear s-hamat s-small s-noli">
+		<span class="kico-eye amar s-noma" _hover-ignore="1">
+		<dfn class="noaf">阅读：</dfn><?php echo $_thread['views']?></span> 
+		<span class="kico-ping amar s-noma">
+		<dfn class="noaf">评论：</dfn><?php echo $_thread['posts']?>
+		</span> 
+		<time class="kico-calendar flor s-flon s-noma"><?php echo $_thread['create_date_fmt'];?></time> 	
+	</footer>
+</article>
+
+<?php }?>
+
+
+
+
+
+
+
+
+
+
+
+
+					<?php }} else { ?>
+						<?php echo lang('none');?>
+					<?php } ?>
+					<!--{hook thread_list_inc_end.htm}-->

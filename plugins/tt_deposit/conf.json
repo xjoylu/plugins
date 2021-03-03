@@ -1,0 +1,13 @@
+{
+    "name": "提现审核、充值审核插件",
+    "brief": "本插件需要预先安装积分插件！将积分提现出来，由管理员审核并手动发放。充值审核，用户充值后，再进行审核发放。",
+    "version": "1.51",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": {
+        "tt_credits": "1.09"
+    }
+}

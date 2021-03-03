@@ -1,0 +1,40 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+
+<form action="<?php echo url("plugin-setting-tt_store");?>" method="post" id="form">
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <div class="card">
+            <div class="card-body" >
+                <h1>后期技术支持</h1>
+                官方网站：http://www.6rabbit.com/ <a href="http://www.6rabbit.com"target="_blank" style="text-decoration: none">点击进入</a><br>
+                官方QQ群：58911696（正常群）、77868272（只吹牛不讨论正事）<br>
+                <h1 style="display:inline-block;">板块设置</h1>请单独开辟一个板块用于展示Store并且设置好相应权限。<br>
+                板块fid (只能设置一个，不接受分号):<input onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" maxlength="4" name="store_fid" value="<?php echo setting_get('tt_store')['fid']; ?>"/>
+<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+            </div></div></div></div>
+</form>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+    var jform = $("#form");
+    var jsubmit = $("#submit");
+    jform.on('submit', function(){
+        jform.reset();
+        jsubmit.button('loading');
+        var postdata = jform.serialize();
+        $.xpost(jform.attr('action'), postdata, function(code, message) {
+            if(code == 0) {
+                $.alert(message);
+                setTimeout(function() {
+                    window.location.reload();
+                    jsubmit.button('reset');
+                }, 1000);
+                return;
+            } else {
+                $.alert(message);
+                jsubmit.button('reset');
+            }
+        });
+        return false;
+    });
+</script>

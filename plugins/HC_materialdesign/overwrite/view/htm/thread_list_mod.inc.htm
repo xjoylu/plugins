@@ -1,0 +1,20 @@
+<?php if($gid > 0 && $gid < 5) { ?>
+<div class="text-center">
+	<label class="mdui-checkbox m-r-1">
+		<input type="checkbox" data-target='input[name="modtid"]' class="checkall m-t-sm m-r-sm" value="" aria-label="<?php echo lang('checkall');?>" /><?php echo lang('checkall');?>
+		<i class="mdui-checkbox-icon"></i>
+	</label>
+	
+	<div class="mdui-btn-group mod-button" role="group" aria-label="">
+		<!--{hook thread_list_mod_delete_before.htm}-->
+		<button type="button" class="mdui-btn mdui-btn-raised delete"><?php echo lang('delete');?></button>
+		<!--{hook thread_list_mod_delete_after.htm}-->
+		<button type="button" class="mdui-btn mdui-btn-raised move"><?php echo lang('move');?></button>
+		<!--{hook thread_list_mod_top_before.htm}-->
+		<button type="button" class="mdui-btn mdui-btn-raised top"><?php echo lang('top');?></button>
+		<!--{hook thread_list_mod_top_after.htm}-->
+		<button type="button" class="mdui-btn mdui-btn-raised _close"><?php echo lang('close');?></button>
+		<!--{hook thread_list_mod_close_after.htm}-->
+	</div>
+</div>
+<?php } ?>

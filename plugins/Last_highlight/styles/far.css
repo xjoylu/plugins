@@ -1,0 +1,79 @@
+/*
+
+FAR Style (c) MajestiC <majestic2k@gmail.com>
+
+*/
+/* 伪元素 滚动条 边角修饰 **/
+pre  { border-radius: 5px; }
+pre code::-webkit-scrollbar { width: 8px; height: 8px; background: rgba(0,0,0,0); } /*滚动槽*/
+pre code::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }         /*滚动轴*/
+pre code::-webkit-scrollbar-corner { background: rgba(0,0,0,0);}                    /*交点  */
+.hljs ul { list-style: decimal-leading-zero ! important; }
+.hljs ul li::before { position: relative; left: -12px; content:' '; background:#000080 ! important; margin-right: -10px }
+
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #000080;
+}
+
+.hljs,
+.hljs-subst {
+  color: #0ff;
+}
+
+.hljs-string,
+.hljs-attribute,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-addition {
+  color: #ff0;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-section,
+.hljs-type,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-variable {
+  color: #fff;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-doctag,
+.hljs-deletion {
+  color: #888;
+}
+
+.hljs-number,
+.hljs-regexp,
+.hljs-literal,
+.hljs-link {
+  color: #0f0;
+}
+
+.hljs-meta {
+  color: #008080;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}

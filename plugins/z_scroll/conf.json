@@ -1,0 +1,10 @@
+{
+    "name": "平滑滚动",
+    "brief": "全局平滑滚动,提升流畅度",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

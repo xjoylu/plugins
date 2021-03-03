@@ -8,7 +8,9 @@ elseif($action == 'credits') {
     elseif($method=='POST'){
         $op = param('op');
         if($op=='n'){
-            $set=setting_get('tt_credits');$e_rmb = param('e_rmb'); $my_rmbs=$user['rmbs'];$my_golds=$user['golds'];$min=$set['min'];$e_rmb_raw=$e_rmb;
+            $set=setting_get('tt_credits');$e_rmb = param('e_rmb');
+			$set['exchange_n']=1;
+			$my_rmbs=$user['rmbs'];$my_golds=$user['golds'];$min=$set['min'];$e_rmb_raw=$e_rmb;
             $e_rmb *= $set['exchange_n'];
             if($e_rmb<$min) {message(-1, '最低兑换金额：¥'.($min/100.0).'，您兑换的金额不足。');die();}
             if($e_rmb<=0 ) {message(-1, lang('ERROR'));die();}
@@ -26,6 +28,7 @@ elseif($action == 'credits') {
             message(0, lang('update_successfully'));
         }elseif($op=='c'){
             $set=setting_get('tt_credits');$e_golds=param('e_golds_c'); $my_golds = $user['golds'];$my_rmbs=$user['rmbs'];$min=$set['min'];$e_golds_raw=$e_golds;
+			$set['exchange_c']=1;
             $e_golds*= $set['exchange_c'];
             if(empty($uid)||empty($e_golds)){message(-1, "ERROR");die();}
             if($e_golds<$min) {message(-1, '最低兑换金币：'.$min.'，您兑换的金额不足。');die();}

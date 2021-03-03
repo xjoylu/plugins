@@ -41,8 +41,6 @@ if(empty($action)) {
 	
 	$uid = $user['uid'];
 	
-	user_update($user['uid'], array('login_ip'=>$longip, 'login_date' =>$time , 'logins+'=>1));
-	
 	$_SESSION['uid'] = $uid;
 	user_token_set($uid);
 	

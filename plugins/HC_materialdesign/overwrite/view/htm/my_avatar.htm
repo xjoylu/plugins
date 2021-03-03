@@ -1,0 +1,59 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<div class="row">
+	<div class="col-lg-6 offset-lg-3">
+		<div class="mdui-card card-block m-t-1">
+			<div class="mdui-card-primary">
+			<h4 class="mdui-card-primary-title"><?php echo lang('modify_avatar');?></h4>
+			</div>
+			<div style="width: 60%; margin: auto;">
+				<p class="text-center">
+					<img id="avatar_img" class="avatar-lg" src="<?php echo $user['avatar_url'];?>">
+				</p>
+				<p class="text-center">
+					<!--
+					<label class="file">
+						<input type="file" id="file">
+						<span class="file-custom"></span>
+					</label>
+					-->
+					<input type="file" id="avatar_upload" accept="image/gif,image/jpeg,image/png,image/jpg,image/bmp"  class="upload" style="width: 200px; opacity: 0.7" value="<?php echo lang('modify_avatar');?>"/>
+				</p>
+				<div class="mdui-progress" id="progress" style="display:none;">
+					<div id="avatar_progress" class="mdui-progress-determinate" style="width: 0%;"></div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<a role="button" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block" href="<?php echo url('my');?>"> <?php echo lang('back');?> </a>
+	</div>
+</div>
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+var javatar_upload = $('#avatar_upload');
+var jprogress = $('#avatar_progress');
+var jimg = $('#avatar_img');
+javatar_upload.on('change', function(e) {
+	$('#progress').show();
+	var files = xn.get_files_from_event(e);
+	jprogress.css('width',0);
+	xn.upload_file(
+		files[0], 
+		xn.url('my-avatar'), 
+		{width: 128, height: 128, action: 'clip', filetype: 'png'}, 
+		function(code, message) {
+			if(code == 0) {
+				jimg.attr('src', message.url+'?'+Math.random());
+			} else {
+				$.alert(message);
+			}
+		}, 
+		function(percent) {
+			jprogress.css('width',percent + '%');
+		}
+	);
+	mdui.alert('上传成功');
+});
+</script>

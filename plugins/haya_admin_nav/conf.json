@@ -1,0 +1,12 @@
+{
+    "name": "后台导航二级菜单",
+    "brief": "后台导航二级菜单，重写导航菜单。作者：deatil",
+    "version": "1.0.2",
+    "author": "deatil",
+    "id": "haya_admin_nav",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

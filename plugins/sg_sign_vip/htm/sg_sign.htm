@@ -1,0 +1,144 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+<div class="row">
+	<div class="col-lg-9">
+		<ol class="breadcrumb d-none d-md-flex">
+			<li class="breadcrumb-item"><a href="./"><i class="icon-home" aria-hidden="true"></i></a></li>
+			<li class="breadcrumb-item active"><?php echo lang('sg_sign12'); ?></a></li>
+		</ol>
+		<div class="card">
+			<div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link <?php echo $active == 'default' ? 'active' : '';?>" href="<?php echo url("sg_sign"); ?>"><?php echo lang('sg_sign13'); ?></a>
+					</li><?php if($kv['sign11'] == 1) {?>
+					<li class="nav-item">
+						<a class="nav-link <?php echo $active == 'list' ? 'active' : '';?>" href="<?php echo url("sg_sign-list"); ?>"><?php echo lang('sg_sign14'); ?></a>
+					</li><?php } ?>
+				</ul>
+			</div>
+			<div class="card-body">
+			<div class="table-responsive">
+						<?php if($sg_signlist) { if($active == 'list') {?>
+							<table class="table">
+										<tr>
+											<th width="100px"><b><?php echo lang('username'); ?></b></th>
+											<th width="100px"><b><?php echo lang('sg_sign15');?></b></th>
+											<th width="100" class="hidden-sm"><b><?php echo lang('sg_sign16'); ?></b></th>
+											<th width="100"><b><?php echo lang('sg_sign17'); ?></b></th>
+										</tr>
+
+									
+									<?php if(is_array($sg_signlist)) { foreach($sg_signlist as $_signlist) { ?>
+											<tr>
+											    <td width="100px"><?php echo $_signlist['user']; ?></td>
+												<td width="100px"><?php echo $_signlist['credits']; ?> <?php echo $Unit; ?></td>
+												<td width="100" class="hidden-sm"><?php echo humandate($_signlist['stime']); ?></td>
+												<td width="100"><?php echo $_signlist['counts'].lang('sg_sign21'); ?></td>
+											</tr>
+										<?php } } ?>
+									
+							</table>
+				</div>
+			</div>
+		</div>
+<nav class="my-3"><ul class="pagination justify-content-center"><?php echo $pagination; ?></ul></nav>
+						<?php }else{ ?>
+							<table class="table">
+										<tr>
+											<th width="60px"><b><?php echo lang('sg_sign18'); ?></b></th>
+											<th width="100px"><b><?php echo lang('username'); ?></b></th>
+											<th width="100px"><b><?php echo lang('sg_sign15'); ?></b></th>
+											<th width="100px" class="hidden-sm"><b><?php echo lang('sg_sign19'); ?></b></th>
+											<th width="100px" class="hidden-sm"><b><?php echo lang('sg_sign16'); ?></b></th>
+											<th width="100px" class="hidden-sm"><b><?php echo lang('sg_sign17'); ?></b></th>
+											<th width="100px" class="hidden-sm"><b><?php echo lang('sg_sign20'); ?></b></th>										
+										</tr>
+
+									
+									<?php if(is_array($sg_signlist)) { foreach($sg_signlist as $_signlist) { ?>
+											<tr>
+												<td width="60px"><?php echo $_signlist['id']; ?></td>
+											    <td width="100px"><?php echo $_signlist['user']; ?></td>
+												<td width="100px"><?php echo $_signlist['credits']; ?> <?php echo $Unit; ?></td>
+												<td width="100px" class="hidden-sm"><?php echo $_signlist['todaycredits']; ?> <?php echo $Unit; ?></td>
+												<td width="100px" class="hidden-sm"><?php echo humandate($_signlist['stime']); ?></td>
+												<td width="100px" class="hidden-sm"><?php echo $_signlist['counts'].lang('sg_sign21'); ?></td>
+												<td width="100px" class="hidden-sm"><?php echo $_signlist['keepdays'].lang('sg_sign21'); ?></td>
+											</tr>
+										<?php } } ?>						
+							</table>
+				</div>
+			</div>
+		</div>
+						<?php }}else{ ?>
+						<table class="table table-hover threadlist"><tr><?php echo lang('sg_sign36'); ?></tr></table>
+				</div>
+			</div>
+		</div>
+							<?php }?>		
+	</div>
+	<div class="col-lg-3">
+		<div class="card mibbs_con d-none d-xl-block" id="start">
+			<span id="sg_sign" class="mibbs_signpanel JD_sign ">
+				<div class="font" id="sign"></div>
+				<div class="fblock">
+					<div class="all" id="peo"></div>
+					<div class="line">
+						<span style="font-size:12px;" id="day"></span>
+					</div>
+				</div>
+			</span>
+		</div>			
+		<div class="card">
+			<div class="m-3 text-center">
+				<h5><?php echo lang('sg_sign24'); ?></h5>
+				
+				<div class="text-left"><?php echo lang('sg_sign23', array('sign1'=>$kv['sign1'].' '.$Unit, 'sign2'=>$kv['sign2'].' '.$Unit,'sign3'=>$kv['sign3'].' '.$Unit,'sign4'=>$kv['sign4'].' '.$Unit,'sign5'=>$kv['sign5'].' '.$Unit,'sign6'=>$kv['sign6'].' '.$Unit,'sign7'=>$kv['sign7'],'sign8'=>$kv['sign8'].' '.$Unit)); ?>
+			</div>
+				
+			</div>
+			<div class="card-footer p-2">
+				<table class="w-100 small">
+					<tr align="center">
+						<td>
+							<span class="text-muted"><?php echo lang('sg_sign25'); ?></span><br>
+							<b><?php echo $sg_sign_set['sg_signnum'].lang('sg_sign28'); ?></b>
+						</td>
+						<td>
+							<span class="text-muted"><?php echo lang('sg_sign26'); ?></span><br>
+							<b><?php echo $sg_sign_set['sg_sign'].lang('sg_sign28'); ?></b>
+						</td>
+						<td>
+							<span class="text-muted"><?php echo lang('sg_sign27'); ?></span><br>
+							<b><?php echo $sg_sign_set['sg_sign_one']; ?></b>
+						</td>
+						
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+<script>
+var sg_sign = $('#sg_sign');
+var sign = $('#sign');
+var peo = $('#peo');
+var day = $('#day');
+var s1 = '<?php if($userinfo['stime'] > strtotime('today')) { echo lang('sg_sign29');}else{ echo lang('sg_sign30');} ?>'; 
+var s2 = '<?php if($sg_sign_set['sg_signnum']) { echo $sg_sign_set['sg_signnum'];}else{ echo '0';} echo lang('sg_sign28');?>'; 
+var s3 = '<?php echo lang('sg_sign35'); if(isset($userinfo['keepdays'])) { echo $userinfo['keepdays'];}else{ echo '0';} echo lang('sg_sign21'); ?>'; 
+var sign = sign.html(s1);
+var peo = peo.html(s2);
+var day = day.html(s3);
+sg_sign.on('click', function() {
+	var postdata = sg_sign.serialize();
+	$.xpost(xn.url('sg_sign'), postdata, function(code, message) {
+			$.alert(message);
+			sg_sign.delay(1000).location(xn.url('sg_sign'));
+	});
+	return false;
+});
+</script>

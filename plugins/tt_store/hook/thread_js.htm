@@ -1,0 +1,20 @@
+<?php if(load_rate_js) { ?>
+<script>
+    var jratebox = $("#ratebox"); var jrateDiv=$("#star_show");
+    function tt_rate(op)
+    {   var postdata = "op="+op;
+        $.confirm("您确定要评分吗？评分后将不可更改！",function(){
+            jratebox.remove();
+            $.xpost("<?php echo url('thread-tRate-'.$tid);?>", postdata, function(code, message) {
+                if(code == 0) {$.alert(message); setTimeout(function() {
+                    window.location.reload();
+                }, 1000);return;
+                } else {$.alert(message); }
+            });
+        });}
+    jrateDiv.on('click',function(){
+        var jmsg = "评分统计信息:<br><br>评分人数:<?php echo $rate['ratenum'];?><br>好评人数:<?php echo $rate['rate5'];?>,中评人数:<?php echo $rate['rate3'];?>,差评人数:<?php echo $rate['rate1'];?>";
+        $.alert(jmsg);
+    });
+</script>
+<?php }?>

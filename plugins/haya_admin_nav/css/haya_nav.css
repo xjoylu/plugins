@@ -1,0 +1,62 @@
+/** 插件配置 **/
+.haya-dropdown-toggle {
+    color: rgba(255, 255, 255, 0.5);
+	padding: 0.2rem 0px !important;
+	display: block;
+	line-height: 1.7rem;
+}
+.haya-dropdown-toggle:hover,
+.haya-dropdown-toggle:focus
+{
+	color: rgba(255, 255, 255, 0.75);
+    text-decoration: none !important;
+}
+.haya-dropdown-toggle::after {
+    width: 0;
+    height: 0;
+    background: none;
+    opacity: 0.5;
+    border: 0;
+}
+.haya-dropdown-menu > li {
+}
+.haya-dropdown-menu > li > a {
+    color: rgba(255, 255, 255, 0.5);
+	font-size: 13.6px;
+	padding: 5px 10px;
+	display: block;
+}
+.haya-dropdown-menu > li > a:hover {
+	color: rgba(255, 255, 255, 0.75);
+    text-decoration: none !important;
+}
+@media(max-width:767px) {
+	.open .dropdown-menu {
+		position:static;
+		float:none;
+		width:auto;
+		margin-top:0;
+		background-color:transparent;
+		border:0;
+		box-shadow:none
+	}
+	.open .dropdown-menu>li>a,
+	.open .dropdown-menu .dropdown-header
+	{
+		padding:5px 15px 5px 25px
+	}
+	.open .dropdown-menu>li>a {
+		line-height:20px
+	}
+	.open .dropdown-menu>li>a:hover,
+	.open .dropdown-menu>li>a:focus
+	{
+		background-image:none;
+	}
+}
+
+
+
+
+
+

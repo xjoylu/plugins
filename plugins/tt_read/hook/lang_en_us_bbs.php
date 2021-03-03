@@ -3,7 +3,3 @@
     'dear_p'=> 'The thread have special content that you cannot see it.',
     'permission'=>'Permission',
     'or_'=>'OR',
-    'read_input_content_here'=>'Please input content here',
-    'insert_login_content'=>'Insert login content',
-    'insert_reply_content'=>'Insert reply content',
-    'insert_component_content'=>'Insert component hide content',

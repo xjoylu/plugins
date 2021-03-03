@@ -1,0 +1,10 @@
+<fieldset style="margin-top: 20px; border:1px dashed #008CFF;padding:10px;-moz-border-radius:8px;box-shadow:rgba(0,0,0,0.14);-webkit-border-radius:8px;border-radius:8px;line-height: 2em;color:#6D6D6D;background-color: #fff;">
+  <legend align="center" style="color:#FFFFFF;width:200px;text-align:center;border-radius: 20px;background-color:#212529;">帖子版权声明</legend>
+		1、本帖标题：<a href="<?php echo http_url_path()."thread-$tid.htm"; ?>" rel="nofollow"><font color="#FF6600"><?php echo $thread['subject'];?></font></a> <br>&nbsp;&nbsp;&nbsp;&nbsp;本站网址：<font color="#FF6600"><?php echo http_url_path() ?></font><br/>
+		2、本网站的资源部分来源于网络，如有侵权，请联系站长进行删除处理。<br />
+		3、会员发帖仅代表会员个人观点，并不代表本站赞同其观点和对其真实性负责。<br />
+		4、本站一律禁止以任何方式发布或转载任何违法的相关信息，访客发现请向站长举报<br/>
+		5、站长邮箱：ifc@1e9.cc
+		<strong>除非注明，本帖由<a href="<?php echo url("user-$thread[uid]");?>" style="color:red"><?php echo $thread['username'];?></a>在本站<a href="<?php echo url("forum-$fid");?>">《<?php echo $forum['name'];?>》</a>版块原创发布，
+		转载请注明出处！</strong>
+</fieldset>

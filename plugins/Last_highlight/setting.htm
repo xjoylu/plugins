@@ -1,0 +1,334 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+
+<style> 
+/** 开关按钮 **/
+.switch{ width: 100px; margin: 10px 10px 40px 10px; }
+.btn_fath{ margin-top: 10px; position: relative; border-radius: 20px; }
+.btn1{ float: left; }
+.btn2{ float: right; }
+.btnSwitch{ height: 40px; width: 50px; border:none; color: #fff; line-height: 40px; font-size: 16px; text-align: center; z-index: 1; } 
+.move{ z-index: 100; width: 40px; border-radius: 20px; height: 40px; position: absolute; cursor: pointer; border: 1px solid #828282; background-color: #f1eff0; box-shadow: 1px 2px 2px 1px #fff inset,0 0 5px 1px #999; } 
+.on .move{ left: 60px; }
+.on.btn_fath{ background-color: #5281cd; }
+.off.btn_fath{ background-color: #828282; }
+
+/** 单选按钮 **/
+.btn input { display: none !important; }
+
+/** 隐藏输入框 - 那为什么还要用form.. **/
+form { display:none; }
+</style>
+
+<div class="row">
+	<div class="col-lg-10 mx-auto">
+		<div class="card">
+			<div class="card-body">
+
+				<h4 class="card-title">代码折叠</h4>
+				<div class="switch right">
+					<div class="btn_fath clearfix <?php echo $setting['fold']; ?>" onclick="toogle(this)"> 
+						<div class="move" data-state="<?php echo $setting['fold']; ?>"></div> 
+						<div class="btnSwitch btn1">ON</div> 
+						<div class="btnSwitch btn2 ">OFF</div> 
+					</div>
+				</div> 
+
+				<h4 class="card-title">代码高亮</h4>
+
+<!-- 演示代码 -->
+<div class="message mt-1 break-all">
+<pre><code class="hljs php">&lt;?php
+/*
+    XiunoPHP 4.0 只是定义了一些函数和全局变量，方便使用，并没有要求如何组织代码。
+    采用静态语言编程风格，有利于 Zend 引擎的编译和 OPCache 缓存，支持 PHP7
+    1. 禁止使用 eval(), 正则表达式 e 修饰符
+    2. 尽量避免 autoload
+    3. 尽量避免 $$var 多重变量
+    4. 尽量避免 PHP 高级特性 __call __set __get 等魔术方法，不利于错误排查
+    5. 尽量采用函数封装功能，通过前缀区分模块
+*/
+
+!defined('DEBUG') AND define('DEBUG', 1); // 1: 开发模式， 2: 线上调试：日志记录，0: 关闭
+!defined('APP_PATH') AND define('APP_PATH', './');
+!defined('XIUNOPHP_PATH') AND define('XIUNOPHP_PATH', dirname(__FILE__).'/');
+
+function_exists('ini_set') AND ini_set('display_errors', DEBUG ? '1' : '0');
+error_reporting(DEBUG ? E_ALL : 0);
+version_compare(PHP_VERSION, '5.3.0', '&lt;') AND set_magic_quotes_runtime(0);
+$get_magic_quotes_gpc = get_magic_quotes_gpc();
+$starttime = microtime(1);
+$time = time();
+
+// 头部，判断是否运行在命令行下
+define('IN_CMD', !empty($_SERVER['SHELL']) || empty($_SERVER['HTTP_USER_AGENT']));
+if(IN_CMD) {
+    !isset($_SERVER['REMOTE_ADDR']) AND $_SERVER['REMOTE_ADDR'] = '';
+    !isset($_SERVER['REQUEST_URI']) AND $_SERVER['REQUEST_URI'] = '';
+    !isset($_SERVER['REQUEST_METHOD']) AND $_SERVER['REQUEST_METHOD'] = 'GET';
+} else {
+    header("Content-type: text/html; charset=utf-8");
+    //header("Cache-Control: max-age=0;"); // 手机返回的时候回导致刷新
+    //header("Cache-Control: no-store;");
+    //header("X-Powered-By: XiunoPHP 4.0");
+}
+
+// hook xiunophp_include_before.php
+
+// ----------------------------------------------------------&gt; db cache class
+
+include XIUNOPHP_PATH.'db_mysql.class.php';
+include XIUNOPHP_PATH.'db_pdo_mysql.class.php';
+include XIUNOPHP_PATH.'db_pdo_sqlite.class.php';
+include XIUNOPHP_PATH.'cache_apc.class.php';
+include XIUNOPHP_PATH.'cache_memcached.class.php';
+include XIUNOPHP_PATH.'cache_mysql.class.php';
+include XIUNOPHP_PATH.'cache_redis.class.php';
+include XIUNOPHP_PATH.'cache_xcache.class.php';
+include XIUNOPHP_PATH.'cache_yac.class.php';
+
+// ----------------------------------------------------------&gt; 全局函数
+
+include XIUNOPHP_PATH.'db.func.php';
+include XIUNOPHP_PATH.'cache.func.php';
+include XIUNOPHP_PATH.'image.func.php';
+include XIUNOPHP_PATH.'array.func.php';
+include XIUNOPHP_PATH.'xn_encrypt.func.php';
+include XIUNOPHP_PATH.'misc.func.php';
+
+// hook xiunophp_include_after.php
+
+empty($conf) AND $conf = array('db'=&gt;array(), 'cache'=&gt;array(), 'tmp_path'=&gt;'./', 'log_path'=&gt;'./', 'timezone'=&gt;'Asia/Shanghai');
+empty($conf['tmp_path']) AND $conf['tmp_path'] = ini_get('upload_tmp_dir');
+empty($conf['log_path']) AND $conf['log_path'] = './';
+
+$ip = ip();
+$longip = ip2long($ip);
+$longip &lt; 0 AND $longip = sprintf("%u", $longip); // fix 32 位 OS 下溢出的问题
+$useragent = _SERVER('HTTP_USER_AGENT');
+
+// 语言包变量
+!isset($lang) AND $lang = array();
+
+// 全局的错误，非多线程下很方便。
+$errno = 0;
+$errstr = '';
+
+// error_handle
+// register_shutdown_function('xn_shutdown_handle');
+DEBUG AND set_error_handler('error_handle', -1);
+empty($conf['timezone']) AND $conf['timezone'] = 'Asia/Shanghai';
+date_default_timezone_set($conf['timezone']);
+
+// 超级全局变量
+!empty($_SERVER['HTTP_X_REWRITE_URL']) AND $_SERVER['REQUEST_URI'] = $_SERVER['HTTP_X_REWRITE_URL'];
+!isset($_SERVER['REQUEST_URI']) AND $_SERVER['REQUEST_URI'] = '';
+$_SERVER['REQUEST_URI'] = str_replace('/index.php?', '/', $_SERVER['REQUEST_URI']); // 兼容 iis6
+$_REQUEST = array_merge($_COOKIE, $_POST, $_GET, xn_url_parse($_SERVER['REQUEST_URI']));
+
+// IP 地址
+!isset($_SERVER['REMOTE_ADDR']) AND $_SERVER['REMOTE_ADDR'] = '';
+!isset($_SERVER['SERVER_ADDR']) AND $_SERVER['SERVER_ADDR'] = '';
+
+// $_SERVER['REQUEST_METHOD'] === 'PUT' ? @parse_str(file_get_contents('php://input', false , null, -1 , $_SERVER['CONTENT_LENGTH']), $_PUT) : $_PUT = array(); // 不需要支持 PUT
+$ajax = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) &amp;&amp; strtolower(trim($_SERVER['HTTP_X_REQUESTED_WITH'])) == 'xmlhttprequest') || param('ajax');
+$method = $_SERVER['REQUEST_METHOD'];
+
+// 保存到超级全局变量，防止冲突被覆盖。
+$_SERVER['starttime'] = $starttime;
+$_SERVER['time'] = $time;
+$_SERVER['ip'] = $ip;
+$_SERVER['longip'] = $longip;
+$_SERVER['useragent'] = $useragent;
+$_SERVER['conf'] = $conf;
+$_SERVER['lang'] = $lang;
+$_SERVER['errno'] = $errno;
+$_SERVER['errstr'] = $errstr;
+$_SERVER['method'] = $method;
+$_SERVER['ajax'] = $ajax;
+$_SERVER['get_magic_quotes_gpc'] = $get_magic_quotes_gpc;
+
+// 初始化 db cache，这里并没有连接，在获取数据的时候会自动连接。
+$db = !empty($conf['db']) ? db_new($conf['db']) : NULL;
+$db AND $db-&gt;errno AND xn_message(-1, $db-&gt;errstr); // 安装的时候检测过了，不必每次都检测。但是要考虑环境移植。
+
+$conf['cache']['mysql']['db'] = $db; // 这里直接传 $db，复用 $db；如果传配置文件，会产生新链接。
+$cache = !empty($conf['cache']) ? cache_new($conf['cache']) : NULL;
+unset($conf['cache']['mysql']['db']); // 用完清除，防止保存到配置文件
+!$cache AND $errno AND xn_message(-1, $errstr);
+
+// 对 key 进行安全保护，Xiuno 专用扩展
+!empty($conf) AND function_exists('xn_key') ? ($conf['auth_key'] = xn_key()) : (function_exists('xiuno_key') ? ($conf['auth_key'] = xiuno_key()) : NULL);
+
+$_SERVER['db'] = $db;
+$_SERVER['cache'] = $cache;
+?&gt;
+</code></pre>								
+</div>
+<!-- /演示代码 -->
+
+				<!-- 高亮方案 = =" 手动写好累啊 -->
+				<div class="bs-example">
+					<div class="XXXbtn-group" data-toggle="buttons">
+						<label class="btn btn-primary" onclick="rarara(this)" id="agate"> Agate </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="androidstudio"> androidstudio </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="arduino-light"> arduino-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="arta"> arta </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="ascetic"> ascetic </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-cave-dark"> atelier-cave-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-cave-light">atelier-cave-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-dune-dark"> atelier-dune-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-dune-light"> atelier-dune-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-estuary-dark"> atelier-estuary-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-estuary-light"> atelier-estuary-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-forest-dark"> atelier-forest-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-forest-light"> atelier-forest-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-heath-dark"> atelier-heath-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-heath-light"> atelier-heath-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-lakeside-dark"> atelier-lakeside-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-lakeside-light"> atelier-lakeside-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-plateau-dark"> atelier-plateau-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-plateau-light"> atelier-plateau-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-savanna-dark"> atelier-savanna-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-savanna-light"> atelier-savanna-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-seaside-dark"> atelier-seaside-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-seaside-light"> atelier-seaside-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-sulphurpool-dark"> atelier-sulphurpool-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atelier-sulphurpool-light"> atelier-sulphurpool-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atom-one-dark"> atom-one-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="atom-one-light"> atom-one-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="brown-paper"> brown-paper </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="codepen-embed"> codepen-embed </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="color-brewer"> color-brewer </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="darcula"> darcula </label>
+						<label class="btn btn-info" onclick="rarara(this)" id="dark"> Dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="default"> default </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="docco"> docco </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="dracula"> dracula </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="far"> far </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="foundation"> foundation </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="github"> github </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="github-gist"> github-gist </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="googlecode"> googlecode </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="grayscale"> grayscale </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="gruvbox-dark"> gruvbox-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="gruvbox-light"> gruvbox-light </label>
+						<label class="btn btn-danger" onclick="rarara(this)" id="hopscotch"> hopscotch </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="hybrid"> hybrid </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="idea"> idea </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="ir-black"> ir-black </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="kimbie-dark"> kimbie-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="kimbie-light"> kimbie-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="magula"> magula </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="mono-blue"> mono-blue </label>
+						<label class="btn btn-info" onclick="rarara(this)" id="monokai"> monokai </label>
+						<label class="btn btn-info" onclick="rarara(this)" id="monokai-sublime"> monokai-sublime </label>
+						<label class="btn btn-info" onclick="rarara(this)" id="obsidian"> obsidian </label>
+						<label class="btn btn-info" onclick="rarara(this)" id="ocean"> ocean </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="paraiso-dark"> paraiso-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="paraiso-light"> paraiso-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="pojoaque"> pojoaque </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="purebasic"> purebasic </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="qtcreator-dark"> qtcreator-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="qtcreator-light"> qtcreator-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="railscasts"> railscasts </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="rainbow"> rainbow </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="routeros"> routeros </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="school-book"> school-book </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="solarized-dark"> solarized-dark </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="solarized-light"> solarized-light </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="sunburst"> sunburst </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="tomorrow"> tomorrow </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="tomorrow-night"> tomorrow-night </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="tomorrow-night-blue"> tomorrow-night-blue </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="tomorrow-night-bright"> tomorrow-night-bright </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="tomorrow-night-eighties"> tomorrow-night-eighties </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="vs"> vs </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="vs2015"> vs2015 </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="xcode"> xcode </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="xt256"> xt256 </label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="zenburn"> zenburn </label>
+					</div>
+				</div>
+
+				<!-- 匿了 -->
+				<form action="<?php echo url("plugin-setting-Last_highlight");?>" method="post" id="form">
+					<?php echo $input['view']; ?>
+					<?php echo $input['fold']; ?>
+					<?php echo $input['other']; ?>
+				</form>
+
+				<a href='https://www.xn--uesr8q.com/thread-53.htm'>使用帮助</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+
+<script>
+// 高亮方案
+function rarara(th){ 
+	var id = $(th).attr("id");
+	$("#view").val(id);
+	ajaxform(); // 触发数据提交
+	$("#views").attr("href","../plugin/Last_highlight/styles/"+id+".css");
+	$(th).siblings().removeClass("active"); // 移除全部选中$("p").removeClass("intro");
+	$("#<?php echo $setting['view']; ?>").addClass("active"); // 追加默认选中
+}
+
+// 开关按钮 
+function toogle(th){ 
+	var ele = $(th).children(".move"); 
+	if(ele.attr("data-state") == "on"){ 
+		ele.animate({left: "0"}, 300, function(){ 
+			ele.attr("data-state", "off"); 
+			$("#fold").val("off");
+			ajaxform(); // 触发数据提交
+		}); 
+		$(th).removeClass("on").addClass("off"); 
+	}else if(ele.attr("data-state") == "off"){ 
+		ele.animate({left: '60px'}, 300, function(){ 
+			$(this).attr("data-state", "on");
+			$("#fold").val("on");
+			ajaxform(); // 触发数据提交
+		}); 
+		$(th).removeClass("off").addClass("on"); 
+	} 
+}
+
+// 封装 ajax
+function ajaxform(){
+	var jform = $("#form");
+	var referer = '<?php echo http_referer();?>';
+	var postdata = jform.serialize();
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$("#body").prepend('<div class="alert alert-success" role="alert" style="position:fixed;top:4rem;left:50%;margin-left:-160px;width:320px;z-index:9999;"><strong>更新成功!</strong> 设定已应用.</div>');
+			setTimeout(function () {
+				$(".alert-success").hide(300, function(){ $(this).remove() });
+			}, 6000);
+			return;
+		} else {
+			$.alert(message);
+			//jsubmit.button('reset');
+		}
+	});
+}
+
+</script> 
+
+
+<!-- 代码高亮 -->
+<?php $setting = setting_get('Last_highlight'); ?>
+<link id="views" rel="stylesheet" type="text/css" href="../plugin/Last_highlight/styles/<?php echo $setting['view']; ?>.css?v1.0"/>
+<script src="../plugin/Last_highlight/highlight.pack.js?v1.0"></script>
+<script >
+	$(function(){
+		$("code").animate({maxHeight:'320px'}); // 演示页面强制折叠, 禁止展开
+		$("#<?php echo $setting['view']; ?>").addClass("active"); // 追加默认选中
+	});
+</script>

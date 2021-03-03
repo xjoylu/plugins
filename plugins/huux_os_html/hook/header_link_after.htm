@@ -1,0 +1,8 @@
+<?php 
+$huux_os_html = setting_get('huux_os_html');
+if(isset($huux_os_html['site-css']) && $huux_os_html['site-css']){
+echo '<style type="text/css" name="dabai">';
+echo $huux_os_html['site-css'];
+echo '</style>';
+}
+?>

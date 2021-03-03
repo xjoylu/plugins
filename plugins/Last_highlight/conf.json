@@ -1,0 +1,11 @@
+{
+    "name": "Markdown 代码高亮",
+    "brief": "基于 highlight.js 制作的 Markdown 代码高亮组件, 内置70余套主题风格可选, 需手动<a href='https://www.xn--uesr8q.com/thread-53.htm'>修改Markdown插件</a> 并未支持富文本编辑器 ",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

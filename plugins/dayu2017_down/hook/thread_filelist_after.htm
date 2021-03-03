@@ -1,0 +1,19 @@
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<div id="idown" style="display:none;box-shadow:5px 5px 5px 5px #888888;background-color:#fff;width:500px;height:300px;padding:20px;">
+<?php echo $thread['subject'];?>
+<hr/>
+<?php include APP_PATH.'plugin/dayu2017_down/hook/ad.htm';?>
+<hr/>
+<a href="" id="downinfo" ></a>
+
+</div>
+<script>
+$(".attachlist a").click(function(){
+var url=$(this).attr("href");
+var title=$(this).html();
+$("#idown #downinfo").html(title);
+$("#idown #downinfo").attr("href",url);
+$("#idown").css("display","block");
+$(this).attr("href","javascript:;");
+});
+</script>

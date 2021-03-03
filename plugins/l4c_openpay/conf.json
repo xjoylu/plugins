@@ -1,0 +1,10 @@
+{
+    "name": "打赏作者",
+    "brief": "在个人资料中可以设置自己的打赏二维码，默认打赏二维码在plugin/l4c_openpay/pay中，可以换成站长自己的-来自<a href='http://le4c.top' style='color:red'>love4cherry</a>",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "dependencies": []
+}

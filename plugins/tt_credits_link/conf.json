@@ -1,0 +1,13 @@
+{
+    "name": "付费下载链接",
+    "brief": "付费下载链接，需要预先安装积分插件商业版。",
+    "version": "1.01",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": {
+        "tt_credits":"1.20"
+    }
+}

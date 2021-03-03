@@ -1,5 +1,2 @@
- <?php exit;
-$forum = forum_read($fid);
-user_update($uid, array('credits-'=>$forum['create_credits'], 'golds-'=>$forum['create_golds']));
-user_update_group($uid);
-?>
+$kv = kv_get('sg_group');
+user__update($uid, array('credits-'=>$kv['group2']));

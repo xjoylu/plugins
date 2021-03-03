@@ -1,0 +1,84 @@
+/* Tomorrow Night Blue Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+
+/* 伪元素 滚动条 边角修饰 **/
+pre  { border-radius: 5px; }
+pre code::-webkit-scrollbar { width: 8px; height: 8px; background: rgba(0,0,0,0); } /*滚动槽*/
+pre code::-webkit-scrollbar-thumb { background: white; border-radius: 4px; }         /*滚动轴*/
+pre code::-webkit-scrollbar-corner { background: rgba(0,0,0,0);}                    /*交点  */
+.hljs ul { list-style: decimal-leading-zero ! important; }
+.hljs ul li::before { position: relative; left: -12px; content:' '; background:#002451 ! important; margin-right: -10px }
+
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+  color: #7285b7;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+  color: #ff9da4;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+  color: #ffc58f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+  color: #ffeead;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: #d1f1a9;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+  color: #bbdaff;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #ebbbff;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: #002451;
+  color: white;
+  padding: 0.5em;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}

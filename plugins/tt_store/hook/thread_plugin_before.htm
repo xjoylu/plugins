@@ -1,0 +1,10 @@
+<?php $load_rate_js=0;
+if($rate_open) { ?>
+<style>
+    .star {display: block;position: relative;width: 116px;height: 20px;background: url(plugin/tt_store/star.png) no-repeat 0px -20px;}
+    .ystar {position: absolute;top: 0;left: 0;width: 116px;height: 20px;background: url(plugin/tt_store/star.png) no-repeat 0px 0px;}
+</style>
+<div class="plugin d-flex justify-content-center mt-3" id="star_show"><span class="star"><span class="ystar" style="width:<?php echo $rate['rate_avg']/5.0*100.0;?>%"></span></span>&nbsp;&nbsp;<?php echo $rate['rate_avg'] ;?>分</div>
+<?php if($uid&& db_count('paylist',array('uid'=>$uid,'tid'=>$tid,'rate'=>0))>=1){$load_rate_js=1;?>
+<div id="ratebox" class="plugin d-flex justify-content-center mt-3"><button type="button" class="btn btn-outline-danger" style="margin:5px;" onclick="tt_rate(1);">差评</button><button type="button" class="btn btn-outline-warning" style="margin:5px;" onclick="tt_rate(2);">中评</button><button type="button" class="btn btn-outline-success" style="margin:5px;" onclick="tt_rate(3);">好评</button></div>
+<?php }}?>

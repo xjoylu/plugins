@@ -21,7 +21,6 @@ Array
 */
 function qq_login_get_token($appid, $appkey, $code, $return_url) {
 	$return_url = urlencode($return_url);
-
 	$get_token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=$appid&redirect_uri=$return_url&client_secret=$appkey&code=$code";
 	$s = https_get($get_token_url);
 	if(strpos($s, "callback") !== false) {
@@ -145,7 +144,7 @@ function qq_login_create_user($username, $avatar_url_2, $openid) {
 	$user = user_read($uid);
 
 	$r = db_insert('user_open_plat', array('uid'=>$uid, 'platid'=>1, 'openid'=>$openid));
-	if(empty($r)) return xn_error(-1, '注册失败');
+	if(empty($uid)) return xn_error(-1, '注册失败');
 	
 	runtime_set('users+', '1');
 	runtime_set('todayusers+', '1');

@@ -1,0 +1,18 @@
+<?php 
+$thread_pic_list = list_pic($_thread['tid']);
+$piclist = $thread_pic_list['list'];
+$ax_index_forum = kv_get('ax_index_forum');
+if($ax_index_forum['piclist'] == 1){
+?>
+
+	<?php if($piclist and $fid <> $ax_index_forum['fid']){?>
+	<a href="<?php echo url("thread-$_thread[tid]");?>" data-pjax="pjax">
+	<div class="row pt-2 pb-2 aximgbg">
+	<?php $i=1;foreach($piclist as $v){?>
+		<img src="<?php echo changeSize($v,150,150,'small_');?>" class="ax_img" />
+	<?php if($i == 4){break;}?>
+	<?php $i=$i+1;}?>	
+	</div>
+	</a>						
+	<?php }?>
+<?php }?>

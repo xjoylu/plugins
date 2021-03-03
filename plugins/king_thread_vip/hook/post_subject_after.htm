@@ -1,0 +1,19 @@
+<?php if($allow_status){?>
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label"><?php echo lang('is_vip');?>：</label>
+	<div class="col-sm-10">
+	<?php echo $input['is_vip'];?>
+	</div>
+</div>
+<div class="form-group row hidden" id="vip">
+	<label class="col-sm-2 form-control-label"><?php echo lang('vip');?>：</label>
+	<div class="col-sm-10">
+	<?php 
+				$viprank = db_find_one('thread_vip', array('tid' => $tid));
+						?>
+		<input type="text" name="viprank" value="<?php echo $viprank['viprank'] ; ?>" placeholder="请输入用户组ID，以|分割，例如：1|2|3" class="form-control" />
+	</div>
+</div>
+
+
+<?php }?>

@@ -1,0 +1,15 @@
+{
+    "name": "微信和支付宝充值插件",
+    "brief": "本插件需要预先安装积分插件！微信和支付宝充值积分插件。企业版专用。",
+    "version": "1.027",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": {
+        "my_nav_credits_after.htm": "10"
+    },
+    "overwrites_rank": [],
+    "dependencies": {
+        "tt_credits": "1.0"
+    }
+}

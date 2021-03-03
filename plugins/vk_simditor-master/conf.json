@@ -1,0 +1,10 @@
+{
+    "name": "Simditor编辑器",
+    "brief": "Share From Github or XiunoBBS -Author:vikingleo",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

@@ -1,0 +1,33 @@
+{if view_form('hy_boss','menu_forum')}
+				{foreach $forum as $v}
+					<a href="{php HYBBS_URL('forum',$v['id'])}">{$v.name}</a>
+				{/foreach}
+				<a href="{php HYBBS_URL('forum')}">{$_LANG['全部板块']}</a>
+			{/if}
+
+<style type="text/css">
+	
+.thread-img-box{
+	    
+    margin-left: 70px;
+}
+@media (max-width: 750px){
+.thread-img-box{
+	    
+    margin-left: 51px;
+}
+}
+
+.thread-img-box ul{
+	    list-style: none;
+	    
+}
+.thread-img-box ul li{
+	margin-top: 10px;
+	width:100px;
+	
+    list-style: none;
+    float: left;
+	margin-right: 10px;
+}
+</style>

@@ -1,0 +1,13 @@
+<?php if($thread['stamp'] >= 1) { ?>
+	<img alt="图章" title="图章" src="plugin/tt_stamp/static/<?php echo $thread['stamp'];?>.small.gif"/>
+	<img alt="图章" style="float:right;" id="big_stamp" title="图章" src="plugin/tt_stamp/static/<?php echo $thread['stamp'];?>.gif"/>
+<script>
+	//小屏幕隐藏防止错位
+	window.onresize = function(){
+	    if(document.body.clientWidth<=1024)
+		    document.getElementById("big_stamp").style.display="none";
+		else
+            document.getElementById("big_stamp").style.display="inline-block";
+	};
+</script>
+<?php }?>

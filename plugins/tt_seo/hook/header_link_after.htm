@@ -1,0 +1,16 @@
+<?php $set_seo = setting_get('tt_seo'); if($set_seo['xzh']=='1'){?>
+<script src="//msite.baidu.com/sdk/c.js?appid=<?php echo $set_seo['xzh_appid'];?>"></script>
+<?php if($route=='thread' && $action != 'create'){?>
+<link rel="canonical" href="<?php echo $set_seo['sitemap_site'],url('thread-'.$tid);?>"/>
+<script type="application/ld+json">
+{
+    "@context": "https://ziyuan.baidu.com/contexts/cambrian.jsonld",
+    "@id": "<?php echo $set_seo['sitemap_site'].url('thread-'.$tid);?>",
+    "appid": "<?php echo $set_seo['xzh_appid'];?>",
+    "title": "<?php echo $header['title'];?>",
+    "pubDate": "<?php echo date('Y-m-d\TH:i:s',$thread['create_date']);?>"
+}
+</script>
+<?php }else {?>
+<link rel="canonical" href="<?php echo $set_seo['sitemap_site'];?>"/>
+<?php }}?>

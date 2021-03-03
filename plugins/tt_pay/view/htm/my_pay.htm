@@ -1,0 +1,53 @@
+<template include="./plugin/tt_credits/view/htm/my_credits.template.htm">
+	<slot name="my_body"><div class="col-md-8 mx-auto" >
+		<?php $set = setting_get('tt_pay'); ?>
+			<div class="input-group"><?php if($set['wx']==1) {?><div class="input-group-text"><input type="radio" name="paymethod" id="wx" checked="checked"/><label for="wx"><img src="./plugin/tt_pay/wechat_pay.png"/></label></div><?php }?>
+				<?php if($set['ali']==1) {?><div class="input-group-text"><input type="radio" id="ali" name="paymethod"<?php if($set['wx']=='0'&&$set['ali']=='1') echo 'checked="checked"';?>/><label for="ali"><img src="./plugin/tt_pay/alipay.png"/></label></div><?php }?></div><hr>
+			<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text"><?php echo lang('willcharge');?></span></div><input type="text" style="color:red;background-color:white;" readonly class="form-control" id="show_value" value="¥ 10"/></div><span id="t_opt"><hr>
+			<button type="button" class="btn btn-outline-primary" onclick="setval('10');" style="margin:3px;">¥10</button>
+			<button type="button" class="btn btn-outline-primary" onclick="setval('20');" style="margin:3px;">¥20</button>
+			<button type="button" class="btn btn-outline-primary" onclick="setval('50');" style="margin:3px;">¥50</button>
+			<button type="button" class="btn btn-outline-primary" onclick="setval('100');" style="margin:3px;">¥100</button>
+			<button type="button" class="btn btn-outline-primary" onclick="setval('200');" style="margin:3px;">¥200</button>
+			<button type="button" class="btn btn-outline-primary" onclick="setval('500');" style="margin:3px;">¥500</button>
+			<button onclick="GetPay();" id="t_pay" class="btn btn-primary" style="float:right ;"><?php echo lang('charge'); ?></button></span>
+			<div id="QR_DIV" style="display:none; text-align:center; margin:1px 1px;"><img id="_qr" src="#" alt="微信支付扫码"/></div>
+			<div id="myDiv"style="text-align:center; "></div>
+		</div></div>
+	</slot></template>
+<script>
+    $('a[data-active="my-pay"]').addClass('active');
+</script>
+<?php $min = setting_get('tt_pay')['min'] ;?>
+<script>
+	var jwx=$("#wx"); var jvalue = $("#show_value"); var jDIV = $("#myDiv"); var price = 10;
+    function setval(val){
+        jvalue.val('¥ '+val);
+        price = val;
+	}
+	function serialize_array(arr){
+        var first = 1; var rtn="";
+        for(var key in arr){
+            if(first!=1) rtn+="&"; else first=0;
+            rtn+= key+"="+arr[key];
+        } return rtn;
+	}
+    function GetPay(){
+        $("#t_opt").fadeOut(); $("#t_pay").fadeOut();
+        if(jwx.checked()) wechat_Pay();
+        else ali_Pay();
+        jDIV.html('正在请求支付,请稍等...');
+    }
+    function wechat_Pay(){
+		$.xpost(xn.url('my-paywechat'),'num='+price,function(code,message){
+			if(code!=0)jDIV.html(message);
+			else location = message;
+		});
+	}
+	function ali_Pay(){
+        $.xpost(xn.url('my-payali'),'num='+price,function(code,message){
+            if(code!=0)jDIV.html(message);
+            else location = message;
+        });
+	}
+</script>

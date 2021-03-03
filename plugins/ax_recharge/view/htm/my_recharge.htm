@@ -1,0 +1,98 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+<!--{hook my_common_start.htm}-->
+<div class="btn-group mb-3 d-lg-none" role="group" id="my_mobile_nav">
+	<!--{hook my_common_mobile_my_before.htm}-->
+	<a role="button" class="btn btn-secondary" data-active="menu-my" href="<?php echo url('my');?>">个人资料</a>
+	<!--{hook my_common_mobile_my_after.htm}-->
+	
+	<!--{hook my_common_mobile_my_thread_before.htm}-->
+	<a role="button" class="btn btn-secondary" data-active="menu-my-thread" href="<?php echo url('my-thread');?>">论坛帖子</a>
+	<!--{hook my_common_mobile_my_thread_after.htm}-->
+</div>
+
+<div class="row">
+	<div class="col-lg-2 hidden-md hidden-sm" id="my_aside">
+		<div class="card">
+			<div class="card-body text-center">
+				<!--{hook my_common_avatar_before.htm}-->
+				<img class="avatar-4" src="<?php echo $user['avatar_url'];?>">
+				<br><?php echo $user['username'];?>
+				<!--{hook my_common_username_after.htm}-->
+			</div>
+			<div class="list-group list-group-flush text-center">
+				<!--{hook my_common_my_before.htm}-->
+				<a href="<?php echo url('my');?>" class="list-group-item list-group-item-action" data-active="menu-my">个人资料</a>
+				<!--{hook my_common_my_after.htm}-->
+				
+				<!--{hook my_common_my_thread_before.htm}-->
+				<a href="<?php echo url('my-thread');?>" class="list-group-item list-group-item-action" data-active="menu-my-thread">论坛帖子</a>
+				<!--{hook my_common_my_thread_after.htm}-->
+				
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-10" id="my_main">
+		<!--{hook my_common_main_card_before.htm}-->
+		<div class="card">
+			<div class="card-header">
+				在线充值
+			</div>
+			<div class="card-body">
+			<form action="<?php echo url('my-recharge');?>" method="post" id="form1">
+				<div class="form-group input-group">
+					<select class="custom-select col-lg-2" name="pay_type" style="margin-right: 1rem">
+						<option value="alipay">支付宝支付</option>
+						<option value="wechat">微信支付</option>
+					</select>
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="icon-money"></i></span>
+					</div>
+					<input type="text" class="form-control" id="ax_pay_num" name="ax_pay_num" placeholder="输入充值金币数量" required="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+					<div class="invalid-feedback"></div>
+				</div>							
+				<div>
+					<button type="submit" class="btn btn-primary btn-block"  data-loading-text="充值中..." id="submit1">立即充值</button>
+				</div>
+			</form>
+			</div>
+		</div>
+		<!--{hook my_common_main_card_after.htm}-->
+	</div>
+</div>
+
+<!--{hook my_common_end.htm}-->
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<!--{hook my_common_js.htm}-->
+<script type="text/javascript">
+$('a[data-active="my-recharge"]').addClass('active');
+$("#al").click(function(){
+  $('#alipay').prop("checked", true);
+  $('#wxpay').removeAttr('checked',true);
+});
+$("#wx").click(function(){
+  $('#wxpay').prop("checked", true);
+  $('#alipay').removeAttr('checked',true);
+});
+</script>
+<script type="text/javascript">
+var jform = $('#form1');
+var jsubmit = $('#submit1');
+jform.on('submit', function() {
+  jform.reset();
+  jsubmit.button('loading');
+  var postdata = jform.serializeObject();
+  var postpay = '';
+  $.xpost(jform.attr('action'), postdata, function(code, message) {
+    if(code == 1) {
+	  window.location.href= message ;	
+	}else if(code == 2){
+	  window.location.href= message ;	
+	}
+	});
+return false;
+});
+</script>
+
+

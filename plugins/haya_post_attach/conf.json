@@ -1,0 +1,15 @@
+{
+    "name": "帖子附件增强",
+    "brief": "帖子附件增强，显示帖子附件图片预览。作者：deatil",
+    "version": "1.0.5",
+    "author": "deatil",
+    "id": "haya_post_attach",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": {
+        "header_css_after.htm": 150
+    },
+    "overwrites_rank": [],
+    "dependencies": []
+}

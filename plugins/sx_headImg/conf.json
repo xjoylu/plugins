@@ -1,0 +1,11 @@
+{
+    "name": "名字首字母头像插件",
+    "brief": "没设置头像的用户显示名字首字母。效果参照:<a href=http://up93.com/forum-19.htm><b>up93.com</b></a><br /> 覆盖了Beta5版本的<b>post_list.inc/thread/thread_list.inc.htm</b>三个文件，如和其他插件不兼容请去论坛下载<a href=http://www.up93.com/thread-351.htm><b>手动hook版</b></a>.",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

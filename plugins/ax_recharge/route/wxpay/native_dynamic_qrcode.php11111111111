@@ -1,0 +1,142 @@
+<?php
+include _include(APP_PATH.'plugin/ax_recharge/lib/WxPayPubHelper.php');
+$amount = param(1);
+$httpurl = http_url_path();
+$url = $httpurl.url("wx_notify");
+	//使用统一支付接口
+	$unifiedOrder = new UnifiedOrder_pub();
+	//设置统一支付接口参数
+	//设置必填参数
+	//appid已填,商户无需重复填写
+	//mch_id已填,商户无需重复填写
+	//noncestr已填,商户无需重复填写
+	//spbill_create_ip已填,商户无需重复填写
+	//sign已填,商户无需重复填写
+	$unifiedOrder->setParameter("body","在线充值");//商品描述
+	//自定义订单号，此处仅作举例
+	$timeStamp = time();
+	$out_trade_no = "$timeStamp";
+	$unifiedOrder->setParameter("out_trade_no",time() );//商户订单号 
+	$unifiedOrder->setParameter("total_fee",$amount*100);//总金额
+	$unifiedOrder->setParameter("notify_url",$url);//通知地址 
+	$unifiedOrder->setParameter("trade_type","NATIVE");//交易类型		
+	//非必填参数，商户可根据实际情况选填
+	//$unifiedOrder->setParameter("sub_mch_id","XXXX");//子商户号  
+	//$unifiedOrder->setParameter("device_info","XXXX");//设备号 
+	//$unifiedOrder->setParameter("attach","XXXX");//附加数据 
+	//$unifiedOrder->setParameter("time_start","XXXX");//交易起始时间
+	//$unifiedOrder->setParameter("time_expire","XXXX");//交易结束时间 
+	//$unifiedOrder->setParameter("goods_tag","XXXX");//商品标记 
+	//$unifiedOrder->setParameter("openid","XXXX");//用户标识
+	//$unifiedOrder->setParameter("product_id","XXXX");//商品ID	
+	//获取统一支付接口结果
+	$unifiedOrderResult = $unifiedOrder->getResult();
+	//商户根据实际情况设置相应的处理流程
+	if ($unifiedOrderResult["return_code"] == "FAIL") 
+	{
+		//商户自行增加处理流程
+		echo "通信出错：".$unifiedOrderResult['return_msg']."<br>";
+	}
+	elseif($unifiedOrderResult["result_code"] == "FAIL")
+	{
+		//商户自行增加处理流程
+		echo "错误代码：".$unifiedOrderResult['err_code']."<br>";
+		echo "错误代码描述：".$unifiedOrderResult['err_code_des']."<br>";
+	}
+	elseif($unifiedOrderResult["code_url"] != NULL)
+	{
+		//从统一支付接口获取到code_url
+		$code_url = $unifiedOrderResult["code_url"];
+		//商户自行增加处理流程
+		//......
+		$add_time = time();
+		$arr = array("uid"=>$uid,"amount"=>$amount,"pay_date"=>$add_time,"status"=>0,"out_order_id"=>$out_trade_no);
+		$wx_pay_id = db_insert("recharge_log",$arr);
+		
+				
+		
+	}
+?>
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="" />
+  <meta name="description" content="测试专用" />
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>微信支付</title>
+</head>
+<style>
+a{ text-decoration:none; }
+.title { color:#FFF; text-align:center; width:100%; margin:0 auto; font-family:"Microsoft Yahei"; font-size:20px; line-height:1.6; height:45px;}
+div img { width:282px !important; height:282px !important;} 
+.impowerBox,.impowerBox .status_icon,.impowerBox .status_txt{display:inline-block;vertical-align:middle}a{outline:0}h1,h2,h3,h4,h5,h6,p{margin:0;font-weight:400}a img,fieldset{border:0}body{font-family:"Microsoft Yahei";color:#fff;background:0 0}.impowerBox{line-height:1.6;position:relative;width:100%;z-index:1;text-align:center}.impowerBox .title{text-align:center;font-size:20px}.impowerBox .qrcode{width:280px;margin-top:15px;border:1px solid #E2E2E2}.impowerBox .info{width:280px;margin:0 auto}.impowerBox .status{padding:7px 14px;text-align:left}.impowerBox .status.normal{margin-top:15px;background-color:#232323;border-radius:100px;-moz-border-radius:100px;-webkit-border-radius:100px;box-shadow:inset 0 5px 10px -5px #191919,0 1px 0 0 #444;-moz-box-shadow:inset 0 5px 10px -5px #191919,0 1px 0 0 #444;-webkit-box-shadow:inset 0 5px 10px -5px #191919,0 1px 0 0 #444}.impowerBox .status.status_browser{text-align:center}.impowerBox .status p{font-size:13px}.impowerBox .status_icon{margin-right:5px}.impowerBox .status_txt p{top:-2px;position:relative;margin:0}.impowerBox .icon38_msg{display:inline-block;width:38px;height:38px}.impowerBox .icon38_msg.succ{background:url(../images/icon_popup3696b4.png)0 -46px no-repeat}.impowerBox .icon38_msg.warn{background:url(../images/icon_popup3696b4.png)0 -87px no-repeat}
+</style>
+<body style="padding: 50px; background-color: rgb(51, 51, 51);">
+		<div class="main impowerBox">
+			<div class="loginPanel normalPanel">
+				<div class="title">微信支付</div>
+				<div class="waiting panelContent">
+					<div class="wrp_code">
+						<div align="center" id="qrcode"></div>
+					<div class="info">
+						<div class="status status_browser js_status normal" id="wx_default_tip">
+			                <p>付款金额：<?php echo param(1); ?>元</p>
+			                <p>页面没跳转请点击，<a href="http://<?php echo $_SERVER['HTTP_HOST']?>" style="color: #fff; font-weight: bold;">已完成！</a></p>
+			            </div>
+			        </div>
+				</div>
+			</div>
+		</div>
+		</body>
+		</html>
+
+<script  type="text/javascript">
+var code_url='<?php echo $unifiedOrderResult["code_url"]; ?>';
+var check_url='<?php echo url("check");?>';
+var wx_pay_id='<?php echo $wx_pay_id?>';
+var href_url='http://<?php echo $_SERVER['HTTP_HOST']?>/my.htm';
+if(code_url != NULL && code_url!='')
+{
+	var url = "<?php echo $code_url;?>";
+	//参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+	var qr = qrcode(10, 'M');
+	qr.addData(url);
+	qr.make();
+	var wording=document.createElement('p');
+	wording.innerHTML = "";
+	var code=document.createElement('DIV');
+	code.innerHTML = qr.createImgTag();
+	var element=document.getElementById("qrcode");
+	element.appendChild(wording);
+	element.appendChild(code);
+}
+
+$(document).ready(function(){
+    setInterval(get_zf_zt,2000);//自动执行get_zf_zt方法
+});
+function get_zf_zt(){
+	$.ajax({
+	type: "POST",
+	url: check_url,
+	data: "id="+wx_pay_id,
+	success: function(data){
+		if (data==1){
+			window.location.href=href_url;	 
+		}
+	}
+	});	
+}
+</script>
+
+
+
+
+
+
+
+

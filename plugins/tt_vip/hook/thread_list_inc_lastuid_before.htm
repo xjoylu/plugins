@@ -1,0 +1,2 @@
+<?php if($_thread['lastuid']) { $is_lastuid_vip = vip_isvip($_thread['lastuid']);
+if($is_lastuid_vip){ $raw_thread_lastusername=$_thread['lastusername']; $_thread['lastusername']='<i class="icon-diamond" aria-hidden="true" style="color:Red;" title="VIP"></i>&nbsp;<span style="color:red;">'.$_thread['lastusername'].'</span>';}}?>

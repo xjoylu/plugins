@@ -1,0 +1,11 @@
+{
+    "name": "大白增强设置",
+    "brief": "增强系统设置项，默认图片修改，一键清除缓存，查看附件列表等<br/><span class='small text-success'>v1.2版本说明：增加会员注册开关</span>",
+    "version": "1.2",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

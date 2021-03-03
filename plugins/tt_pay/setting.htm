@@ -1,0 +1,30 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');
+$set = setting_get('tt_pay');?>
+<div class="row"><div class="col-lg-10 mx-auto"><div class="card"><div class="card-body" >
+<h3>后期技术支持</h3>官方网站：http://www.6rabbit.com/ <a href="http://www.6rabbit.com"target="_blank" style="text-decoration: none">点击进入</a><br>
+官方QQ群：58911696（正常群）、77868272（只吹牛不讨论正事）</div></div><div class="card"><div class="card-body" >
+    <form action="<?php echo url('plugin-setting-tt_pay');?>" method="post" id="form">
+        <h3>开关</h3>
+        <input type="checkbox" value="wx" id="wx" name="wx" <?php echo $set['wx']==1?'checked="checked"':''; ?>/><label for="wx">开启微信支付</label><br>
+        <input type="checkbox" value="ali" id="ali" name="ali" <?php echo $set['ali']==1?'checked="checked"':''; ?>/><label for="ali">开启支付宝支付</label><br>
+        <div style="display:none;">最低充值金额(单位:分)，不要输入小数点和字符，防止出错:<input name="min" value="<?php echo $set['min'];?>"/></div><br>
+<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+</form></div></div></div></div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+    var jform = $("#form");
+    var jsubmit = $("#submit");
+    jform.on('submit', function(){
+        jform.reset();
+        jsubmit.button('loading');
+        var postdata = jform.serialize();
+        $.xpost(jform.attr('action'), postdata, function(code, message) {
+            if(code == 0) {
+                $.alert(message);
+                setTimeout(function() { window.location.reload();jsubmit.button('reset');}, 1000);
+                return;
+            } else { $.alert(message);jsubmit.button('reset');}
+        });
+        return false;
+    });
+</script>

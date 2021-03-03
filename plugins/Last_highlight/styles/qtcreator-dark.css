@@ -1,0 +1,91 @@
+/*
+
+Qt Creator dark color scheme
+
+*/
+
+/* 伪元素 滚动条 边角修饰 **/
+pre  { border-radius: 5px; }
+pre code::-webkit-scrollbar { width: 8px; height: 8px; background: rgba(0,0,0,0); } /*滚动槽*/
+pre code::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }         /*滚动轴*/
+pre code::-webkit-scrollbar-corner { background: rgba(0,0,0,0);}                    /*交点  */
+.hljs ul { list-style: decimal-leading-zero ! important; }
+.hljs ul li::before { position: relative; left: -12px; content:' '; background:#000000 ! important; margin-right: -10px }
+
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #000000;
+}
+
+.hljs,
+.hljs-subst,
+.hljs-tag,
+.hljs-title {
+  color: #aaaaaa;
+}
+
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
+
+.hljs-bullet,
+.hljs-quote,
+.hljs-number,
+.hljs-regexp,
+.hljs-literal {
+  color: #ff55ff;
+}
+
+.hljs-code
+.hljs-selector-class {
+  color: #aaaaff;
+}
+
+.hljs-emphasis,
+.hljs-stronge,
+.hljs-type {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-function,
+.hljs-section,
+.hljs-symbol,
+.hljs-name {
+  color: #ffff55;
+}
+
+.hljs-attribute {
+  color: #ff5555;
+}
+
+.hljs-variable,
+.hljs-params,
+.hljs-class .hljs-title {
+  color: #8888ff;
+}
+
+.hljs-string,
+.hljs-selector-id,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-addition,
+.hljs-link {
+  color: #ff55ff;
+}
+
+.hljs-comment,
+.hljs-meta,
+.hljs-deletion {
+  color: #55ffff;
+}

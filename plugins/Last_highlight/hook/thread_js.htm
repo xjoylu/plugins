@@ -1,0 +1,34 @@
+<!-- 排版 -->
+<style>
+body { color: #525252; }
+
+/* 标题 */
+.message h1 { padding-bottom: 0.3em; font-size: 2em; border-bottom: 1px solid #eaecef; }
+.message h2 a:before { content: "#"; margin-left: -25px; position: absolute; font-size: 28px; color: #f4645f; opacity: .6; }
+
+/* 块引用 */
+.message blockquote { background: #f4645f; color: #fff; border-radius: 3px; margin: 10px 0 20px; padding: 10px 15px; }
+
+/* 段落 */
+.message p { line-height: 1.5; margin: 10px 0 20px; }
+.message blockquote p { font-size: 14.5px; line-height: 1.7; }
+/* 代码 */
+.message :not(pre)>code { background: #f0f2f1; color: #f4645f; padding: 1px 5px; border-radius: 3px; }
+
+/* 链接 */
+.message a { color: #f4645f; text-decoration: none; }
+</style>
+
+
+<!-- 代码高亮 -->
+<?php $setting = setting_get('Last_highlight'); ?>
+<link rel="stylesheet" type="text/css" href="plugin/Last_highlight/styles/<?php echo $setting['view']; ?>.css?v1.0"/>
+<script src="plugin/Last_highlight/highlight.pack.js?v1.0"></script>
+<script>
+	$(function(){
+		if ("<?php echo $setting['fold']; ?>" == "on"){
+			$("code").animate({maxHeight:'320px'}); // 开启折叠
+			$("code").click(function() { $(this).animate({maxHeight:'100%'},"slow"); }); // 点击展开
+		}
+	});
+</script>

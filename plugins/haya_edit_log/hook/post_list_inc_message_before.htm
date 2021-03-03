@@ -1,0 +1,11 @@
+<?php if(!empty($user) && !empty($_post['haya_edit_uid'])) { ?>
+	<?php $haya_edit_post_user = user_read($_post['haya_edit_uid']); ?>
+	<?php $haya_edit_log_config = kv_get('haya_edit_log'); ?>
+	<div class="small text-grey text-<?php echo isset($haya_edit_log_config['edit_log_position'])?$haya_edit_log_config['edit_log_position']:'right'; ?>">
+		<span>
+			<?php echo $haya_edit_post_user['username']; ?>,
+			<?php echo humandate($_post['haya_edit_time']); ?>
+			最后编辑
+		</span>
+	</div>
+<?php } ?>

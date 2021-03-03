@@ -1,0 +1,288 @@
+<?php $ax_index_forum = kv_get('ax_index_forum');?>
+
+
+
+
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+<style type="text/css">
+	.bgnone{background: none; font-weight: bold;color: #333}
+	.post2{padding: 0.4rem 0px; border-bottom: 1px solid #e9ecef;}
+	.w33{ width: 250px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; display: inline-block; }
+	@media (max-width: 576px){
+		.w33{ width: 200px; }
+	}
+	.card-title{ border-bottom: 1px solid #e9ecef; text-indent: 0.375rem }
+	.text-truncate a{ color: #00586b;  font-weight: bold; }
+	.bbs_home_page_list_title{ color: #333 !important; font-weight: normal !important;  }
+	.thread{padding: 0.4rem 0px;}
+	
+#news{
+
+    height:30px;
+
+    overflow:hidden;/*这里必须设置哦，否则滚动会消失的，如果设置为scroll，更容易明白原理*/
+}
+#news li{
+    line-height:30px;
+}
+
+</style>
+<!--{hook index_start.htm}-->
+<div class="row">
+	<div class="col-lg-12 main">
+
+		<div class="card-body">
+			<center><img src="plugin/ax_index_forum/img/logo.png"></center>
+			<center class="mt-4">
+				<Div class="col-lg-7">
+					<form action="<?php echo url('search');?>" id="search_form">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="<?php echo lang('keyword');?>" name="keyword">
+										<div class="input-group-append">
+											<button class="btn btn-primary" type="submit"><?php echo lang('search');?></button>
+										</div>
+									</div>
+					</form>
+				</Div>
+			</center>
+		</div>
+		
+		
+	
+ <!--{hook index_main_start.htm}-->
+		
+		
+		
+
+<?php $ax_xs = kv_get('ax_wenda');?>
+<?php if($ax_index_forum['banner'] == 1){?>
+<style type="text/css">.carousel img{ width: 100% ; height: 310px; }.carousel-inner{margin-top: 0.8rem}</style>
+<div class="px-1 py-1 row mx-0 mb-3 border text-small border-shadow pb-2 hidden-md" style="background: #fff; border-radius: 5px">
+	<div class="col-md-5 d-none d-lg-block">
+			
+				<div id="index_banner" class="carousel slide" data-ride="carousel">
+				<?php if($ax_index_forum['banner1'] or $ax_index_forum['banner2'] or $ax_index_forum['banner3']){?>
+				  <ul class="carousel-indicators">
+				  <?php if($ax_index_forum['banner1']){?>
+				    <li data-target="#index_banner" data-slide-to="0" class="active"></li>
+				  <?php }?>
+				  <?php if($ax_index_forum['banner2']){?>
+				    <li data-target="#index_banner" data-slide-to="1"></li>
+				  <?php }?>
+				  <?php if($ax_index_forum['banner3']){?>
+				    <li data-target="#index_banner" data-slide-to="2"></li>
+				  <?php }?>
+				  </ul>
+				 <?php }?>
+				  <!-- 轮播图片 -->
+				  <div class="carousel-inner">  
+				  <?php if($ax_index_forum['banner1']){?>
+				  	<div class="carousel-item active">
+				      	<?php echo htmlspecialchars_decode($ax_index_forum['banner1']);?>
+				    </div>
+				  <?php }?>
+				  <?php if($ax_index_forum['banner2']){?>
+				    <div class="carousel-item">
+				      	<?php echo htmlspecialchars_decode($ax_index_forum['banner2']);?>
+				    </div>
+				  <?php }?>
+				  <?php if($ax_index_forum['banner3']){?>
+				    <div class="carousel-item">
+				      	<?php echo htmlspecialchars_decode($ax_index_forum['banner3']);?>
+				    </div>
+				  <?php }?>	
+				  </div>
+				  <a class="carousel-control-prev" href="#index_banner" data-slide="prev">
+				    <span class="carousel-control-prev-icon"></span>
+				  </a>
+				  <a class="carousel-control-next" href="#index_banner" data-slide="next">
+				    <span class="carousel-control-next-icon"></span>
+				  </a>
+				</div>
+			
+	</div>
+	<div class="col-md-7">
+			<div class="card-title pb-1 mt-2 font-weight-bold" > <a>最新发布</a></div>
+
+			<?php $new_thread = thread_find(array('tid'=>array('>'=>0)),array('create_date'=>-1), $page = 1, $pagesize = 10);
+					foreach($new_thread as $_thread){?>
+			<div class="bbs_home_page_row_div row mx-0 py-1 " style="padding-left: .37rem;line-height: 1.6rem;">
+
+			  <div class="col-9 px-0 text-truncate">
+
+				
+				<!--{hook thread_list_inc_subject_before.htm}-->
+			    <a href="<?php echo url("forum-$_thread[fid]");?>">[<?php echo $_thread['forumname']?>]</a><a class="bbs_home_page_list_title" href="<?php echo url("thread-$_thread[tid]");?>" title="<?php echo $_thread['subject']?>"><?php echo $_thread['subject']?></a>
+
+			  </div>
+			  <div class="col px-0 text-right text-truncate">
+			            <span class="date text-grey pl-1 text-nowrap"><?php echo $_thread['create_date_fmt']?></span>
+			      </div>
+			</div>
+			<?php }?>
+	</div>
+
+</div>
+<?php }?>
+
+<div class="px-1 py-1 row mx-0 mb-3 border text-small border-shadow pb-2 hidden-md" style="background: #fff; border-radius: 5px">
+   
+    <div class="col-md-<?php echo $ax_index_forum['fid_index'] == 0 ? '6' : '4'?>">
+      <div class="card-title pb-1 mt-2 font-weight-bold" ><span class="text-danger"><i class="icon-fire"></i> 置顶推荐</span></div>
+
+		<?php $zd = thread_find(array('top'=>array('>'=>0)),array('last_date'=>-1),1,8);?>
+		<?php if($zd){foreach($zd as $_thread){?>
+		<div class="bbs_home_page_row_div row mx-0 py-1 " style="padding-left: .37rem;line-height: 1.6rem;">
+
+		  <div class="col-9 px-0 text-truncate">
+		
+			<!--{hook thread_list_inc_subject_before.htm}-->
+		    <a href="<?php echo url("forum-$_thread[fid]");?>">[<?php echo $_thread['forumname']?>]</a><a class="bbs_home_page_list_title" href="<?php echo url("thread-$_thread[tid]");?>" title="<?php echo $_thread['subject']?>"><?php echo $_thread['subject']?></a>
+		    
+
+		  </div>
+		  <div class="col px-0 text-right text-truncate">
+		            <span class="date text-grey pl-1 text-nowrap"><?php echo $_thread['create_date_fmt']?></span>
+		      </div>
+		</div>
+		<?php }}?>
+    </div>
+
+
+    <div class="col-md-<?php echo $ax_index_forum['fid_index'] == 0 ? '6' : '4'?>">
+      <div class="card-title pb-1 mt-2 font-weight-bold" ><i class="icon-twitch"></i> 最新回复</div>
+						<?php $new_thread = post_find(array('isfirst'=>0), array('pid'=>-1), 1, 8);?>
+						<?php if($new_thread){foreach($new_thread as $v){?>
+						<?php $vf = thread_read($v['tid']);?>	
+						<!--兼容表情-->
+						<?php 
+							$biaoqing = preg_match('/\[em_([0-9]*)\]/i', $v['message']);
+							if($biaoqing == 1){
+								$msg2 = preg_replace("/\[em_([0-9]*)\]/i","<img src='./plugin/ax_biaoqing/face/arclist/$1.gif' border='0'/>",$v['message']);
+								$v['message']=	$msg2;	
+							}else{
+								$v['message'] =	xn_substr(strip_tags($v['message']), 0, 120);
+							}				
+						?>	
+		<div class="bbs_home_page_row_div row mx-0 py-1 "style="padding-left: .37rem;line-height: 1.6rem;">
+
+		  <div class="col-9 px-0 text-truncate">
+		
+		    <a href="<?php echo url("forum-$vf[fid]");?>">[<?php echo $vf['forumname']?>]</a><a class="bbs_home_page_list_title" href="<?php echo url("thread-$v[tid]");?>#<?php echo $v['pid']?>" title="<?php echo xn_substr(strip_tags($v['message']), 0, 120)?>"><?php echo $v['message'] ? $v['message'] : '图片回复';?></a>
+		   
+		  </div>
+		  <div class="col px-0 text-right text-truncate">
+		            <span class="date text-grey pl-1 text-nowrap"><?php echo $v['create_date_fmt']?></span>
+		  </div>
+		</div>
+		<?php }}?>
+
+	</div>
+
+
+<?php if($ax_index_forum['fid_index'] > 0){?>
+<?php $forum_name = forum_read($ax_index_forum['fid_index']);?>
+    <div class="col-md-4">
+      <div class="card-title pb-1 mt-2 font-weight-bold"><i class="icon-diamond flash"></i> <?php echo $forum_name['name']?></div>
+
+		<?php $xs = thread_find(array('fid'=>$ax_index_forum['fid_index']),array('last_date'=>-1),1,8);foreach($xs as $_thread){?>
+		<div class="bbs_home_page_row_div row mx-0 py-1 " style="padding-left: .37rem;line-height: 1.6rem;">
+
+		  <div class="col-9 px-0 text-truncate">
+		  <!--{hook thread_list_inc_subject_after.htm}-->
+		  <!--{hook thread_list_inc_subject_before.htm}-->
+		    <a class="bbs_home_page_list_title" href="<?php echo url("thread-$_thread[tid]");?>" title="<?php echo $_thread['subject']?>"><?php echo $_thread['subject']?></a>
+		  
+		  </div>
+		  <div class="col px-0 text-right text-truncate">
+		            <span class="date text-grey pl-1 text-nowrap"><?php echo $_thread['last_date_fmt']?></span>
+		      </div>
+		</div>
+		<?php }?>
+
+    </div>
+<?php }?>
+
+  </div>
+
+<?php if($ax_index_forum['open'] == 1){?>
+<div class="card d-none d-lg-block">
+<div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" ><?php echo $ax_index_forum['forum_name']?></a>
+					</li>
+				</ul>
+</div>
+
+			<div class="card-body">
+			<?php 
+				function last_forum_time($fid){
+					$r = db_find_one('thread',array('fid'=>$fid),array('last_date'=>-1));
+					$rs = db_find_one('post',array('tid'=>$r['tid']),array('pid'=>-1));
+					return $rs['create_date'];
+				}
+				function forum_posts($fid){
+					$r = db_sql_find_one("select sum(posts) as forum_posts from bbs_thread where fid = {$fid}");
+					return $r['forum_posts'] ;
+				}
+			?>				
+					<Div class="row m-0 p-0">
+						<div class="col-lg-4 row p-3 mr-2">
+								<div><a href="<?php echo url('thread-create-'.$fid);?>" target="_blank"><img class="avatar-4" src="plugin/ax_index_forum/img/fabu.jpg"></a></div>
+								<div class="media-body ml-3">
+										<div>
+											<a href="<?php echo url('thread-create-'.$fid);?>" target="_blank"><b style="color: #000">发布主题</b></a>
+										</div>
+										<div>
+											<span class=" small text-info">本站主题：<b ><?php echo $runtime['threads'];?></b></span>&emsp;
+											<span class=" small text-info">帖子数：<b><?php echo $runtime['posts'];?></b></span>
+										</div>
+										<div class=" smallpt-1 text-info">
+											会员数: <?php echo $runtime['users'];?>				
+										</div>
+								</div>
+						</div>
+						<?php foreach($forumlist_show as $_forum) { ?>
+						<?php $last_time = last_forum_time($_forum['fid']);?>
+							<div class="col-lg-4 row p-3 mr-2 <?php echo $_forum['fid'] == 19 ? 'd-none' : ''?>" id="bk">
+								<div><a href="<?php echo url("forum-$_forum[fid]");?>"><img class="avatar-4" src="<?php echo $_forum['icon_url']; ?>"></a></div>
+								<div class="media-body ml-3">
+										<div>
+											<a href="<?php echo url("forum-$_forum[fid]");?>"><?php echo $_forum['name']?></a>
+										</div>
+										<div>
+											<span class="text-muted small">主题数：<b style="color:#868e96"><?php echo $_forum['threads']?></b></span>&emsp;
+											<span class="text-muted small">回帖数：<b style="color:#868e96"><?php echo forum_posts($_forum['fid'])?></b></span>
+										</div>
+										<div class="text-muted smallpt-1">
+											最后发表: <?php echo date('Y-m-d h:i:s',$last_time); ?>				
+										</div>
+								</div>
+							</div>
+						<?php }?>	
+						
+					</Div>
+			</div>						
+</div>
+<?php }?>
+
+		
+		
+	</div>
+	
+</div>
+
+<!--{hook index_page_before.htm}-->
+
+
+<!--{hook index_end.htm}-->
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+$('li[data-active="fid-0"]').addClass('active');
+</script>
+
+<!--{hook index_js.htm}-->
+

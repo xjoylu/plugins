@@ -1,0 +1,7 @@
+<?php if($forumlist[$fid]['structure']!='0'){ $thread_structure = db_find_one('thread_structure',array('tid'=>$tid));
+if(isset($thread_structure)){
+$thread_structure_list = explode('|',$forumlist[$fid]['structure']);
+$thread_structure_list_count = count($thread_structure_list);$c=0;?>
+<?php foreach($thread_structure_list as $__structure) {$c++;?>
+<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text"><?php echo $__structure;?></span></div><input type="text" class="form-control" disabled style="color:black;background-color: transparent;" value="<?php echo $thread_structure['c'.$c];?>"></div><?php }?>
+<?php }} ?>

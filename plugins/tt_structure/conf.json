@@ -1,0 +1,11 @@
+{
+    "name": "结构化帖子",
+    "brief": "结构化帖子",
+    "version": "1.0",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

@@ -1,0 +1,35 @@
+<template include="./plugin/tt_credits/view/htm/my_credits.template.htm">
+	<slot name="my_body"><h3 style="margin-top:5px;"><?php echo lang('charge');?></h3>
+			<div class="input-group"><div class="input-group-text"><input type="radio" name="paymethod" id="wx" checked="checked"/><label for="wx"><img src="./plugin/tt_deposit/wechat_pay.png"/></label></div>
+				<div class="input-group-text"><input type="radio" id="ali" name="paymethod"/><label for="ali"><img src="./plugin/tt_deposit/alipay.png"/></label></div></div><hr><form method="post" id="form_d">
+			<input type="text" id="d_rmb" name="d_rmb" oninput="OnInput();" class="form-control" placeholder="人民币(单位:分)" aria-describedby="basic-addon1" style="display:inline-block;width: 40%;" maxlength="10"/>&nbsp;&nbsp;&nbsp;可充值 ¥<span style="color:red;" id="d_rmbs">0</span>元<br>
+			<input type="text" id="d_code" style="margin-top:5px;" name="d_code" class="form-control" placeholder="输入您的订单号等信息" aria-describedby="basic-addon1" style="display:inline-block;width: 40%;" maxlength="50"/>
+			<button type="button" style="margin-top:5px;" class="btn btn-info" id="submit_d" data-loading-text="<?php echo lang('submiting');?>..." data-active="<?php echo url('my-payperson');?>"><?php echo lang('charge');?></button></form><hr>
+		<div><img id="divPIC"/></div>
+	</slot>
+</template>
+<script>
+    $('a[data-active="my-payperson"]').addClass('active');
+</script>
+<script>
+    var dform = $('#form_d'); var dinput = $("#d_rmb"); var dsubmit = $('#submit_d'); var drmbs=$("#d_rmbs");var jpic=$("#divPIC"); var jwechat = $("#wx"); var jalipay=$("#ali"); var paymethod="微信";
+    $(document).ready(function(){
+        jpic.attr("src","plugin/tt_deposit/imgs/wechat.jpg");
+        jwechat.on("click",function(){jpic.attr("src","plugin/tt_deposit/imgs/wechat.jpg"); var paymethod="微信";});
+        jalipay.on("click",function(){jpic.attr("src","plugin/tt_deposit/imgs/alipay.jpg"); var paymethod="支付宝";});
+	});
+    function OnInput(){
+        dinput.val(dinput.val().replace(/[^0-9]/g, ''));
+        drmbs.text(dinput.val()==''?'0':dinput.val()/100.0);
+	}
+    dsubmit.on('click', function() {
+        dinput.keyup();if(dinput.val()==""||dinput.val()=="0") return false;
+        $.confirm('您确定要充值积分吗?',function(){
+            dform.reset();dsubmit.button('loading');var postdata = dform.serialize(); postdata+= ","+paymethod;
+            $.xpost(dsubmit.attr('data-active'), postdata, function(code, message) {
+                if(code == 0) {$.alert(message);dsubmit.button(message).delay(3000).button('reset');
+                } else if(code < 0) {$.alert(message);dsubmit.button('reset');
+                } else {dform.find('[name="'+code+'"]').alert(message).focus();dsubmit.button('reset');}});
+            return false;
+        });});
+</script>

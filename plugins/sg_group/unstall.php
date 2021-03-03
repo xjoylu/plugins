@@ -5,12 +5,9 @@
 */
 
 !defined('DEBUG') AND exit('Forbidden');
+
 $tablepre = $db->tablepre;
-$sql = "ALTER TABLE `{$tablepre}forum` DROP `create_credits`, DROP `create_golds`, DROP `post_credits`, DROP `post_golds`;";
-$r = db_exec($sql);
-forum_list_cache_delete();
 $r = kv_delete('sg_group');
-$r = setting_delete('sg_group');
 $r === FALSE AND message(-1, '卸载失败');
 
 ?>

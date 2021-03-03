@@ -1,0 +1,30 @@
+<?php if($isfirst) { ?>
+<script>
+    var jdiv=$("#structure_tid");var jforum_s=new Array();
+    var jedit =0;var jedit_fid=0; var jedit_arr= new Array();
+
+    <?php foreach($forumlist as $__forum){ ?>
+        jforum_s["<?php echo $__forum['fid'];?>"]="<?php echo $__forum['structure'];?>";
+    <?php }?>
+
+    <?php if(isset($post_update)){?>
+        jedit=1; jedit_fid="<?php echo $fid;?>";var s=0;
+        <?php for($p=0;$p<$forum_structure_count;$p++) {?>
+            jedit_arr['c'+(s+1).toString()]="<?php echo $forum_structure_r['c'.($p+1)];?>";s++;
+    <?php }}?>
+    jfid.on('change',function(){change_div();});
+    change_div();
+    function change_div()
+    {
+        var fid = jfid.val(); var _html="";
+        var fid_structure_r = jforum_s[fid];
+        if(fid_structure_r=='0') {jdiv.html('');return false;}
+        var fid_structure = fid_structure_r.split('|');
+        var fid_structure_count = fid_structure.length;
+        for(var i=0;i<fid_structure_count;i++)
+            if(jedit==1&&fid==jedit_fid) {_html+= '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="ins_'+(i+1).toString()+'">'+fid_structure[i]+'</span></div><input maxlength="80" type="text" class="form-control" id="ini_'+(i+1).toString()+'" name="ini_'+(i+1).toString()+'" value="'+jedit_arr['c'+(i+1).toString()] +'" ></div>';}
+            else {_html+= '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="ins_'+(i+1).toString()+'">'+fid_structure[i]+'</span></div><input type="text" class="form-control" id="ini_'+(i+1).toString()+'" name="ini_'+(i+1).toString()+'" value="" maxlength="80"></div>';}
+        jdiv.html(_html);
+    }
+</script>
+<?php }?>

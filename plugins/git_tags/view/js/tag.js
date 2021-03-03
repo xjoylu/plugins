@@ -60,7 +60,8 @@ $(document).on('click', '#tag li a', function() {
 		var t   = $(this).parent() // this不能直接传递
 		var tid = $('#tag').data('tid')
 		var tag = $(this).parent().data('tag')
-		var url = '?tag-del.htm'
+		var url = 'tag-del.htm'
+		if (location.search.indexOf("?") != -1) { url = '?tag-del.htm' }
 		$.xpost(url, {'tid': tid, 'tag': tag }, function(code,msg){
 			if (code == 0) {
 				// 删除成功则移除此标签
@@ -85,7 +86,8 @@ $(document).on('click', '#tag-add button', function() {
 	var r = $('#tag-data').val()
 	var tid = $('#tag').attr('data-tid')
 	if (安检(r)){
-		var url = '?tag-add.htm'
+		var url = 'tag-add.htm'
+		if (location.search.indexOf("?") != -1) { url = '?tag-add.htm' }
 		$.xpost(url, {'tid': tid, 'tag': r.trim() }, function(code,msg){
 			if (code == 1) {
 				if ( $("#tag li[data-tag='"+msg+"']").length > 0 ) {

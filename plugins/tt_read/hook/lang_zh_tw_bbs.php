@@ -3,7 +3,3 @@
 'dear_p'=> '您好，本帖含有特定內容，您無權查看。',
 'permission'=>'權限',
 'or_'=>'或',
-'read_input_content_here'=>'請在此輸入內容',
-'insert_login_content'=>'插入登錄可見內容',
-'insert_reply_content'=>'插入回帖可見內容',
-'insert_component_content'=>'插入部分隱藏內容',

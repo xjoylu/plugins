@@ -1,0 +1,197 @@
+<style>
+	.item {
+		float: left;
+		padding-left: 0.3em;
+		padding-right: 0.3em;
+	}
+
+	.navbar-nav-my {
+		float: left;
+	}
+
+	.link-my {
+		color: rgba(255, 255, 255, .7)!important;
+	}
+
+	.link-my:visited {
+		color: rgba(255, 255, 255, .7)!important;
+	}
+
+	.link-my:hover {
+		color: rgb(255, 255, 255)!important;
+		text-decoration: none;
+	}
+
+	.link-my:active {
+		color: rgb(255, 255, 255)!important;
+		text-decoration: none;
+	}
+</style>
+<link rel="stylesheet" href="//cdn.bootcss.com/mdui/0.3.0/css/mdui.min.css">
+<script src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
+<!--{hook header_nav_start.htm}-->
+<div class="mdui-appbar mdui-hidden-md-down">
+	<div class="mdui-toolbar mdui-color-indigo">
+		<!-- PC 导航 -->
+		<div class="mdui-container">
+			<div class="mdui-row">
+				<!-- 左侧：版块区域 -->
+				<div class="mdui-col-md-8">
+					<div class="navbar-nav-my" id="nav_pc">
+
+						<!--{hook header_nav_pc_start.htm}-->
+
+						<!-- LOGO -->
+						<div class="item">
+							<img src="<?php echo $conf['view_url'];?>img/logo.png" class="logo-sm">
+						</div>
+						&nbsp;&nbsp;
+						<!--{hook header_nav_logo_after.htm}-->
+
+						<!-- 前台首页 -->
+						<div class="item home" fid="0">
+							<a class="link-my" href=".">
+								<?php echo lang('index_page');?>
+							</a>
+						</div>
+
+						<!--{hook header_nav_home_link_after.htm}-->
+
+						<!-- 版块 -->
+						<?php foreach($forumlist_show as $_forum) { ?>
+
+						<!--{hook header_nav_forumlist_loop_start.htm}-->
+						<div class="item" fid="<?php echo $_forum['fid'];?>">
+							<a class="link-my" href="<?php echo url("forum-$_forum[fid]");?>">
+								<?php echo $_forum['name'];?>
+							</a>
+						</div>
+						<!--{hook header_nav_forumlist_loop_end.htm}-->
+
+						<?php } ?>
+
+						<!--{hook header_nav_pc_end.htm}-->
+
+					</div>
+				</div>
+				<!-- 右侧：用户区域-->
+				<div class="mdui-col-md-4">
+					<div class="nav navbar-nav pull-right">
+
+						<!--{hook header_nav_pc_user_start.htm}-->
+
+						<!-- 游客 -->
+						<?php if(empty($uid)) { ?>
+
+						<div class="item">
+							<a class="link-my" href="<?php echo url('user-login');?>">
+								<?php echo lang('login');?>
+							</a>
+						</div>
+						<div class="item">
+							<a class="link-my" href="<?php echo url('user-create');?>">
+								<?php echo lang('register');?>
+							</a>
+						</div>
+
+						<!-- 登陆用户 -->
+						<?php } else { ?>
+
+						<div class="item">
+							<a class="link-my" href="<?php echo url('my');?>" tabindex="-1" mdui-tooltip="{content: '<?php echo $user['username'];?>'}">
+								<img class="avatar-sm" src="<?php echo $user['avatar_url'];?>">
+							</a>
+						</div>
+						<!-- 管理员 -->
+						<?php if($gid == 1) { ?>
+						<div class="item">
+							<a class="mdui-btn mdui-btn-icon link-my" href="admin/" mdui-tooltip="{content: '<?php echo lang('admin_page');?>'}">
+								<i class="mdui-icon material-icons">adb</i>
+							</a>
+						</div>
+						<?php } ?>
+						<div class="item">
+							<a class="mdui-btn mdui-btn-icon link-my" href="<?php echo url('user-logout');?>" mdui-tooltip="{content: '<?php echo lang('logout');?>'}">
+								<i class="mdui-icon material-icons">exit_to_app</i>
+							</a>
+						</div>
+
+						<?php } ?>
+
+						<!--{hook header_nav_pc_user_end.htm}-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="mdui-appbar mdui-hidden-lg-up">
+	<div class="mdui-toolbar mdui-color-indigo">
+	  <button class="mdui-btn mdui-ripple mdui-btn-icon"><i class="mdui-icon material-icons" mdui-drawer="{target: '#left-drawer'}">menu</i></button>
+	  <a href="javascript:;" class="mdui-typo-headline"><?php echo $header['title'];?></a>
+	  <div class="mdui-toolbar-spacer"></div>
+	  <?php if(empty($uid)) { ?>
+			  <a class="link-my mdui-btn mdui-ripple mdui-btn-icon m-r-xs" href="<?php echo url('user-login');?>" aria-label="<?php echo lang('login');?>">
+				  <i class="mdui-icon material-icons">person</i>
+			  </a>
+			<?php } else { ?>
+			<?php if($route != 'thread') { ?>
+			  	<a class="link-my mdui-btn mdui-ripple mdui-btn-icon" href="<?php echo url("thread-create-$fid");?>" aria-label="<?php echo lang('thread_create');?>"><i class="mdui-icon material-icons">create</i></a>
+			<?php } else { ?>
+			  	<a class="link-my mdui-btn mdui-ripple mdui-btn-icon" href="<?php echo url("post-create-$tid");?>" aria-label="<?php echo lang('post_create_new');?>"><i class="mdui-icon material-icons">reply</i></a>
+			  <?php } ?>
+		<?php } ?>
+	</div>
+  </div>
+	<div class="mdui-drawer mdui-drawer-close" id="left-drawer">
+	<ul class="mdui-list">
+	<a href="./">
+	  <li class="mdui-list-item mdui-ripple">
+			<i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+			<div class="mdui-list-item-content"><?php echo lang('index_page');?></div>
+	  </li>
+	</a>
+	<!--{hook header_nav_mobile_forum_before.htm}-->
+	<?php foreach($forumlist_show as $_forum) { ?>
+	<a href="<?php echo url("forum-$_forum[fid]");?>">
+		<li class="mdui-list-item mdui-ripple" fid="<?php echo $_forum['fid'];?>">
+			<?php echo $_forum['name'];?>
+		</li>
+	</a>
+	<?php } ?>
+	<!--{hook header_nav_mobile_forum_after.htm}-->
+	  <li class="mdui-subheader">Users</li>
+	  	<!-- 个人资料 / profile -->
+		<?php if($uid) { ?>
+		<a href="<?php echo url('my');?>">
+			<li class="mdui-list-item mdui-ripple">
+					<i class="mdui-list-item-icon mdui-icon material-icons">person</i>
+					<div class="mdui-list-item-content"><?php echo lang('user_profile');?></div>
+			</li>
+		</a>
+		<?php } ?>
+		<?php if($gid == 1) { ?>
+		<a href="admin/">
+			<li class="mdui-list-item mdui-ripple">
+					<i class="mdui-list-item-icon mdui-icon material-icons">adb</i>
+					<div class="mdui-list-item-content"><?php echo lang('admin_page');?></div>
+			</li>
+		</a>
+		<?php } ?>
+		<!--{hook header_nav_mobile_logout_before.htm}-->
+		<?php if($uid) { ?>
+		<a href="<?php echo url('user-logout');?>">
+			<li class="mdui-list-item mdui-ripple">
+					<i class="mdui-list-item-icon mdui-icon material-icons">exit_to_app</i>
+					<div class="mdui-list-item-content"><?php echo lang('logout');?></div>
+			</li>
+		</a>
+			<?php } ?>
+	  <!--{hook header_nav_mobile_logout_after.htm}-->
+	</ul>
+	</div>
+
+
+
+<!--{hook header_nav_footer.htm}-->

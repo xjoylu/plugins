@@ -1,0 +1,1 @@
+elseif($uid && $set_vip['no_reply_see']!='0' && vip__isvip($user['vip_end']) && vip_getlevel($uid)>=$set_vip['no_reply_see']) $first['message_fmt'] = str_replace($a,$b,$first['message_fmt']);

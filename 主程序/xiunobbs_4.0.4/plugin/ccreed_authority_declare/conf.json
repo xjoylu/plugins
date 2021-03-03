@@ -1,0 +1,11 @@
+{
+    "name": "版权声明",
+    "brief": "声明网站帖子原创版权",
+    "version": "1.0.1",
+    "bbs_version": "4.0.4",
+    "installed": 1,
+    "enable": 1,
+   	"author":"夜琉璃",
+    "hooks_rank": [],
+    "dependencies": []
+}

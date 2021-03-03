@@ -1,0 +1,9 @@
+$this->menu_action = array(
+            'index'=>'',
+            'thread'=>'',
+            'post'=>'',
+            'mess'=>'',
+            'op'=>'',
+            'file'=>'',
+            'log'=>''
+        );

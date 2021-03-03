@@ -1,0 +1,12 @@
+<script>
+$(function() {
+	$(document).on("click", ".js-haya-post-attach-img-btn", function() {
+		var thiz = $(this).parent();
+		if (thiz.hasClass("open")) {
+			thiz.removeClass("open");
+		} else {
+			thiz.addClass("open");
+		}
+	});
+});
+</script>

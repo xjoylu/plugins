@@ -1,0 +1,12 @@
+{
+    "name": "朋友圈-轻微博",
+    "brief": "这是一个轻微博，轻朋友圈插件，可以发图片说说，更多插件主题 <a href='http://www.432k.cn' style='color:red'>立即前往</a>",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": [],
+    "username": ""
+}

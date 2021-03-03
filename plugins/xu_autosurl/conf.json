@@ -1,0 +1,11 @@
+{
+    "name": "超连接自动转换",
+    "brief": "检测用户发帖输入的连接将其自动转换为超链接<br>作者QQ:<a href=\"tencent://Message/?Uin=378757890&websiteName=q-zone.qq.com&Menu=yes641844114\" target=\"_blank\" _href=\"tencent://Message/?Uin=378757890&websiteName=q-zone.qq.com&Menu=yes641844114\"><span style=\"color:#0070c0\">641844114</span></a><br>网址:<a href=\"https://yz.xv92.cn/xiro/\" target=\"_blank\" _href=\"https://yz.xv92.cn/xiro/\"><span style=\"color:#0070c0\">https://yz.xv92.cn/xiro/</span></a>",
+    "version": "1.0",
+    "bbs_version": "4.0.3",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

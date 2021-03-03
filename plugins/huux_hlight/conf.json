@@ -1,0 +1,11 @@
+{
+    "name": "主题高亮",
+    "brief": "让主题变色的插件<br />(FOR 4.0正式版)",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

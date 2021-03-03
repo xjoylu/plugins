@@ -1,0 +1,42 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm'); $set = setting_get('tt_sign');
+$static = db_count('sign',array('time'=>array('>',strtotime(date('Y-m-d',time()))-1)));
+?>
+<?php
+    $num_pid = db_count('user',array('v'=>array('!='=>'0')));
+	$page = param(1,1);
+	$data =  db_find('user',array('v'=>array('!='=>'0')), array('uid'=>-1), $page, $pagesize = 20);
+    $pagination = pagination(url("tt_v-{page}"), $num_pid, $page, $pagesize);
+?>
+<div class="row"><div class="col-lg-10 mx-auto"><div class="card"><div class="card-body" ><h3>后期技术支持</h3>官方网站：http://www.6rabbit.com/ <a href="http://www.6rabbit.com"target="_blank" style="text-decoration: none">点击进入</a><br>
+官方QQ群：58911696（正常群）、77868272（只吹牛不讨论正事）</div></div>
+<div class="card"><div class="card-body" ><h3>认证信息设置</h3>不要出现特殊字符。认证信息填写0，即关闭这个用户的验证。<br>
+请输入用户名: <input name="username" id="username" value="admin"/><br>
+认证信息：<input name="v_content" id="v_content" value="admin是劳模，本站站长，大家都喜欢他！" style="width:80%;" maxlength="100"/><br><br>
+    <button type="button" width="200px" class="btn btn-success" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button> <button type="button" class="btn btn-success" id="inquire" width="200px" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('inquire');?></button>
+</div></div><div class="card"><div class="card-body" ><h3>认证查询</h3>
+<?php foreach($data as $v){?>
+<li class="media thread tap" >
+    用户名: <?php echo $v['username'];?> | 认证信息: <?php echo $v['v'];?> &nbsp;&nbsp;<button onclick="b_click('<?php echo $v['username'];?>','<?php echo $v['v'];?>');">编辑</button>
+</li><?php }?>
+<nav class="text-center"><ul class="pagination"><?php echo $pagination; ?></ul></nav>
+</div></div></div></div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+    var jsubmit = $("#submit"); var jinquire = $("#inquire");var jusername=$("#username"); var jcontent=$("#v_content");
+    jinquire.on('click',function(){
+        jinquire.button('loading'); var postdata ="op=0&username="+jusername.val();
+        $.xpost("<?php echo url('plugin-setting-tt_v');?>",postdata,function(code,message){
+            if(code == 0) {jcontent.val(message);} else {$.alert(message);}
+            jinquire.button('reset');
+        });
+    });
+    jsubmit.on('click',function(){
+        jsubmit.button('loading'); var postdata ="op=1&username="+jusername.val()+"&val="+jcontent.val();
+        $.xpost("<?php echo url('plugin-setting-tt_v');?>",postdata,function(code,message){
+            $.alert(message);setTimeout(function(){location.reload();},1000); });
+    });
+    function b_click(username,identity)
+    {
+        jusername.val(username); jcontent.val(identity);
+    }
+</script>

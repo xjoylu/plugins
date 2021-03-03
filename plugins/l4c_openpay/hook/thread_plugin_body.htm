@@ -1,0 +1,41 @@
+  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+打赏</button>
+
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLongTitle">作者打赏</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+    <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-one-alipay" data-toggle="list" href="#list-alipay" role="tab" aria-controls="alipay">支付宝</a>
+      <a class="list-group-item list-group-item-action" id="list-two-wechatpay" data-toggle="list" href="#list-wechatpay" role="tab" aria-controls="wechatpay">微信</a>
+      <a class="list-group-item list-group-item-action" id="list-three-QQpay" data-toggle="list" href="#list-QQpay" role="tab" aria-controls="QQpay">QQ钱包</a>
+      <a class="list-group-item list-group-item-action" id="list-four-paypal" data-toggle="list" href="#list-paypal" role="tab" aria-controls="paypal">Paypal</a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-alipay" role="tabpanel" aria-labelledby="list-one-alipay">
+<IMG src="plugin/l4c_openpay/pay/zfb-<?php echo $thread['user']['uid'];?>.png" onerror="javascript:this.src='plugin/l4c_openpay/pay/zfb.png'" class="img-fluid" alt="alipay"></div>
+      <div class="tab-pane fade" id="list-wechatpay" role="tabpanel" aria-labelledby="list-two-wechatpay"><IMG src="plugin/l4c_openpay/pay/wx-<?php echo $thread['user']['uid'];?>.png" onerror="javascript:this.src='plugin/l4c_openpay/pay/wx.png'" class="img-fluid" alt="wechatpay"></div>
+      <div class="tab-pane fade" id="list-QQpay" role="tabpanel" aria-labelledby="list-three-QQpay"><IMG src="plugin/l4c_openpay/pay/qq-<?php echo $thread['user']['uid'];?>.png" onerror="javascript:this.src='plugin/l4c_openpay/pay/qq.png'" class="img-fluid" alt="QQpay"></div>
+      <div class="tab-pane fade" id="list-paypal" role="tabpanel" aria-labelledby="list-four-paypal"><IMG src="plugin/l4c_openpay/pay/paypal-<?php echo $thread['user']['uid'];?>.png" onerror="javascript:this.src='plugin/l4c_openpay/pay/paypal.png'" class="img-fluid" alt="Paypal"></div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

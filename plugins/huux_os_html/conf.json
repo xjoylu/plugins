@@ -1,0 +1,13 @@
+{
+    "name": "大白自定义",
+    "brief": "首页、板块页、主题页等页面的自定义html、CSS、JS。<br/><span class='small text-success'>v2.0版本说明：趋于完善的版本</span>",
+    "version": "2.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": {
+        "header_link_after.htm": -10
+    },
+    "overwrites_rank": [],
+    "dependencies": []
+}

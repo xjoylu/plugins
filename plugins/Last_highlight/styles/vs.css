@@ -1,0 +1,78 @@
+/*
+
+Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+
+*/
+
+/* 伪元素 滚动条 边角修饰 **/
+pre  { border-radius: 5px; }
+pre code::-webkit-scrollbar { width: 8px; height: 8px; background: rgba(0,0,0,0); } /*滚动槽*/
+pre code::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }         /*滚动轴*/
+pre code::-webkit-scrollbar-corner { background: rgba(0,0,0,0);}                    /*交点  */
+.hljs ul { list-style: decimal-leading-zero ! important; }
+.hljs ul li::before { position: relative; left: -12px; content:' '; background:white ! important; margin-right: -10px }
+
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: white;
+  color: black;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-variable {
+  color: #008000;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag {
+  color: #00f;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-attribute,
+.hljs-literal,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-addition {
+  color: #a31515;
+}
+
+.hljs-deletion,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-meta {
+  color: #2b91af;
+}
+
+.hljs-doctag {
+  color: #808080;
+}
+
+.hljs-attr {
+  color: #f00;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link {
+  color: #00b0e8;
+}
+
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}

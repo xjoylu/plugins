@@ -1,0 +1,25 @@
+	<link rel="shortcut icon" href="{#WWW}favicon.ico">
+	<link rel="stylesheet" href="{#WWW}View/hybbs/icon/iconfont.css?var={#HYBBS_V}">
+	<link rel="stylesheet" href="{#WWW}View/hybbs/app.css?var={#HYBBS_V}">					
+<style type="text/css">
+
+@media (max-width: 750px){
+.thread-img-box{
+	    
+    margin-left: 51px;
+}
+}
+
+.thread-img-box ul{
+	    list-style: none;
+	    
+}
+.thread-img-box ul li{
+	margin-top: 10px;
+	width:100px;
+	
+    list-style: none;
+    float: left;
+	margin-right: 10px;
+}
+</style>

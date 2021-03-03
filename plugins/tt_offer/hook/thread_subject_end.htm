@@ -1,0 +1,7 @@
+<?php if($thread['offerNum']>0){
+$set_offer = setting_get('tt_offer');
+    if($thread['offerStatus']==0){ $load_select_btn=1; ?>
+<i class="icon-magic" style="color:gold;" aria-hidden="true" title="有悬赏!"></i><span style="color:gold"><?php echo '[',lang('offer'),']',credits_get_text($set_offer['credits_type'],$thread['offerNum']);?></span>
+<?php } else{ ?>
+<i class="icon-magic" style="color:lawngreen;" aria-hidden="true" title="悬赏完毕!"></i><span style="color:lawngreen"><?php echo '[',lang('offer'),']',credits_get_text($set_offer['credits_type'],$thread['offerNum']);?></span>
+<?php }} ?>

@@ -1,0 +1,1 @@
+case 'pay_notify': include _include(APP_PATH.'plugin/tt_pay/pay.route.php'); break;

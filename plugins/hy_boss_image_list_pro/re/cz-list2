@@ -1,0 +1,28 @@
+{if $v['posts']}
+    	<div class="comment">
+    		<span class="badge {if ($v['btime']+1800) > NOW_TIME}badge-success{/if}">{$v.posts}</span>
+    	</div>
+    	{/if}
+		<link rel="stylesheet" href="Plugin/hy_boss_image_list_pro/css/lrtk.css" />
+<script type="text/javascript" src="Plugin/hy_boss_image_list_pro/js/jquery.min.js"></script>
+					<script type="text/javascript" src="Plugin/hy_boss_image_list_pro/js/jquery.imgbox.pack.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#example1-1").imgbox();
+		});
+	</script>
+						<?php
+						if($v['img_count']){
+							echo '<div class="thread-img-box"><ul>';
+							$img = explode(',', $v['img']);
+							$i = 0;
+							foreach ($img as $vv) {
+								if($i++ == 6)
+									break;
+								echo '<li><a  id="example1-1"  href="'.$vv.'"><img src="'.$vv.'" style="width: 100px;height: 67px;object-fit: cover;"></a></li>';
+							}
+							echo '</ul>
+					<div style="clear: both;"></div>
+					</div>';
+						}
+						?>

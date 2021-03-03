@@ -7,7 +7,9 @@ table.nav_tag_list td a{margin-right: 0.5rem;}
 </style>
 
 		<table class="small nav_tag_list">
-		<?php if(!empty($forum['tagcatelist'])) {foreach($forum['tagcatelist'] as $i=>$tagcate) { ?>
+		<?php if(!empty($forum['tagcatelist'])) {foreach($forum['tagcatelist'] as $i=>$tagcate) { 
+				if(empty($tagcate['enable'])) continue;
+			?>
 			<tr>
 				<td class="text-muted text-nowrap" align="right" valign="top">
 					<?php echo $tagcate['name'];?>：
@@ -34,6 +36,7 @@ table.nav_tag_list td a{margin-right: 0.5rem;}
 					<a href="<?php echo url("forum-$fid-1", array('tagids'=>$tagidadd));?>" <?php echo $tagactive;?>><?php echo lang('all');?></a>
 					<?php foreach($tagcate['taglist'] as $tag) { ?>
 					<?php 
+						if(empty($tag['enable'])) continue;
 						switch ($i) {
 							case 0: 
 								$tagidadd = "{$tag['tagid']}_{$tagid2}_{$tagid3}_{$tagid4}";

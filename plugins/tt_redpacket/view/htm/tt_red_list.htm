@@ -1,0 +1,42 @@
+<?php if(empty($uid)) message(-1,'您需要先登录才能查看红包记录!');
+$tid = param(2, 0); $page =  param(3, 1);
+$set=setting_get('tt_redpacket');$isrmb = $set['money_type']=='3'?1:0;
+$_thread=db_find_one('thread',array('tid'=>$tid));
+empty($_thread) AND message(-1, '主题不存在');
+thread_format($_thread);
+$data= db_find('red_packet',array('tid'=>$tid),array('time'=>1), $page, $pagesize=20);
+$packet_count = db_count('red_packet',array('tid'=>$tid));
+$pagination = pagination(url("thread-sPacket-{$tid}-{page}"), $packet_count, $page, $pagesize=20);
+function get_user($uid) {
+    $user = db_find_one('user',array('uid'=>$uid));
+    return $user;
+}
+$_statics = db_find_one('thread_red',array('tid'=>$tid));
+$_credits_name = lang('credits'.$set['money_type']);
+include _include(APP_PATH.'view/htm/header.inc.htm');?>
+<div class="row"><div class="col-lg-10 mx-auto"><div class="card"><div class="card-body" ><h4><?php echo $g_red_type_name[$_statics['type']];?>详情 - <?php echo $_thread['subject'];?></h4>
+    <div style="margin-bottom:8px;"><a href="<?php echo url("user-$_thread[uid]");?>" class="mr-3" tabindex="-1"><img class="avatar-1" src="<?php echo $_thread['user']['avatar_url'];?>">&nbsp;<?php echo $_thread['user']['username'];?></a><?php if($gid=='1'||($_thread['uid']==$uid&&$_thread['red_num']>0&&time()-$_thread['create_date']>=86400)){ ?><div style="float:right;cursor:pointer;" id="__back">撤回红包</div><?php }?></div>
+    <div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">数量</span></div>
+        <input type="text" class="form-control" disabled style="background-color: white;" value="<?php echo '剩',$_statics['rest'],'个 / 共',$_statics['total'],'个';?>"></div>
+    <div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">金额</span></div>
+        <input type="text" class="form-control" disabled style="background-color: white;" value="<?php echo '剩',$isrmb?$_statics['rest_money']/100.0:$_statics['rest_money'],$_credits_name,' / 共',$isrmb?$_statics['total_money']/100.0:$_statics['total_money'],$_credits_name;?>"></div>
+</div></div><div class="card"><div class="card-body">
+<table class="table"><tr><th style="width:20%;">时间</th><th style="width:60%;">用户</th><th style="width:20%;">金额</th></tr>
+    <?php foreach($data as $v){$__user = get_user($v['uid']);user_format($__user); ?>
+    <tr style="<?php echo $v['uid']==$uid?'font-weight:bold;':'';?>"><td><?php echo date('Y-m-d H:i:s',$v['time']);?></td><td><a href="<?php echo url("user-$v[uid]");?>" class="mr-3" tabindex="-1"><img class="avatar-1" src="<?php echo $__user['avatar_url'];?>"></a>&nbsp;<a href="<?php echo url("user-$v[uid]");?>" class="mr-3" tabindex="-1"><?php echo $__user['username'];?></a></td><td style="color:orange;"><?php echo ($isrmb? $v['get']/100.0: $v['get']),$_credits_name;?></td>
+    </tr><?php }?></table> <nav class="text-center"><ul class="pagination"><?php echo $pagination; ?></ul></nav>
+</div></div></div></div>
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+<?php if($gid=='1'||($_thread['uid']==$uid&&$_thread['red_num']>0&&time()-$_thread['create_date']>=86400)){ ?>
+    <script>
+        var jcancel = $("#__back");
+        jcancel.on('click',function(){
+            $.confirm('您确定要撤回红包吗?',function(){
+                jcancel.attr('disabled','disabled');
+                $.xpost("<?php echo url('thread-cPacket-'.$tid);?>","",function(code,message){
+                    jcancel.fadeOut(); $.alert(message);
+                });
+            });
+        });
+    </script>
+<?php }?>

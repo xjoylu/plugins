@@ -1,0 +1,11 @@
+{
+    "name": "Fuck SEO",
+    "brief": "我们最讨厌,却又离不开,又无可奈何!<br/><span class='small text-success'>如果觉得这个插件还不错的话,<a href='http://www.baiup.com/thread-145.htm' target='_blank'>点我打赏作者</a></span>",
+    "version": "1.1",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

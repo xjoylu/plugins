@@ -1,0 +1,11 @@
+{
+    "name": "微信支付/支付宝支付",
+    "brief": "本插件必须Rewrite，否则插件无法正常使用，支付宝商户需前往:https://b.alipay.com签约<br/>电脑端需签约'电脑网站支付',手机版请签约'手机网站支付'，微信支付开通认证公众平台开通微信支付(服务号)",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": 0,
+    "overwrites_rank": [],
+    "dependencies": []
+}

@@ -1,0 +1,50 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<!--{hook user_login_start.htm}-->
+<div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <div class="card card-block m-t-1">
+
+            <div style="background:#FFF;padding:15px;text-align: center" class="center-block">
+                <div id="xcode" style="width:256px;height:256px;margin:0 auto;"></div>
+            </div>
+
+            <h4 class="text-center">微信扫一扫</h4>
+        </div>
+    </div>
+</div>
+
+<!--{hook user_login_end.htm}-->
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<script src='/plugin/xn_wechat_public/view/js/jquery.qrcode.min.js'></script>
+<script>
+    $('#xcode').qrcode('http://<?php echo $_SERVER['HTTP_HOST'] .'/'.url('wxlogin-uniqid-'.$uniqid)?>');
+
+    setInterval(function () {
+
+        $.ajax({
+            async:false,
+            url: "<?php echo url('wxlogin-pc')?>",
+            type: "GET",
+            dataType: 'jsonp',
+            jsonp: 'callback',
+            timeout: 5000,
+            success: function (json) {//客户端jquery预先定义好的callback函数,成功获取跨域服务器上的json数据后,会动态执行这个callback函数
+                if(json==0){
+                    window.location.href='<?php echo url('my')?>'
+                }else if(json==1){
+
+                }else{
+                    $('#xcode').html("");
+                    $('#xcode').qrcode('http://<?php echo $_SERVER['HTTP_HOST'] .'/'?>'+xn.url('wxlogin-uniqid-'+json));
+                }
+            },
+        });
+
+    },1500);
+
+</script>
+
+<!--{hook user_login_js.htm}-->

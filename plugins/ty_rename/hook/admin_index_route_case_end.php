@@ -1,0 +1,1 @@
+case 'renamesetting':	include _include(APP_PATH.'plugin/ty_rename/route/admin_renamesetting.php'); 	break;

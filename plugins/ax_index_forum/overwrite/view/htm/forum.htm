@@ -1,0 +1,139 @@
+<?php $ax_index_forum = kv_get('ax_index_forum');?>
+<?php if($ax_index_forum['fid'] == $fid){?>
+
+<?php include _include(APP_PATH.'plugin/ax_index_forum/htm/prolist.htm');?>
+
+<?php }else{?>
+
+
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+<?php 
+function fenqu_user($uid){
+  $uid = explode(',',$uid);
+  $r = db_find('user',array('uid'=>$uid));
+  return $r;
+}
+?>
+<style type="text/css">
+  @media (max-width: 576px){
+    .container{ padding-left: 2px; padding-right: 2px; }
+  }
+  
+</style>
+  <main id="body">
+    <div class="container">
+      
+  
+  <ol class="breadcrumb mb-2 hidden-sm hidden-md">
+    <li class="breadcrumb-item"><a href="./" aria-label="首页"><i class="icon-home"></i> 四叶草|精湛社区</a></li>
+    <li class="breadcrumb-item active"><a href="<?php echo url("forum-$fid");?>">『<?php echo $forum['name'];?>』</a></li>
+    
+    <div class="media-body text-right">
+      <a href="<?php echo url('thread-create-'.$fid);?>" role="button" class="btn btn-sm btn-primary">发新帖</a>
+    </div>
+  </ol>
+  
+  <div class="card pa-sm">
+    <div class="card-body">
+      <dl class="row">
+        <dt class="vtop col-lg-1">
+          <img src="<?php echo $forum['icon_url'];?>" width="60" height="60" class="forum_icon" />
+        </dt>
+        <dd class="vtop col-lg-11">
+          <div class="text-small">
+            <span style="font-size: 15px;" class="font-weight-bold">『<?php echo $forum['name'];?>』</span>　
+            <span><span class="text-grey text-small">版块主题：</span><b><?php echo $forum['threads'];?> </b></span>　
+          </div>
+          <div class="text-middle text-muted" style="line-height: 2;">
+            <?php echo $forum['brief'];?> 
+          </div>
+          <?php if($forum['announcement']){?>
+          <div class="text-middle text-muted" style="line-height: 2;">
+            <span class="icon-volume-up"></span> 公告：<?php echo $forum['announcement'];?>        
+          </div>
+          <?php }?>
+                <?php 
+                    $_user = fenqu_user($forum['moduids']);
+                    if($_user){
+                  ?>
+                  <div class="text-small" style="line-height: 2"><span class="text-grey">版主：</span>
+                <?php foreach($_user as $u){?>
+                <?php $user = user_read_cache($u['uid']);?>
+                 <a href="<?php echo url("user-$u[uid]")?>" class="text-muted text-nowrap">
+                      <img src="<?php echo $user['avatar_url'];?>" class="avatar-1">
+                <?php echo $u['username'];?></a> &nbsp;
+                <?php }?>
+                      </div>
+                      <?php }?>
+                </dd>
+      </dl>
+    </div>
+  </div>
+
+    
+  <!--{hook forum_breadcrumb_after.htm}-->
+
+
+    <table class="small nav_tag_list">
+        </table>
+    
+
+  <div class="card">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs float-left">
+        <li class="nav-item">
+          <a class="nav-link active" href="<?php echo url("forum-$fid")?>">最新主题</a>
+        </li>
+        <!--{hook forum_thread_list_nav_item_after.htm}-->  
+      </ul>
+      <div class="float-right " >
+      <div class="text-right text-small pt-1 card-header-dropdown">
+          <div class="btn-toolbar" role="toolbar">
+            <span class="text-muted"><?php echo lang('orderby');?>：</span>
+            <div class="dropdown btn-group">
+              <a href="#" class="dropdown-toggle" id="ordery_dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <?php echo $orderby == 'tid' ? lang('thread_create_date') : lang('post_create_date');?>
+                <!--{hook forum_thread_list_dropdown_toggle.htm}-->
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ordery_dropdown_menu">
+                  <a class="dropdown-item" href="<?php echo url("forum-$fid-1", array('orderby'=>'tid') + $extra);?>"><i class="icon text-primary <?php echo $orderby == 'tid' ? 'icon-check' : '';?>"></i>&nbsp; <?php echo lang('thread_create_date');?></a>
+                  <a class="dropdown-item" href="<?php echo url("forum-$fid-1", array('orderby'=>'lastpid') + $extra);?>"><i class="icon text-primary <?php echo $orderby == 'lastpid' ? 'icon-check' : '';?>"></i>&nbsp; <?php echo lang('post_create_date');?></a>
+                  <!--{hook forum_thread_list_dropdown_menu.htm}-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+    </div>
+    <div class="card-body">
+     
+      <ul class="list-unstyled threadlist mb-0">
+            <!--{hook index_threadlist_before.htm}-->
+              <?php include _include(APP_PATH.'view/htm/thread_list.inc.htm');?>
+            <!--{hook index_threadlist_after.htm}-->                   
+      </ul>    
+     
+    </div>
+   
+   
+  </div>
+
+     <?php include _include(APP_PATH.'view/htm/thread_list_mod.inc.htm');?>
+  
+ <!--{hook forum_page_before.htm}-->
+    <nav class="my-3"><ul class="pagination justify-content-center"><?php echo $pagination; ?></ul></nav>
+    <!--{hook forum_page_after.htm}-->
+    
+
+    
+
+    </div>
+
+  </main>
+
+  
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+
+<?php }?>

@@ -1,0 +1,6 @@
+{if view_form('hy_boss','menu_forum')}
+				{foreach $forum as $v}
+					<a href="{php HYBBS_URL('forum',$v['id'])}">{$v.name}</a>
+				{/foreach}
+				<a href="{php HYBBS_URL('forum')}">{$_LANG['全部板块']}</a>
+			{/if}

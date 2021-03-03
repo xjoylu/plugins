@@ -1,0 +1,11 @@
+{
+	"name":"先回复后看帖",
+	"brief":"在想隐藏的地方用[hide][/hide]短代码隐藏起来,没有回复过的用户就看不见啦,这是一个简单版本",
+	"version":"1.0",
+	"bbs_version":"4.0",
+	"installed":0,
+	"enable":0,
+	"hooks_rank":[],
+	"overwrites_rank":[],
+	"dependencies":[]
+}

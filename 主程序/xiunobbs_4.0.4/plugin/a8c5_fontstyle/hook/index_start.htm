@@ -1,0 +1,71 @@
+<style>
+@media (min-width:992px){
+    .icolistson{
+        width:20% !important;
+		max-width: 20% !important;
+    }
+}
+@media (max-width:992px){
+    .icolistson{
+        display:none;
+    }
+}
+
+.icolist{
+    display:-webkit-flex;
+    display: flex;
+	flex-direction:row;
+	flex-wrap: wrap;
+	justify-content: flex-star;
+}
+.icolistson{
+        width:33%;
+		flex: 1 1 auto;
+		max-width: 33%;
+    }
+.website {
+    color: #266da1;
+    display: block;
+    font-size: 1.16em;
+    margin: 10px 15px 0;
+}
+.website-list li a {
+    white-space: nowrap;
+	font-weight: 700;
+    padding-left: 14px;
+}
+ .description {
+    color: #a2a2a2;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 10px 15px 0;
+}
+.fontli {
+    border-left: 1px dotted #e8e8e8;
+    cursor: pointer;
+    height: 78px;
+    margin-left: -1px;
+    overflow: hidden;
+}
+
+.fontli:hover {
+    background-color: #f2f8fd;
+}
+.fontli:hover a {
+    color: #ee521c;
+    text-decoration: underline;
+}
+
+</style>
+<div class="card icolist">
+<?php $testlist = db_find('icolink', array(), array('rank'=>-1), 1, 1000, 'linkid') ;?>
+		<?php if($testlist) { foreach ($testlist as $link) { ?>
+		<div class="icolistson">
+		<div class="m-2 text-center fontli"style="margin-bottom:0.5rem;">
+						<a  class="website" target="_blank" href="<?php echo $link['url'];?>" target="_blank" rel="nofollow"><?php echo $link['name'];?></a>
+						<p class="description" ><?php echo $link['renqi'];?></p>
+						
+		</div>
+		</div>
+					<?php }} ?>
+</div>

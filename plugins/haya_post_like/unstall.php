@@ -11,15 +11,17 @@
 
 $tablepre = $db->tablepre;
 
-db_exec("DROP TABLE IF EXISTS {$tablepre}post_like;");
+$sql = "
+DROP TABLE IF EXISTS {$tablepre}haya_post_like;
+";
+$r = db_exec($sql);
 
-db_exec("ALTER TABLE {$tablepre}post DROP COLUMN likes;");
-db_exec("ALTER TABLE {$tablepre}thread DROP COLUMN likes;");
+$sql = "
+ALTER TABLE {$tablepre}post DROP COLUMN haya_post_likes;
+";
+$r = db_exec($sql);
 
 // 删除插件配置
 setting_delete('haya_post_like'); 
-
-// 删除热门回复缓存
-cache_delete('haya_post_like');
 
 ?>

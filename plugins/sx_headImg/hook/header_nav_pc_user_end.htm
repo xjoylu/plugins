@@ -1,0 +1,27 @@
+	<?php }else {?>						
+						<!-- 游客 -->
+						<?php if(empty($uid)) { ?>
+						
+						<li class="nav-item"><a class="nav-link" href="<?php echo url('user-login');?>"><?php echo lang('login');?></a></li>
+						<li class="nav-item"><a class="nav-link" href="<?php echo url('user-create');?>"><?php echo lang('register');?></a></li>
+						
+						<!-- 登陆用户 -->
+						<?php } else { ?>
+						
+						<li class="nav-item"><a class="nav-link" href="<?php echo url('my');?>" tabindex="-1">
+							<?php if(strpos($user['avatar_url'], '/avatar.png') == false){ ?>
+								<img class="avatar-xs" src="<?php echo $user['avatar_url'];?>">
+							<?php }else{ ?>
+                                <img src="" class="avatar-xs img-circle headImg-<?php echo $user['uid'];?>" alt="头像">
+                                <canvas id="headImg-<?php echo $user['uid'];?>" class="headImg" alt="<?php echo $user['username'];?>" style="display:none"></canvas>
+							<?php } ?>	
+						</a></li>
+						<li class="nav-item username m-l-xs"><a class="nav-link" href="<?php echo url('my');?>"><?php echo $user['username'];?></a></li>
+						<!-- 管理员 -->
+						<?php if($gid == 1) { ?>
+						<li class="nav-item"><a class="nav-link" href="admin/"><i class="icon-home"></i> <?php echo lang('admin_page');?></a></li>
+						<?php } ?>
+						<li class="nav-item"><a class="nav-link" href="<?php echo url('user-logout');?>"><?php echo lang('logout');?></a></li>
+						
+						<?php } ?>
+	<?php }?>						

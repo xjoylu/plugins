@@ -1,0 +1,13 @@
+{
+    "name": "帖子编辑增强",
+    "brief": "帖子编辑增强，显示帖子IP，记录最后编辑者与编辑时间。作者：deatil",
+    "version": "1.0.3",
+    "author": "deatil",
+    "id": "haya_edit_log",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

@@ -6,179 +6,81 @@
 		<div class="card">
 			<div class="card-body">
 				<form action="<?php echo url('plugin-setting-haya_favorite');?>" method="post" id="formcreate">
-					<h4 class="card-title mb-3"><?php echo lang('haya_favorite').lang('setting'); ?></h4>
+					<h4 class="card-title mb-3">帖子收藏设置</h4>
 					
 					<hr class="m-0" />
 					
 					<div class="form-group row mb-3 mt-4">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="user_favorite">
-							<?php echo lang('haya_favorite_setting_user_favorite'); ?>：
+						<label class="col-sm-2 form-control-label text-md-right pr-0" for="user_favorite">
+							用户收藏数量：
 						</label>
-						<div class="col-md-8">
+						<div class="col-sm-8">
 							<input type="text" name="user_favorite" id="user_favorite" value="<?php echo isset($config['user_favorite']) ? intval($config['user_favorite']) : 10; ?>" class="form-control">
 							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_user_favorite_tip'); ?>
-							</div>
-						</div>
-					</div>
-					
-					<div class="form-group row mb-3 mt-4">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="user_favorite_count">
-							<?php echo lang('haya_favorite_setting_user_favorite_count'); ?>：
-						</label>
-						<div class="col-md-8">
-							<input type="text" name="user_favorite_count" id="user_favorite_count" value="<?php echo isset($config['user_favorite_count']) ? intval($config['user_favorite_count']) : 20; ?>" class="form-control">
-							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_user_favorite_count_tip'); ?>
+								设置收藏页面要显示的帖子数量。
 							</div>
 						</div>
 					</div>
 					
 					<div class="form-group row mb-3">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="thread_show_favorite">
-							<?php echo lang('haya_favorite_setting_thread_show_favorite'); ?>：
+						<label class="col-sm-2 form-control-label text-md-right pr-0" for="user_favorite_sort">
+							用户收藏排序：
 						</label>
-						<div class="col-md-8">							
-							<div class="custom-redio" id="thread_show_favorite">
-								<?php if (isset($config['thread_show_favorite']) && $config['thread_show_favorite'] == 1) { ?>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="thread_show_favorite" value="1" checked="checked"> <?php echo lang('enable'); ?>
-									</label>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="thread_show_favorite" value="0"> <?php echo lang('disable'); ?>
-									</label>
+						<div class="col-sm-8">
+							<select name="user_favorite_sort" id="user_favorite_sort" class="form-control">
+								<?php if ($config['user_favorite_sort'] == 'desc') { ?>
+									<option value="asc">顺序排序</option>
+									<option value="desc" selected="selected">倒序排序</option>
 								<?php } else { ?>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="thread_show_favorite" value="1"> <?php echo lang('enable'); ?>
-									</label>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="thread_show_favorite" value="0" checked="checked"> <?php echo lang('disable'); ?>
-									</label>
+									<option value="asc" selected="selected">顺序排序</option>
+									<option value="desc">倒序排序</option>
 								<?php } ?>
-							</div>		
-							
-							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_thread_show_favorite_tip'); ?>
-							</div>
-						</div>
-					</div>	
-					
-					<div class="form-group row mb-3">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="favorite_count_type">
-							<?php echo lang('haya_favorite_setting_favorite_count_type'); ?>：
-						</label>
-						<div class="col-md-8">							
-							<div class="custom-redio" id="favorite_count_type">
-								<?php if (isset($config['favorite_count_type']) && $config['favorite_count_type'] == 1) { ?>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="favorite_count_type" value="1" checked="checked"> <?php echo lang('enable'); ?>
-									</label>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="favorite_count_type" value="0"> <?php echo lang('disable'); ?>
-									</label>
-								<?php } else { ?>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="favorite_count_type" value="1"> <?php echo lang('enable'); ?>
-									</label>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="favorite_count_type" value="0" checked="checked"> <?php echo lang('disable'); ?>
-									</label>
-								<?php } ?>
-							</div>		
-							
-							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_favorite_count_type_tip'); ?>
-							</div>
-						</div>
-					</div>	
-					
-					<div class="form-group row mb-3">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="show_hot_favorite">
-							<?php echo lang('haya_favorite_setting_show_hot_favorite'); ?>：
-						</label>
-						<div class="col-md-8">							
-							<div class="custom-redio" id="show_hot_favorite">
-								<?php if (isset($config['show_hot_favorite']) && $config['show_hot_favorite'] == 1) { ?>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="show_hot_favorite" value="1" checked="checked"> <?php echo lang('enable'); ?>
-									</label>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="show_hot_favorite" value="0"> <?php echo lang('disable'); ?>
-									</label>
-								<?php } else { ?>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="show_hot_favorite" value="1"> <?php echo lang('enable'); ?>
-									</label>
-									<label class="custom-input custom-radio mr-3">
-										<input type="radio" name="show_hot_favorite" value="0" checked="checked"> <?php echo lang('disable'); ?>
-									</label>
-								<?php } ?>
-							</div>		
-							
-							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_show_hot_favorite_tip'); ?>
-							</div>
-						</div>
-					</div>	
-					
-					<div class="form-group row mb-3 mt-4">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="hot_favorite_count">
-							<?php echo lang('haya_favorite_setting_hot_favorite_count'); ?>：
-						</label>
-						<div class="col-md-8">
-							<input type="text" name="hot_favorite_count" id="hot_favorite_count" value="<?php echo isset($config['hot_favorite_count']) ? intval($config['hot_favorite_count']) : 10; ?>" class="form-control">
-							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_hot_favorite_count_tip'); ?>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group row mb-3 mt-4">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="hot_favorite_find_time">
-							<?php echo lang('haya_favorite_setting_hot_favorite_find_time'); ?>：
-						</label>
-						<div class="col-md-8">
-							<input type="text" name="hot_favorite_find_time" id="hot_favorite_find_time" value="<?php echo isset($config['hot_favorite_find_time']) ? intval($config['hot_favorite_find_time']) : 30; ?>" class="form-control">
-							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_hot_favorite_find_time_tip'); ?>
-							</div>
-						</div>
-					</div>	
-					
-					<div class="form-group row mb-3 mt-4">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="hot_favorite_cache_time">
-							<?php echo lang('haya_favorite_setting_hot_favorite_cache_time'); ?>：
-						</label>
-						<div class="col-md-8">
-							<input type="text" name="hot_favorite_cache_time" id="hot_favorite_cache_time" value="<?php echo isset($config['hot_favorite_cache_time']) ? intval($config['hot_favorite_cache_time']) : 86400; ?>" class="form-control">
-							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_hot_favorite_cache_time_tip'); ?>
-							</div>
-						</div>
-					</div>					
-					
-					<div class="form-group row mb-3">
-						<label class="col-md-2 form-control-label text-md-right pr-0" for="clear_hot_favorite">
-							<?php echo lang('haya_favorite_setting_clear_hot_favorite'); ?>
-						</label>
-						<div class="col-md-8">
-							<select name="clear_hot_favorite" id="clear_hot_favorite" class="form-control">
-								<option value="1"><?php echo lang('haya_favorite_setting_now_clear_hot_favorite'); ?></option>
-								<option value="0" selected="selected"><?php echo lang('haya_favorite_setting_no_clear_hot_favorite'); ?></option>
 							</select>
 							<div class="figure-caption mt-2">
-								<?php echo lang('haya_favorite_setting_clear_hot_favorite_tip'); ?>
+								设置用户收藏默认排序。
+							</div>
+						</div>
+					</div>					
+					
+					<div class="form-group row mb-3 mt-4">
+						<label class="col-sm-2 form-control-label text-md-right pr-0" for="hot_favorite">
+							热门收藏数量：
+						</label>
+						<div class="col-sm-8">
+							<input type="text" name="hot_favorite" id="hot_favorite" value="<?php echo isset($config['hot_favorite']) ? intval($config['hot_favorite']) : 10; ?>" class="form-control">
+							<div class="figure-caption mt-2">
+								设置热门收藏要显示的帖子数量。
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row mb-3">
+						<label class="col-sm-2 form-control-label text-md-right pr-0" for="show_hot_favorite">
+							热门收藏：
+						</label>
+						<div class="col-sm-8">
+							<select name="show_hot_favorite" id="show_hot_favorite" class="form-control">
+								<?php if ($config['show_hot_favorite'] == 1) { ?>
+									<option value="1" selected="selected">启用</option>
+									<option value="0">关闭</option>
+								<?php } else { ?>
+									<option value="1">启用</option>
+									<option value="0" selected="selected">关闭</option>
+								<?php } ?>
+							</select>
+							<div class="figure-caption mt-2">
+								是否在首页显示热门收藏。
 							</div>
 						</div>
 					</div>					
 					
 					<div class="form-group row mb-3">
-						<label class="col-md-2 form-control-label"></label>
-						<div class="col-md-2">
-							<button type="submit" class="btn btn-primary btn-block mr-2 mb-3" id="submit"><?php echo lang('save'); ?></button>
+						<label class="col-sm-2 form-control-label"></label>
+						<div class="col-sm-2">
+							<button type="submit" class="btn btn-primary btn-block mr-2 mb-2" id="submit">确认</button>
 						</div>
-						<div class="col-md-2">
-							<a role="button" class="btn btn-secondary btn-block mb-3" href="javascript:history.back();"><?php echo lang('back'); ?></a>
+						<div class="col-sm-2">
+							<a role="button" class="btn btn-secondary btn-block mb-2" href="javascript:history.back();">返回</a>
 						</div>
 					</div>
 					
@@ -193,5 +95,5 @@ include _include(ADMIN_PATH.'view/htm/footer.inc.htm');
 ?>
 
 <script>
-$('#nav li.nav-item-plugin').addClass('active');
+$('#nav li.nav-item-plugin, #nav_pc li.plugin, #nav_mobile li.plugin').addClass('active');
 </script>

@@ -1,0 +1,49 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');$set=setting_get('tt_vip');
+$input_names_list = array();$q=0;$m=0;
+foreach($set as $k=>$v) {$input_names_list['l'.$q]=$k;$input_names_list['v'.($q++)]=$v;}?>
+<div class="row"><div class="col-lg-8 mx-auto"><div class="card"><div class="card-body" ><h3>后期技术支持</h3>官方网站：http://www.6rabbit.com/ <a href="http://www.6rabbit.com"target="_blank" style="text-decoration: none">点击进入</a><br>
+官方QQ群：58911696（正常群）、77868272（只吹牛不讨论正事）</div></div><form action="<?php echo url('plugin-setting-tt_vip');?>" method="post" id="form">
+<div class="card"><div class="card-body" ><h3>VIP特权设置</h3>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP提升阅读权限（本功能生效需要预先安装tt_read 1.07插件）:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP免积分下载(0为关闭1~6为有这个权限的最低VIP等级):</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP免积分查看付费主题(0为关闭1~6为有这个权限的最低VIP等级):</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP免回复查看需要回帖可见的内容（本功能生效需要预先安装tt_read 1.07插件）(0为关闭1~6为有这个权限的最低VIP等级):</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<hr><h3>VIP费用设置</h3>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP月费:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP月费赠送成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP季费(3个月):</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP季费赠送成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP半年费:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP半年费赠送成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP年费:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP年费赠送成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP缴费积分段(1经验2金币3人民币[单位:分]): </label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<hr><h3>VIP成长设置</h3>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP每日成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">非VIP每日降低成长值(至大于0为止):</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP 2级成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP 3级成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP 4级成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP 5级成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<div class="form-group row"><label class="col-lg-9 form-control-label">VIP 6级成长值:</label><input class="col-sm-2 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+</div></div></form>
+    <div class="card"><div class="card-body" ><h3><a href="<?php echo url('vip')?>">用户VIP信息编辑</a></h3>
+</div></div></div></div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+    var jform = $("#form");
+    var jsubmit = $("#submit");
+    jform.on('submit', function(){
+        jform.reset();
+        jsubmit.button('loading');
+        var postdata = jform.serialize(); postdata+="&op=0";
+        $.xpost(jform.attr('action'), postdata, function(code, message) {
+            if(code == 0) { $.alert(message);
+                setTimeout(function() {window.location.reload();jsubmit.button('reset');}, 1000);
+                return;
+            } else { $.alert(message);jsubmit.button('reset');}
+        });
+        return false;
+    });
+</script>

@@ -1,0 +1,5 @@
+{if $v['posts']}
+    	<div class="comment">
+    		<span class="badge {if ($v['btime']+1800) > NOW_TIME}badge-success{/if}">{$v.posts}</span>
+    	</div>
+    	{/if}

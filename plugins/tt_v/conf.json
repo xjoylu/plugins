@@ -1,0 +1,11 @@
+{
+    "name": "官方认证",
+    "brief": "官方可以在特别认证的用户名字后面加v。",
+    "version": "1.031",
+    "bbs_version": "4.0.4",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

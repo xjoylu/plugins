@@ -1,0 +1,249 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<style type="text/css">
+#wrapper{ background: #fff}
+.y{ display:none}
+</style>
+<div class="row">
+	<div class="col-lg-12">
+
+		<div class="card">
+
+		
+			<!-- card-block start -->
+			<div class="card-block">
+				<!-- tab -->
+				<ul class="nav nav-tabs" role="tablist" id="myTab">
+				  <li class="nav-item active"><a href="#tab1"  class="nav-link">自定义导航</a></li>
+
+				</ul>
+
+				<div class="tab-content card-block">
+<!-- tab1 -->
+<div class="tab-pane" id="tab1">
+
+     <form action="<?php echo url('plugin-setting-ax_nav_sel-link');?>" method="post" id="form2">
+			<div class="table-responsive arrlist">
+				<table class="table" style="min-width: 800px">
+					<thead>
+						<tr align="center">
+							<th width="20">ID</th>
+							<th width="100">上级ID</th>
+							<th width="100">名称</th>
+							<th width="100" class="y">描述</th>
+							<th>链接</th>
+							<th width="100">打开</th>
+							<th width="100">排序</th>
+							<th width="100" class="y">类别</th>
+							<th width="100" class="text-center">删除</th>
+						</tr>
+					<thead>
+					<tbody>
+						<?php if($linklist){foreach($linklist as $arr) { 
+						$rowid = $arr['linkid'];
+						?>
+						<tr align="center" rowid="<?php echo $rowid; ?>">
+							<td><input type="text" class="form-control" name="rowid[<?php echo $rowid;?>]" value="<?php echo $rowid; ?>"  placeholder="版块ID" readonly  unselectable="on" /></td>
+
+							<td><input type="text" class="form-control" name="note[<?php echo $rowid;?>]" value="<?php echo $arr['note']; ?>"  placeholder="上级ID" /></td>
+
+							<td><input type="text" class="form-control" name="name[<?php echo $rowid;?>]" value="<?php echo $arr['name']; ?>" placeholder="名称" /></td>
+							
+							<td><input type="text" class="form-control" name="url[<?php echo $rowid;?>]" value="<?php echo $arr['url']; ?>"  placeholder="链接" /></td>
+							<td><select name="target[<?php echo $rowid;?>]" class="custom-select" > 
+									<option value="0" <?php echo ($arr['target']==0 ? 'selected="selected"':''); ?> >新窗口</option> 
+									<option value="1" <?php echo ($arr['target']==1 ? 'selected="selected"':''); ?> >本地窗口</option> 
+							</select></td>
+							<td><input type="text" class="form-control" name="rank[<?php echo $rowid;?>]" value="<?php echo $arr['rank']; ?>" placeholder="顺序" /></td>
+							<td class="y">
+							<select name="type[<?php echo $rowid;?>]" class="custom-select" > 
+									<option value="99" <?php echo ($arr['type']==99 ? 'selected="selected"':''); ?> >不显示</option>
+									<option value="0" <?php echo ($arr['type']==0 ? 'selected="selected"':''); ?> >友情链接0</option> 
+									<option value="1" <?php echo ($arr['type']==1 ? 'selected="selected"':''); ?> >导航栏链接1</option> 
+									<option value="2" <?php echo ($arr['type']==2 ? 'selected="selected"':''); ?> >类别=2</option> 
+									<option value="3" <?php echo ($arr['type']==3 ? 'selected="selected"':''); ?> >类别=3</option> 
+									<option value="4" <?php echo ($arr['type']==4 ? 'selected="selected"':''); ?> >类别=4</option> 
+									<option value="5" <?php echo ($arr['type']==5 ? 'selected="selected"':''); ?> >类别=5</option> 
+									<option value="6" <?php echo ($arr['type']==6 ? 'selected="selected"':''); ?> >类别=6</option> 
+									<option value="7" <?php echo ($arr['type']==7 ? 'selected="selected"':''); ?> >类别7</option> 
+									<option value="8" <?php echo ($arr['type']==8 ? 'selected="selected"':''); ?> >类别=8</option> 
+									<option value="9" <?php echo ($arr['type']==9 ? 'selected="selected"':''); ?> >类别=9</option> 
+									<option value="10" <?php echo ($arr['type']==10 ? 'selected="selected"':''); ?> >类别=10</option> 
+									<option value="11" <?php echo ($arr['type']==11 ? 'selected="selected"':''); ?> >类别=11</option> 
+									<option value="12" <?php echo ($arr['type']==12 ? 'selected="selected"':''); ?> >类别=12</option> 
+									<option value="13" <?php echo ($arr['type']==13 ? 'selected="selected"':''); ?> >类别=13</option> 
+									<option value="14" <?php echo ($arr['type']==14 ? 'selected="selected"':''); ?> >类别=14</option> 
+									<option value="15" <?php echo ($arr['type']==15 ? 'selected="selected"':''); ?> >类别=15</option> 
+									<option value="16" <?php echo ($arr['type']==16 ? 'selected="selected"':''); ?> >类别=16</option> 
+									<option value="17" <?php echo ($arr['type']==17 ? 'selected="selected"':''); ?> >类别=17</option> 
+									<option value="18" <?php echo ($arr['type']==18 ? 'selected="selected"':''); ?> >类别=18</option>
+									<option value="19" <?php echo ($arr['type']==19 ? 'selected="selected"':''); ?> >类别=19</option>
+									<option value="20" <?php echo ($arr['type']==20 ? 'selected="selected"':''); ?> >类别=20</option>
+							</select>
+								</td>
+							<td><a class="btn row_delete btn-sm btn-default" role="btn">删除</a></td>
+						</tr>
+						<?php }}else{$rowid = 0; ?>
+						<tr align="center" rowid="<?php echo $rowid; ?>" class="hidden" style="<?php if($linklist <> '') echo 'display: none'?>">
+							<td><input type="text" class="form-control" name="rowid[0]" value=""  placeholder="ID" readonly  unselectable="on" /></td>
+							
+							<td><input type="text" class="form-control" name="note[0]" value=""  placeholder="上级ID" /></td>
+
+							<td><input type="text" class="form-control" name="name[0]" value="" placeholder="名称" /></td>
+							<td class="y"><input type="text" class="form-control" name="note[0]" value="" placeholder="描述" /></td>
+							<td><input type="text" class="form-control" name="url[0]" value=""  placeholder="链接" /></td>
+							<td><select name="target[0]" class="custom-select" > 
+									<option value="0" selected="selected">新窗口</option> 
+									<option value="1">本地窗口</option> 
+								</select></td>
+							<td><input type="text" class="form-control" name="rank[0]" value="" placeholder="顺序" /></td>
+							<td class="y"><select name="type[0]" class="custom-select" >  
+									<option value="99">不显示</option>
+									<option value="0" selected="selected">友情链接0</option> 
+									<option value="1">导航栏链接1</option>
+									<option value="2">类别=2</option> 
+									<option value="3">类别=3</option> 
+									<option value="4">类别=4</option> 
+									<option value="5">类别=5</option> 
+									<option value="6">类别=6</option> 
+									<option value="7">类别=7</option> 
+									<option value="8">类别=8</option> 
+									<option value="9">类别=9</option> 
+									<option value="10">类别=10</option>
+									<option value="11">类别=11</option>
+									<option value="12">类别=12</option> 
+									<option value="12">类别=13</option> 
+									<option value="14">类别=14</option> 
+									<option value="15">类别=15</option> 
+									<option value="16">类别=16</option> 
+									<option value="17">类别=17</option> 
+									<option value="18">类别=18</option> 
+									<option value="19">类别=19</option>
+									<option value="20">类别=20</option>
+								</select></td>
+							<td><a class="btn row_delete btn-sm btn-default" role="btn">删除</a></td>
+						</tr>
+						<?php }?>
+					</tbody>
+				</table>
+			</div>
+			<p><a role="button" class="btn row_add">[+]增加一行</a></p>
+			<p class="text-center">
+				<button type="submit" class="btn btn-primary" id="submit2" data-loading-text="<?php echo lang('submiting');?>..." style="width: 10rem;"><?php echo lang('confirm');?></button>
+			</p>
+		</form>
+
+<p class="card-body" style="color: red">PS:上级ID不能与ID相同，否则将无法显示。</p>
+
+</div>
+
+
+
+
+
+			  </div>
+			  <!-- tab end-->
+
+			</div>
+			<!-- card-block end -->
+			
+	    </div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+var jform = $("#form");
+var jsubmit = $("#submit");
+jform.on('submit', function(){
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serialize();
+	console.log(postdata);
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message.b);
+			jsubmit.text(message.a).delay(1000).button('reset');
+			setTimeout("location.reload();",1000);
+			return;
+		} else {
+			$.alert(message.c);
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+
+				var maxid = <?php echo $maxid;?>;
+
+				var jform2 = $("#form2");
+				var jsubmit2 = $("#submit2");
+				var jarrlist = $('.arrlist');
+				jform2.base64_encode_file(); // 对文件进行 base64 编码，处理文件上传，很方便
+				jform2.on('submit', function(){
+					jform2.reset();
+					var postdata = jform2.serialize();
+					jsubmit2.button('loading');
+					$.xpost(jform2.attr('action'), postdata, function(code, message) {
+						if(code == 0) {
+							$.alert(message);
+							//jsubmit2.text(message).delay(3000).location();
+							jsubmit2.text(message).delay(3000);
+							jsubmit2.button('reset');
+							setTimeout("location.reload();",1000);
+							return;
+						} else {
+							alert(message);
+							jsubmit2.button('reset');
+						}
+					});
+					return false;
+				});
+
+				// 删除
+				var jdelete = $('a.row_delete');
+				jarrlist.on('click', 'a.row_delete', function() {
+					var jthis = $(this);
+					var jtr = jthis.parents('tr');
+					var rowid = jtr.attr('rowid');
+				
+					jtr.remove();
+					return false;
+				});
+				// 增加
+				var jadd = $('a.row_add');
+				jadd.on('click', function() {
+					var jclone = jarrlist.find('tr').last().clone();
+					jclone.insertAfter(jarrlist.find('tr').last()).show();
+					var jrowid = jclone.find('input[name^="rowid"]');
+					//var rowid = xn.intval(jrowid.val()) + 1;
+					var rowid = ++maxid;
+					jrowid.val(rowid);
+					jclone.attr('rowid', rowid);
+					
+					// 清空值
+					jclone.find('input').not('[name^="rowid"]').val('');
+					
+					// 修改 [] 中的值为 rowid
+					jclone.find('input').attr_name_index(rowid);
+					jclone.find('select').attr_name_index(rowid);
+
+					// 图片缩略
+					jclone.find('img.forum').attr('id', 'img_'+rowid).attr('src', '../view/img/logo.png');
+					jclone.find('input[type="file"]').attr('data-assoc', 'img_'+rowid);
+					
+					return false;
+				});
+
+
+
+//tab
+$(function () {
+    $('#myTab a:first').tab('show');
+    $('#myTab a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+    });
+})
+
+</script>

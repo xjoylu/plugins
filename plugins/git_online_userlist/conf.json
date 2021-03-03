@@ -1,0 +1,11 @@
+{
+    "name": "显示在线用户",
+    "brief": "在首页底部显示在线用户。<a style='font-size:12px;' href='https://gitee.com/soyoumi/git_online_userlist' target='_blank'>码云上协作<a>|<a style='font-size:12px;' href='https://jq.qq.com/?_wv=1027&k=5197JrP' target='_blank'>协作沟通<a>",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

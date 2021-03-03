@@ -1,0 +1,35 @@
+<div class="container">
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card card-friendlink link-bottom">
+			<div class="card-header">在线用户--<?php
+			$arronline=assoc_unique(online_list_cache(),'uid');//获取在线用户信息并且根据uid值去重复
+			echo count($arronline);
+			?></div>
+			<div class="card-body p-a-sm p-b-xs">
+					<?php 
+$rew=$conf['url_rewrite_on']==0 ? '?':'';//伪静态
+foreach($arronline as $online_user) { //Changed By Eveson 
+echo "<a class=\"mr-2 float-left\" href=\"".getlistn().$rew."user-{$online_user['uid']}.htm\" target=\"_blank\" >{$online_user['username']}</a>";//此处感觉应该引入js或者html文件
+}
+function assoc_unique($arr, $key) {  //根据指定的key值为数组去重
+        $tmp_arr = array();  
+        foreach($arr as $k => $v) {  
+            if(in_array($v[$key], $tmp_arr)) {  
+                unset($arr[$k]);  
+            } else {  
+                $tmp_arr[] = $v[$key];  
+            }  
+        }  
+        sort($arr);  
+        return $arr;  
+} 
+function getlistn(){//返回修罗主程序所处相对目录 
+return substr($_SERVER['PHP_SELF'],0,strlen($_SERVER['PHP_SELF'])-10);   
+}
+                    
+                    ?>
+			</div>
+		</div>
+	</div>
+	</div>

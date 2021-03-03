@@ -1,0 +1,12 @@
+{
+    "name": "附件管理器",
+    "brief": "附件管理器，管理系统上传的文件和图片。作者：deatil",
+    "version": "1.0.7",
+    "author": "deatil",
+    "id": "haya_attach",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

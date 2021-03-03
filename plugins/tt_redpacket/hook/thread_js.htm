@@ -1,0 +1,26 @@
+<?php if($load_redpacket_js) {?>
+<script>
+    var jred_img = $("#redpacket");var jred_tid="<?php echo $thread['tid'];?>";
+    jred_img.on('click',function(){
+        var postdata = "tid="+jred_tid;jred_img.attr('disabled','disabled');
+        <?php if($red_info['rest']>0 && $red_info['type']=='3' && db_count('red_packet',array('tid'=>$tid,'uid'=>$uid))<=0){ ?>
+        var jcommand = "<?php echo $red_info['command'];?>";
+        $.tt_confirm('这是一个口令红包,您确定要回复如下内容,领取红包吗？<br>'+jcommand,function(){
+            get_redpacket();
+        },null,'领取');
+        <?php }else {?>
+        get_redpacket();
+        <?php }?>
+    });
+    function get_redpacket(){
+        $.xpost(xn.url('thread-tPacket-' + jred_tid), "tid="+jred_tid, function (code, message) {
+            if(code==-2){$.tt_confirm(message,function(){location=xn.url('user-login');},null,'立即登录');}
+            else if(code==-3){$.tt_confirm(message,function(){location='<?php echo url("thread-sPacket-".$tid."-1");?>';},null,'查看领取记录');}
+            else if(code==-4){$.tt_confirm(message,function(){location='<?php echo url("thread-sPacket-".$tid."-1");?>';},null,'查看领取记录');}
+            else if(code==0){$.tt_confirm(message,function(){location='<?php echo url("thread-sPacket-".$tid."-1");?>';},null,'查看领取记录');}
+            else {$.alert(message);}
+            jred_img.removeAttr('disabled');
+        });
+    }
+</script>
+<?php }?>

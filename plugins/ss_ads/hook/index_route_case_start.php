@@ -1,0 +1,1 @@
+		case 'ssdd': include APP_PATH.'plugin/ss_ads/route/index.php'; break;

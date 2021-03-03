@@ -1,40 +1,61 @@
 <?php
+$action = param(1);
 
-$openid = true;
-include _include(APP_PATH.'plugin/xn_wechat_public/model/wechat.func.php');
-if ( $method == 'POST' ) {
-	$email = param('email');                        // 邮箱或者手机号 / email or mobile
-	$password = param('password');
-	$openid = xn_decrypt(param('openid'));
-	empty( $openid ) AND message('password', '错误的授权秘钥');
-	empty( $email ) AND message('email', lang('email_is_empty'));
-	if ( is_email($email, $err) ) {
-		$user = user_read_by_email($email);
-		empty( $user ) AND message('email', lang('email_not_exists'));
-	} else {
-		$user = user_read_by_username($email);
-		empty( $user ) AND message('email', lang('username_not_exists'));
-	}
-	!is_password($password, $err) AND message('password', $err);
-	md5($password . $user['salt']) != $user['password'] AND message('password', lang('password_incorrect'));
-	user_update($user['uid'], array( 'login_ip' => $longip, 'login_date' => $time, 'logins+' => 1 ));
-	$uid = $user['uid'];
-	$open_user = db_find_one('user_open_wechat', array( 'uid' => $uid ));
-	!empty( $open_user['uid'] ) AND message(1, '无需重复授权,谢谢!');
-	$open_user = db_find_one('user_open_wechat', array( 'openid' => $openid ));
-	!empty( $open_user['uid'] ) AND message(1, '无需重复授权,谢谢!');
-	db_update('user_open_wechat', array( 'openid' => $openid ), array( 'uid' => $uid ));
-    $_SESSION['uid'] = $uid;
-    user_token_set($user['uid']);
-    message(0, ' 授权登录成功!');
-}
-$code = param('code');
-$auto = param(1, '');
-$auto=  $auto=='auto' ? 1:0;
-$state = param('state');
-if ( $code ) {
-	wechat_get_token($code, $state);
-} else {
-	wechat_login_link($auto);
+if($action=='uniqid') {
+    user_login_check();
+    $uniqid = param(2);
+    empty($uniqid) AND message(-1,'错误的请求');
+    $qr_sid=cache_get($uniqid);
+    if($qr_sid){
+        db_update('session',array('sid'=>$qr_sid),array('uid'=>$uid));
+        cache_delete($uniqid);
+        message(0,jump('扫码登陆成功','./',2));
+    }else{
+        message(-1,'二维码已过期,请重新扫码');
+    }
+
+}elseif($action=='pc'){
+
+    $header['title']='会员登录';
+    $callback = param("callback");
+    if ($callback) {
+        $uniqid=!empty($_COOKIE['bbs_uniqid']) ? $_COOKIE['bbs_uniqid']:'';
+        if($uniqid){
+            $uid=_SESSION('uid');
+            if($uid){
+                $user=user_read($uid);
+                user_token_set($uid);
+                $_SESSION['uid']=$uid;
+                $uniqid=0;
+            }else{
+                $uniqid=1;
+            }
+        }else{
+            $uniqid=get_uniqid();
+            cache_set($uniqid,$sid,600);
+            setcookie('bbs_uniqid', $uniqid, $time + 600, '');
+        }
+        $result = xn_json_encode($uniqid);
+        echo $callback . "($result)";
+        exit;
+    }else{
+        !empty( $user ) AND http_location( './' );
+        $uniqid=get_uniqid();
+        setcookie('bbs_uniqid', $sid, $time + 600, '');
+        cache_set($uniqid,$sid,600);
+        include _include(APP_PATH.'plugin/xn_wechat_public/view/htm/wxlogin.htm');
+    }
+}else{
+
+    include _include(APP_PATH.'plugin/xn_wechat_public/model/wechat.func.php');
+    $code = param('code');
+    $auto = param(1, '');
+    $auto=  $auto=='auto' ? 1:0;
+    $state = param('state');
+    if ( $code ) {
+        wechat_get_token($code, $state);
+    } else {
+        wechat_login_link($auto);
+    }
 }
 ?>

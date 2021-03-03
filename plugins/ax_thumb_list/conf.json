@@ -1,0 +1,11 @@
+{
+    "name": "多图文列表展示",
+    "brief": "图文列表混搭。图片列表<br><span class='text-success'></span>：后台设置选择。",
+    "version": "1.2",
+    "bbs_version": "4.0.1",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

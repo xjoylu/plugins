@@ -1,0 +1,10 @@
+{
+    "name": "私方主题：黄色风格",
+    "brief": "这个主题风格基于Xiuno官方主题修改版，感谢Xiuno、感谢CCTV、感谢NTV。",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

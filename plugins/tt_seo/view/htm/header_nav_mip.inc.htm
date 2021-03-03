@@ -1,0 +1,20 @@
+	<!--{hook header_nav_start.htm}-->
+	<header class="navbar bg-dark" id="header">
+		<div class="container">
+			<span class="navbar-toggler"><i class="icon-bolt icon" aria-hidden="true" title="MIP页面,专为移动用户设计优化!"></i></span>
+			<!--{hook header_nav_logo_before.htm}-->
+			<a href="<?php echo $header['mobile_link'];?>"><div class="mip_logo">
+			<mip-img src="<?php echo $conf['logo_mobile_url'];?>"></mip-img></div></a>
+			<!--{hook header_nav_logo_after.htm}-->
+			
+			<?php if(empty($uid)) { ?>
+				<a class="navbar-toggler" href="<?php echo url('user-login');?>" aria-label="<?php echo lang('login');?>"> <i class="icon-user icon"></i></a>
+			<?php } else { ?>
+				<a class="navbar-toggler" href="<?php echo url("thread-create-$fid");?>" aria-label="<?php echo lang('thread_create');?>"><i class="icon-edit icon"></i></a>
+			<?php } ?>
+			
+			<!--{hook header_nav_user_icon_after.htm}-->
+
+		</div>
+	</header>
+	<!--{hook header_nav_end.htm}-->

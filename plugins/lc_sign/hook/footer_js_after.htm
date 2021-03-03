@@ -1,0 +1,37 @@
+<script>
+var sign = $('#sign');
+//页面加载查询是否已签到
+var postdata = 'act=cx';
+	$.xpost(xn.url('lc_sign'), postdata, function(code, message) {			
+				sign.html(message);				
+	});
+
+sign.on('click', function() 
+{
+	var postdata = 'act=qd';
+	$.xpost(xn.url('lc_sign'), postdata, function(code, message) {
+			$.alert(message);
+			sign.delay(1000).location(xn.url('index'));
+			//sign.delay(1000);
+	});
+	return false;	
+});	
+//手机端
+var sign2 = $('#sign2');
+//页面加载查询是否已签到
+var postdata = 'act=cx';
+	$.xpost(xn.url('lc_sign'), postdata, function(code, message) {		
+				sign2.html(message);				
+	});
+
+sign2.on('click', function() 
+{
+	var postdata = 'act=qd';
+	$.xpost(xn.url('lc_sign'), postdata, function(code, message) {
+			$.alert(message);
+			sign2.delay(1000).location(xn.url('index'));
+			//sign.delay(1000);
+	});
+	return false;	
+});						
+</script>

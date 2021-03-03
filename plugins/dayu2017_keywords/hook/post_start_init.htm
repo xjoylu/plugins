@@ -1,0 +1,11 @@
+	if($route == 'thread' && $action == 'create') {
+
+		$form_keywords = '';
+
+	} elseif($route == 'post' && $action == 'update') {
+
+		$form_keywords = $thread['keywords'];
+	
+	} elseif($route == 'post' && $action == 'create') {
+		$form_keywords = '';
+	}

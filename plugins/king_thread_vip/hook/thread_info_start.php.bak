@@ -1,0 +1,20 @@
+<?php exit;
+ $is_vip = db_find_one('thread_vip',array('tid'=>$tid));
+ if($is_vip){
+	
+ 	
+	  
+ 	$status = cache_get("thread_vip_".$tid."_".$uid);
+ 	//判断是不是自己的帖子，以及权限
+ 	$thread = db_find_one('thread', array('tid' => $tid));
+	$viprank = db_find_one('thread_vip', array('tid' => $tid));
+ 	if(!$status&&$thread['uid']!=$uid&&$viprank['viprank']!=$gid){
+		
+ 		include _include(APP_PATH.'plugin/king_thread_vip/hook/vip_login.htm');exit;
+ 	}
+	
+	
+	
+	
+ }
+?>

@@ -31,6 +31,11 @@ function tag_thread_delete_by_tagid($tagid) {
 	return $r;
 }
 
+function tag_thread_delete_by_tid($tid) {
+	$r = db_delete('tag_thread', array('tid'=>$tid));
+	return $r;
+}
+
 /*
 
 Array

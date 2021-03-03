@@ -1,0 +1,12 @@
+{
+    "name": "会员签到",
+    "brief": "会员点击签到按钮,可获得金币,会员连续签到,可获得更高金币。开发者联盟出品<a href='http://www.432k.cn'>开发者联盟</a>",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": [],
+    "username": "迷途"
+}

@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="plugin/a8c5_fontlist/css/style.css" type="text/css" />
+<div class="card fontlist">
+<?php $fontlist = db_find('fontlink', array(), array('rank'=>-1), 1, 1000, 'linkid') ;?>
+		<?php if($fontlist) { foreach ($fontlist as $link) { ?>
+		<div class="fontlistson">
+		<div class="text-center">
+					    <a href="<?php echo $link['url'];?>" class="<?php echo 'button button-'.$link['imgurl'];?>">
+							<span><?php echo $link['name'];?></span>
+						</a>
+		</div>
+		</div>
+					<?php }} ?>
+</div>

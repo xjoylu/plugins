@@ -1,0 +1,30 @@
+<?php
+
+$inc_tag=param(3);
+$url_tagid=param(4);
+
+$ppd=null;
+if($inc_tag=='t'){
+
+$start = ($page - 1) * $pagesize;
+$limit = $pagesize;
+
+$count_sql = "SELECT COUNT(tid) AS num FROM bbs_fq_tag_thread WHERE tagid='$url_tagid'";
+$arr = db_sql_find_one($count_sql);
+$n = $arr['num'];
+
+$find_sql="SELECT tid FROM bbs_fq_tag_thread WHERE tagid='$url_tagid' ORDER BY tid DESC LIMIT $start, $limit";
+$tidlist = db_sql_find($find_sql);
+$tids = arrlist_values($tidlist, 'tid');
+
+
+$pagination = pagination(url("forum-$fid-{page}-t-$url_tagid"), $n, $page, $pagesize);
+$threadlist = thread_find_by_tids($tids);
+$toplist = array();
+$ppd='1';
+
+$arr = db_sql_find_one("SELECT * FROM bbs_fq_tag where tagid='$url_tagid'");
+if($arr!==FALSE){$tagname=$arr['name'];}else{$tagname='';}
+}
+if($inc_tag!=='t' & $ppd==false){
+?>

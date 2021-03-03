@@ -1,0 +1,1 @@
+rmdir_log_recusive($conf['log_path']);

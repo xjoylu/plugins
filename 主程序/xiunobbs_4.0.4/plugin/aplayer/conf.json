@@ -1,0 +1,12 @@
+﻿{
+    "name": "Xiuno4.0音乐播放器",
+    "brief": "关联网易云音乐使用方法，[song]单曲ID[/song]，多个单曲用逗号分隔，歌单插入[playlist]歌单ID[playlist]",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": [],
+    "username": "可乐醉了猫"
+}

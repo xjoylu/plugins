@@ -1,0 +1,1 @@
+include _include(APP_PATH.'plugin/tt_seo/model/tt_seo.func.php');

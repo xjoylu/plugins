@@ -1,0 +1,17 @@
+<?php $db = G('db');?>
+<?php $starttime = G('starttime');?>
+<?php $time = G('time');?>
+<?php $ip = G('ip');?>
+<?php $useragent = G('useragent');?>
+<?php $forumlist = G('forumlist');?>
+<?php $forumarr = G('forumarr');?>
+<?php $fid = G('fid');?>
+<?php $conf = G('conf');?>
+<?php $static_version = $conf['static_version'];?>
+		</div>
+	</main>
+	<?php include _include(APP_PATH.'plugin/tt_seo/view/htm/footer_nav_mip.inc.htm');?>
+</body>
+</html>
+
+<?php echo cron_run();?>

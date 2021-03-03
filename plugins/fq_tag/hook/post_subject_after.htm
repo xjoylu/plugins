@@ -1,0 +1,31 @@
+<?php
+$from_tag='';
+$arr = db_sql_find("SELECT * FROM bbs_fq_tag_thread where tid='$tid'");
+
+if($arr === FALSE) {
+	$from_tag='';
+} else {
+	$tag_arry = array_map('array_shift',$arr); //得到多个标签ID
+	for($i=0;$i<count($tag_arry);$i++){
+	   $arrlist = db_find_one('fq_tag', array('tagid'=>$tag_arry[$i]));
+	   if($i==0){
+	      $from_tag=$arrlist['name'];
+	   }else{
+	      $from_tag=$from_tag.','.$arrlist['name'];
+	   }
+	}
+	$from_tag=str_replace(","," ",$from_tag);
+}
+
+
+?>
+
+ <div>
+          <fieldset class="form-group">
+           <div class="input-group"> 
+            <span class="input-group-addon">标签</span> 
+            <input type="text" class="form-control" name="test_tag" id="test_tag" value="<?php echo $from_tag;?>">
+            </div>
+			<a style="font-size:12px;color:#EOEOEO">请填写标签名称，多个用空格隔开。</a>
+          </fieldset>
+      </div>

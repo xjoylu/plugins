@@ -1,0 +1,7 @@
+<?php exit;
+global $uid,$group;
+$see_check = check_need_check($group,'see');
+foreach($postlist as $pid=>$post)
+    if($post['OK']!='1' && (!$see_check) && $uid!=$post['uid'])
+        unset($postlist[$pid]);
+?>

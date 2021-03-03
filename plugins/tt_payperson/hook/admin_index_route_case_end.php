@@ -1,0 +1,1 @@
+case 'tt_deposit': include APP_PATH.'plugin/tt_deposit/setting.php'; break;

@@ -1,0 +1,43 @@
+<style>
+@media (min-width:992px){
+    .icolistson{
+        width:20% !important;
+		max-width: 20% !important;
+    }
+}
+.icolist{
+    display:-webkit-flex;
+    display: flex;
+	flex-direction:row;
+	flex-wrap: wrap;
+	justify-content: flex-star;
+}
+.icolistson{
+        width:33%;
+		flex: 1 1 auto;
+		max-width: 33%;
+    }
+.icolistson img{
+	border-radius: 10px;
+    height: 4.5rem;
+    width:  4.5rem;
+	}
+.icolistson a{
+    text-decoration:none;
+    }
+</style>
+<div class="card icolist">
+<?php $testlist = db_find('icolink', array(), array('rank'=>-1), 1, 1000, 'linkid') ;?>
+		<?php if($testlist) { foreach ($testlist as $link) { ?>
+		<div class="icolistson">
+		<div class="m-3 text-center" style="margin:5px 10px;" >
+					    <a href="<?php echo $link['url'];?>" target="_blank">
+							<img src="<?php echo $link['imgurl'];?>">
+						</a>
+						<h5 style="padding-top:10px;font-size:14px;color:#666;font-weight:100;"><a href="<?php echo $link['url'];?>" target="_blank"><?php echo $link['name'];?></a></h5>
+						<p class="text-secondary" style="margin-top:0.2rem; margin-bottom:0.2rem;">人气：<?php echo $link['renqi'];?></p>
+						
+		</div>
+		</div>
+					<?php }} ?>
+</div>

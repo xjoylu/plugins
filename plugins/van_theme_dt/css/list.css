@@ -1,0 +1,7 @@
+/*博客*/
+.spic,.context{display:none}
+.thread .media-body{}
+.subject{font-weight:400 !important;color:#999;}
+.subject a{font-size:15px;}
+.thread:hover{background:#fafafa;}
+.thread:hover a{color:#1d7887}

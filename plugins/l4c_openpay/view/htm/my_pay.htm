@@ -1,0 +1,112 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<div class="row">
+	<div class="col-lg-8 mx-auto">
+	
+		<?php include _include(APP_PATH.'view/htm/my_profile.inc.htm');?>
+		
+			<div class="card">
+			<div class="card-header">
+				<?php include _include(APP_PATH.'view/htm/my_nav.inc.htm');?>
+			</div>
+
+			<style>
+        input{  
+            opacity:0;
+          filter:alpha(opacity=0);
+            margin:0 auto;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9;
+			cursor: pointer;
+        }
+</style>
+  
+  <div class="card-body text-center">
+  <p>注意:</p>
+  <p>1:上传的图片不要超过1MB,否则会上传失败</p>
+  <p>2:建议上传1:1比例的图片会更加美观</p>
+  </div>
+
+  <div class="card"> 
+  <div class="card-body">
+  <div class="row"> 
+  <div class="col text-center">
+  	<p>支付宝</p>
+  <input type="file" id="pay_upload1" accept=".jpg,.jpeg,.png,.gif,.bmp"  value="<?php echo lang('modify_avatar');?>"/>
+				  <img id="pay_img1" class="border border-primary" src="plugin/l4c_openpay/pay/zfb-<?php echo $uid;?>.png"  onerror="javascript:this.src='plugin/l4c_openpay/pay/zfb.png'" width="96px" height="96px">
+  </div> 
+  <div class="col text-center">
+  	<p>微信</p>
+  	<input type="file" id="pay_upload2" accept=".jpg,.jpeg,.png,.gif,.bmp"  value="<?php echo lang('modify_avatar');?>"/>
+				  <img id="pay_img2" class="border border-primary" src="plugin/l4c_openpay/pay/wx-<?php echo $uid;?>.png"  onerror="javascript:this.src='plugin/l4c_openpay/pay/wx.png'" width="96px" height="96px">
+  </div> 
+  <div class="w-100"></div> 
+  <div class="col text-center">
+  	<p>QQ钱包</p>
+  	<input type="file" id="pay_upload3" accept=".jpg,.jpeg,.png,.gif,.bmp"  value="<?php echo lang('modify_avatar');?>"/>
+				  <img id="pay_img3" class="border border-primary" src="plugin/l4c_openpay/pay/qq-<?php echo $uid;?>.png"  onerror="javascript:this.src='plugin/l4c_openpay/pay/qq.png'" width="96px" height="96px">
+  </div> 
+  <div class="col text-center">
+  	<p>Paypal</p>
+  	<input type="file" id="pay_upload4" accept=".jpg,.jpeg,.png,.gif,.bmp"  value="<?php echo lang('modify_avatar');?>"/>
+				  <img id="pay_img4" class="border border-primary" src="plugin/l4c_openpay/pay/paypal-<?php echo $uid;?>.png"  onerror="javascript:this.src='plugin/l4c_openpay/pay/paypal.png'" width="96px" height="96px">
+  </div> 
+  </div>
+  </div>
+  </div>
+  
+					<progress class="progress-bar progress-bar-striped progress-bar-animated" value="0" max="100" id="avatar_progress">0%</progress>
+   </div>
+   </div>
+   </div>
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+<script>
+var javatar_upload1 = $('#pay_upload1');
+var javatar_upload2 = $('#pay_upload2');
+var javatar_upload3 = $('#pay_upload3');
+var javatar_upload4 = $('#pay_upload4');
+
+var jprogress = $('#avatar_progress');
+
+var i;
+javatar_upload1.on('change', function(e) {
+i='1';
+	pay_upload(e,i);
+});
+javatar_upload2.on('change', function(e) {
+i='2';
+	pay_upload(e,i);
+});
+javatar_upload3.on('change', function(e) {
+i='3';
+	pay_upload(e,i);
+});
+javatar_upload4.on('change', function(e) {
+i='4';
+	pay_upload(e,i);
+});
+function pay_upload(e,i){
+var files = xn.get_files_from_event(e);
+	jprogress.val(0);
+	xn.upload_file(
+		files[0], 
+		xn.url('my-payImg'+i), 
+		{width: 500, height: 560, action: 'clip', filetype: 'png'}, 
+		function(code, message) {
+			if(code == 0) {
+				$('#pay_img'+i).attr('src', message.url+'?'+Math.random());
+			} else {
+				$.alert(message);
+			}
+		}, 
+		function(percent) {
+			jprogress.val(percent);
+		}
+	);
+}
+</script>

@@ -1,0 +1,11 @@
+{
+    "name": "关键词_大鱼插件",
+    "brief": "发布帖子时可以添加关键词,添加后关键词会显示在头部元数据,注意,此插件在安装时,会直接向数据库的thread表加入一个keywords字段,请备份原表后使用",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

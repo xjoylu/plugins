@@ -1,0 +1,13 @@
+{
+    "name": "充值审核插件",
+    "brief": "本插件需要预先安装积分插件！微信/支付宝充值插件的个人版，需要管理员手动审核是否充值成功。",
+    "version": "1.02",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": {
+        "tt_credits": "1.0"
+    }
+}

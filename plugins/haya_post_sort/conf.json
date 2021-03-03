@@ -1,0 +1,13 @@
+{
+    "name": "回帖排序",
+    "brief": "增加回帖查看方式，包含“倒序”和“只看楼主”。作者：deatil。",
+    "version": "1.5.3",
+    "author": "deatil",
+    "id": "haya_post_sort",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

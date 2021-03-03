@@ -1,0 +1,11 @@
+{
+    "name": "附件下载弹出层(简易版)_大鱼插件",
+    "brief": "可设置一个广告",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

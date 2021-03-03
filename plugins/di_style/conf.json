@@ -1,0 +1,11 @@
+{
+    "name": "我的插件",
+    "brief": "本插件无任何功能，站长自用或用于新插件开发<br />(FOR 4.0 正式版)",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

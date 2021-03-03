@@ -1,0 +1,46 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<!--{hook admin_index_login_start.htm}-->
+
+<div class="row m-t-1">
+	<div class="col-lg-5 offset-lg-3">
+		<div class="card">
+			<div class="card-block">
+				<form action="<?php echo url('thread-look');?>" method="post" id="vip_form">
+				
+					<p><center><?php echo lang('for_look_thread');?></center></p>
+					<input type="hidden" name="tid" value="<?php echo $tid;?>" />
+					<img src="123.png" width="100%" height="100%" /> 
+
+				</form>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+<script src="../view/js/md5.js"></script>
+
+<script>
+var pform = $('#vip_form');
+var psubmit = $('#submit');
+var vip = $('#vip').focus();
+pform.on('submit', function() {
+	pform.reset();
+	psubmit.button('loading');
+	var postdata = pform.serialize();
+	$.xpost(pform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			psubmit.button(message.msg).delay(1000).location(message.url);
+		}else if(code == 1){
+			window.location.href=message;
+		}else {
+			alert(message);
+			psubmit.button('reset');
+		}
+	});
+	return false;
+});
+
+</script>

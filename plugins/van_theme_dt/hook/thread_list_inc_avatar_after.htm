@@ -1,0 +1,20 @@
+<?php
+$post = db_find_one('post', array('tid'=>$_thread['tid'],'isfirst'=>1),'',array('message'), NULL);
+$str=$post['message'];
+preg_match_all("/<img.*\>/isU",$str,$ereg);//正则表达式把图片的整个都获取出来了
+$img=$ereg[0][0];//图片
+$p="#src=('|\")(.*)('|\")#isU";//正则表达式
+preg_match_all ($p, $img, $img1);
+   $img_path =$img1[2][0];//获取第一张图片路径
+if(!$img_path){
+?>
+<div class="spic">
+<a href="<?=$_thread['url']?>"><img src="plugin/van_theme_dt/images/no.gif" ></a></div>	
+<?php
+}
+else{
+?>
+<div class="spic">
+<a href="<?=$_thread['url']?>"><img src="<?php echo $img_path;?>" ></a></div>
+<?php } ?>
+<!--获取首张图片-->	

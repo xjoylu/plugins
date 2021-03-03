@@ -1,0 +1,77 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');$set=setting_get('tt_seo');
+$input_names_list = array();$q=0;$m=0; foreach($set as $k=>$v) {$input_names_list['l'.$q]=$k;$input_names_list['v'.($q++)]=$v; } ?>
+<div class="row"><div class="col-lg-10 mx-auto">
+<div class="card"><div class="card-body" ><h4>SEO插件设置</h4><form action="<?php echo url('plugin-setting-tt_seo');?>" method="post" id="form">
+    <div style="color:red;weight:bold;">您好，请在设置前仔细阅读官网教程：<a href="https://www.6rabbit.com/thread-76.htm" target="_blank">https://www.6rabbit.com/thread-76.htm</a></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">数据表前缀:</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">自动推送_站点地址（注意http/https，末尾带/）:</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">自动推送_开关（0为关闭,1为开启）:</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">自动推送_token:</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">sitemap_最多主题数:</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">sitemap_站点地址（注意http/https，末尾带/）:</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">sitemap_每天自动更新sitemap（0为关闭,1为开启.当站点较大时，消耗较多资源，谨慎开启）：</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">熊掌号_开关（0为关闭,1为开启）：</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">熊掌号_appid：</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">熊掌号_token：</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">MIP_发帖自动推送：</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <div class="form-group row"><label class="col-sm-4 form-control-label">MIP_发帖自动熊掌号：</label><input class="col-lg-7 form-control" name="<?php echo $input_names_list['l'.$m];?>" value="<?php echo $input_names_list['v'.($m++)];?>"/></div>
+    <hr><h4>设置开启自动推送的板块</h4>
+    <table class="table"><tr><th>板块名称</th><th>下述用户组在这些板块中发表的帖子开启自动推送</th></tr>
+        <?php foreach($forumlist as $_forum){?><tr><td> <?php echo $_forum['name']; ?></td>
+            <td><input type="checkbox" name="SEO_forum[<?php echo $_forum['fid']?>]" <?php echo $_forum['allowSEO']=="1"?'checked':''?>/></td>
+        <?php }?></tr>
+    </table>
+    <h4>设置开启自动推送的用户组</h4>
+    <table class="table"><tr><th>用户组名称</th><th>该用户在上述板块发表的帖子开启自动推送</th></tr>
+        <?php foreach($grouplist as $_group){?><tr><td> <?php echo $_group['name']; ?></td>
+            <td><input type="checkbox" name="SEO_group[<?php echo $_group['gid']?>]" <?php echo $_group['allowSEO']=="1"?'checked':''?>/></td>
+        <?php }?></tr>
+    </table>
+<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button></form>
+</div></div><div class="card"><div class="card-body"><h4>站点地图（sitemap）生成</h4>
+<button type="button" class="btn btn-primary btn-block" id="sitemap" data-loading-text="<?php echo lang('submiting');?>...">生成sitemap</button>
+</div></div><div class="card"><div class="card-body"><h4>主动推送功能</h4>
+主动推送功能默认开启，如果您想关闭该功能，请您删除文件：plugin/tt_seo/header_body_start.htm
+</div></div><div class="card"><div class="card-body"><h4><a href="<?php echo url('seo_log');?>">推送记录查询</a></h4><div>
+    最近一次推送：<?php $r = db_find_one('seo_log',array(),array('time'=>-1));
+    if($r) echo date('Y-m-d H:i:s',$r['time']);
+    else echo '无记录'; ?></div>
+<button type="button" class="btn btn-primary btn-block" id="clear" data-loading-text="<?php echo lang('submiting');?>...">清空推送记录</button>
+</div></div><div class="card"><div class="card-body">
+    <h3>后期技术支持</h3>官方网站：http://www.6rabbit.com/ <a href="http://www.6rabbit.com"target="_blank" style="text-decoration: none">点击进入</a><br>官方QQ群：58911696（正常群）、77868272（只吹牛不讨论正事）</div></div></div></div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+    var jform = $("#form");var jsubmit = $("#submit");var jsitemap=$("#sitemap");var jclear=$("#clear");
+    jform.on('submit', function(){
+        jform.reset();jsubmit.button('loading'); var postdata = jform.serialize()+'&op=0';
+        $.xpost(jform.attr('action'), postdata, function(code, message) {
+            if(code == 0) {
+                $.alert(message);
+                setTimeout(function() {window.location.reload();jsubmit.button('reset');}, 1000);
+                return;
+            } else {
+                $.alert(message);jsubmit.button('reset');}
+        });
+        return false;
+    });
+    jsitemap.on('click',function(){
+        $.confirm('您是否要生成全站sitemap呢？生成速度取决于服务器性能，可能较慢！',function(){
+            jsitemap.button('loading');
+            $.xpost(jform.attr('action'),'op=2',function(code,message){
+                if(code==0) $.alert('生成成功！');
+                else $.alert(message);
+                jsitemap.button('reset');
+            });
+        });
+    });
+    jclear.on('click',function(){
+        $.confirm('您是否要清空SEO推送表呢？',function(){
+            jclear.button('loading');
+            $.xpost(jform.attr('action'),'op=1',function(code,message){
+                if(code==0) $.alert('清空数据表成功！');
+                else $.alert(message);
+                jclear.button('reset');
+            });
+        });
+    });
+</script>

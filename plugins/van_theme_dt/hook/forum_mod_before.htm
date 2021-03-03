@@ -1,0 +1,54 @@
+		<?php
+		$_threadlist = thread_digest_find_by_fid($thread['fid'], 1, 2);
+			//作者最新主题$_threadlist = mythread_find_by_uid($thread['uid'], 1, 10);
+			//板块精华主题$_threadlist = thread_digest_find_by_fid($thread['fid'], 1, 6);
+						
+			// 过滤没有权限访问的主题 / filter no permission thread
+			thread_list_access_filter($_threadlist, $gid);
+		?>
+				<!--<h6 class="card-title">全站置顶</h6>-->
+				<ul class="small break-all itop">
+					<?php foreach($_threadlist as $_thread) { ?>
+					<li class="line-height-2 itop-li">
+					<?php
+						$post = db_find_one('post', array('tid'=>$_thread['tid'],'isfirst'=>1),'',array('message'), NULL);
+							$str=$post['message'];
+						preg_match_all("/<img.*\>/isU",$str,$ereg);//正则表达式把图片的整个都获取出来了
+							$img=$ereg[0][0];//图片
+							$p="#src=('|\")(.*)('|\")#isU";//正则表达式
+						preg_match_all ($p, $img, $img1);
+							$img_path =$img1[2][0];//获取第一张图片路径
+						if(!$img_path){
+						?>
+						
+						<a  class="it-img" href="<?=$_thread['url']?>"><img src="plugin/van_theme_dt/images/no.gif" ><span><?php echo $_thread['subject'];?></span></a>	
+						<?php
+						}
+						else{
+						?>
+						<a class="it-img" href="<?=$_thread['url']?>"><img src="<?php echo $img_path;?>" ><span><?php echo $_thread['subject'];?></span></a>
+						<?php } ?>
+					</li>
+					<?php } ?>
+				</ul>
+		<!--板块精华-->
+		<?php	
+		$_threadlist = thread_digest_find_by_fid($thread['fid'], 0, 10);
+			//作者最新主题$_threadlist = mythread_find_by_uid($thread['uid'], 1, 10);
+			//板块精华主题$_threadlist = thread_digest_find_by_fid($thread['fid'], 1, 6);
+						
+			// 过滤没有权限访问的主题 / filter no permission thread
+			thread_list_access_filter($_threadlist, $gid);
+		?>
+		    <div class="card itit">
+				<h6 class="card-header card-title">精选导读</h6>
+				<ul class="break-all iolu">
+					<?php foreach($_threadlist as $_thread) { ?>
+					<li class="line-height-2 iolli">
+						<a class="iolt" href="<?php echo url("thread-$_thread[tid]");?>">
+							<?php echo $_thread['subject'];?>
+						</a>
+					</li>
+					<?php } ?>
+				</ul>
+				</div>

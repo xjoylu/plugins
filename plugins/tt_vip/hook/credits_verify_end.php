@@ -1,0 +1,1 @@
+elseif($uid && setting_get('tt_vip')['no_credits_see']=='1' && vip__isvip($user['vip_end'])==1) $first['message_fmt'] = str_replace($a,$b,$first['message_fmt']);

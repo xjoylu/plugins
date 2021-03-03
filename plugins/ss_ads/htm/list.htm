@@ -1,0 +1,37 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<style type="text/css">
+.card-title .alert{float: right;font-size: 75% !important;padding: 0.15rem !important;margin:0;cursor:pointer;}
+</style>
+<div class="row">
+    <div class="col-lg-10 offset-lg-1">
+        <div class="card">
+            <div class="card-block">
+                    <div class="card-title">列表管理<a href="<?php echo url('plugin-setting-ss_ads-edit');?>"><span class="alert alert-success add">新增</span></a></div>
+                    <div class="table-responsive arrlist">
+                        <table class="table" style="min-width: 800px">
+                            <thead>
+                                <tr align="center">
+                                    <th width="80">序号</th>
+                                    <th width="100">名称</th>
+                                    <th width="200" align="left">调用代码</th>
+                                    <th class="text-center">管理</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($list as $arr) { ?>
+                                <tr align="left">
+                                    <td><?php echo $arr['aid']; ?></td>
+                                    <td><?php echo $arr['name']; ?></td>
+                                    <td><xmp><script src="<?php echo url('ssdd-'.$arr['aid']); ?>"></script></xmp></td>
+                                    <td align="center"><a href="<?php echo url('plugin-setting-ss_ads-edit-'.$arr['aid']);?>" class="btn btn-warning btn-sm">修改</a> <a href="<?php echo url('plugin-setting-ss_ads-del-'.$arr['aid']);?>" class="btn btn-danger btn-sm">删除</a></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>

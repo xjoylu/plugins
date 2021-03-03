@@ -1,0 +1,15 @@
+<hr>
+<?php if(vip__isvip($user['vip_end'])) { $vip_info = vip_read($uid);
+$progress=100; $now=$vip_info['grow']; $max=vip_get_maxgrow($now);
+$progress = (int)($now/$max * 100.0); ?>
+<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text"><span style="color:Red;">VIP</span>&nbsp;到 期&nbsp;</span></div>
+<input type="text" class="form-control" aria-label="Default" disabled style="background-color: white;" value="<?php echo date('Y-m-d H:i:s',$user['vip_end']); ?>"></div>
+<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text"><span style="color:Red;">VIP</span>&nbsp;等 级&nbsp;</span></div>
+<input type="text" class="form-control" aria-label="Default" disabled style="background-color: white;" value="Lv <?php echo $vip_info['level']; ?>"></div>
+<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text"><span style="color:Red;">VIP</span>成长值</span></div>
+<input type="text" class="form-control" aria-label="Default" disabled style="background-color: white;" value="<?php echo $vip_info['grow']; ?>"></div>
+<div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $progress;?>%;" aria-valuenow="<?php echo $progress;?>" aria-valuemin="0" aria-valuemax="100"><?php if($progress>=20) echo $progress,'%';?></div><?php if($progress<20) echo $progress,'%';?></div>
+<?php $btn_txt='立即续费';} else { $btn_txt='立即开通';?>
+尊敬的用户您好,开通VIP,即可尽享如下特权!<br><span style="color:Red;">会员红名、提升阅读权限、附件免积分下载、主题免买查看、提升阅读权限、尊享专属板块！</span>
+<?php }?><br>
+<div class="col-md-6 mx-auto"><button type="button" class="btn btn-danger" data-modal-url="<?php echo url('my-tt_vip_open');?>" data-modal-title="开通VIP" data-modal-size="lg" ><?php echo $btn_txt;?></button></div>

@@ -1,0 +1,23 @@
+<script>
+    var dform = $('#form_d'); var dinput = $("#d_rmb"); var dsubmit = $('#submit_d'); var drmbs=$("#d_rmbs");
+    dinput.keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+        drmbs.text($(this).val()==''?'0':$(this).val()/100.0);
+    }).bind("paste", function () {
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+        drmbs.text($(this).val()==''?'0':$(this).val()/100.0);
+    }).css("ime-mode", "disabled").blur(function() {
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+        drmbs.text($(this).val()==''?'0':$(this).val()/100.0);
+    });
+    dsubmit.on('click', function() {
+        dinput.keyup();if(dinput.val()==""||dinput.val()=="0") return false;
+        $.confirm('您确定要提现积分吗?',function(){
+            dform.reset();dsubmit.button('loading');var postdata = dform.serializeObject();
+            $.xpost(dsubmit.attr('data-active'), postdata, function(code, message) {
+                if(code == 0) {$.alert(message);dsubmit.button(message).delay(3000).button('reset');
+                } else if(code < 0) {$.alert(message);dsubmit.button('reset');
+                } else {dform.find('[name="'+code+'"]').alert(message).focus();dsubmit.button('reset');}});
+            return false;
+        });});
+</script>

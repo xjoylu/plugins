@@ -1,0 +1,10 @@
+{
+    "name": "Xiuno4百度贴吧模板",
+    "brief": "Xiuno4百度贴吧模板，作者：imyoy.com",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

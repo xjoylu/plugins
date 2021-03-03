@@ -1,0 +1,81 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm'); ?>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			
+			<div class="card">
+				<div class="card-block">
+					<form action="<?php echo url('plugin-setting-haya_edit_log');?>" method="post" id="formcreate">
+						<h4 class="card-title">帖子增强设置</h4>
+						
+						<div class="form-group row m-b-1 m-t-2">
+							<label class="col-sm-2 form-control-label text-right" for="form_edit_log_is_ip">
+								显示IP：
+							</label>
+							<div class="col-sm-8">
+								<select name="edit_log_is_ip" id="form_edit_log_is_ip" class="form-control">
+									<?php if ($config['edit_log_is_ip'] == 1) { ?>
+										<option value="0">关闭</option>
+										<option value="1" selected="selected">启用</option>
+									<?php } else { ?>
+										<option value="0" selected="selected">关闭</option>
+										<option value="1">启用</option>
+									<?php } ?>
+								</select>
+								<div class="figure-caption m-t-sm">
+									帖子列表会显示用户的IP信息。
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group row m-b-1 m-t-2">
+							<label class="col-sm-2 form-control-label text-right" for="form_edit_log_position">
+								最后编辑位置：
+							</label>
+							<div class="col-sm-8">
+								<select name="edit_log_position" id="form_edit_log_position" class="form-control">
+									<?php if ($config['edit_log_position'] == 'left') { ?>
+										<option value="left" selected="selected">左</option>
+										<option value="center">中</option>
+										<option value="right">右</option>
+									<?php } elseif ($config['edit_log_position'] == 'center') { ?>
+										<option value="left">左</option>
+										<option value="center" selected="selected">中</option>
+										<option value="right">右</option>
+									<?php } else { ?>
+										<option value="left">左</option>
+										<option value="center">中</option>
+										<option value="right" selected="selected">右</option>
+									<?php } ?>
+								</select>
+								<div class="figure-caption m-t-sm">
+									最后编辑显示位置。
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group row m-b-1">
+							<label class="col-sm-2 form-control-label"></label>
+							<div class="col-sm-2">
+								<button type="submit" class="btn btn-primary btn-block" id="submit">确认</button>
+							</div>
+							<div class="col-sm-2">
+								<a role="button" class="btn btn-secondary btn-block m-l-1" href="javascript:history.back();">返回</a>
+							</div>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php
+include _include(ADMIN_PATH.'view/htm/footer.inc.htm');
+?>
+
+<script>
+$('#nav_pc li.plugin, #nav_mobile li.plugin').tab('show');
+</script>

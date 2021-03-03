@@ -1,0 +1,40 @@
+					<!--{hook thread_list_inc_start.htm}-->
+					<?php 
+					if($threadlist) { 
+						$have_allowtop = 0;
+						foreach($threadlist as &$_thread) {
+							$_thread['allowtop'] = forum_access_mod($_thread['fid'], $gid, 'allowtop');
+							if($_thread['allowtop']) $have_allowtop = 1;
+						}
+					}
+					?>
+<div class="apa">
+<ul class="cols noma ktm-cont ktm-show">
+					<?php if($threadlist) { foreach($threadlist as &$_thread) { ?>
+<?php  
+$imglist = ax_imglist($_thread['tid']);
+$num = count($imglist);
+$img = $imglist[0];
+?>					
+					
+
+            <li class="col s-cole">
+            <h4 class="h5 noma">
+            <a href="<?php echo url("thread-$_thread[tid]");?>" title="<?php echo $_thread['subject'];?>">
+            <img src="<?php echo $img;?>" alt="<?php echo $_thread['subject'];?>" class="kandyCover kandyFrame" width="184" height="184" style="background-image: url(<?php echo $img;?>);"><?php echo $_thread['subject'];?>
+            </a>
+            </h4><p class="clear grey noma small">
+            <span class="kico-eye flol"><dfn class="noaf">阅读：</dfn><?php echo $_thread['views'];?></span> 
+            <a  rel="nofollow" class="kico-cmt flor grey">
+            <dfn class="noaf">评论：</dfn><?php echo $_thread['posts'];?></a></p>
+            </li>
+
+          
+
+
+
+					<?php }} else { ?>
+						<?php echo lang('none');?>
+					<?php } ?>
+					<!--{hook thread_list_inc_end.htm}-->
+					  </ul></div>

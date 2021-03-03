@@ -1,0 +1,68 @@
+/*
+  Five-color theme from a single blue hue.
+*/
+/* 伪元素 滚动条 边角修饰 **/
+pre  { border-radius: 5px; }
+pre code::-webkit-scrollbar { width: 8px; height: 8px; background: rgba(0,0,0,0); } /*滚动槽*/
+pre code::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }         /*滚动轴*/
+pre code::-webkit-scrollbar-corner { background: rgba(0,0,0,0);}                    /*交点  */
+.hljs ul { list-style: decimal-leading-zero ! important; }
+.hljs ul li::before { position: relative; left: -12px; content:' '; background:#eaeef3 ! important; margin-right: -10px }
+
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #eaeef3;
+}
+
+.hljs {
+  color: #00193a;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-title,
+.hljs-section,
+.hljs-doctag,
+.hljs-name,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-comment {
+  color: #738191;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-built_in,
+.hljs-literal,
+.hljs-type,
+.hljs-addition,
+.hljs-tag,
+.hljs-quote,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #0048ab;
+}
+
+.hljs-meta,
+.hljs-subst,
+.hljs-symbol,
+.hljs-regexp,
+.hljs-attribute,
+.hljs-deletion,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-bullet {
+  color: #4c81c9;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}

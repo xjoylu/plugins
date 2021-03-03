@@ -1,0 +1,3 @@
+	<link rel="shortcut icon" href="{#WWW}favicon.ico">
+	<link rel="stylesheet" href="{#WWW}View/hybbs/icon/iconfont.css?var={#HYBBS_V}">
+	<link rel="stylesheet" href="{#WWW}View/hybbs/app.css?var={#HYBBS_V}">

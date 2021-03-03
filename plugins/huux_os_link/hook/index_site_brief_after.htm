@@ -1,0 +1,29 @@
+<?php if($huux_os_link['link_index_friendlink'] == 1 || $huux_os_link['link_index_friendlink'] == 3) { ?>
+<!-- 首页侧边栏-友情链接 -->
+  <?php
+    $linklist = db_find('huux_os_link', array('type'=>0), array('rank'=>-1), 1, 1000, 'linkid');
+    if($linklist){
+  ?>
+
+  <div class="card card-friendlink">
+    <div class="card-header">友情链接</div>
+    <div class="card-block" style="padding: 0">
+      <div class="list-group">
+      <?php if($linklist) { foreach ($linklist as $link) { 
+        $iconurl = 'view/img/logo.png';
+        $link['icon'] !=0 && $iconurl ='upload/huux_os_link/'.$link['linkid'].'.png?'.$link['icon'];
+        $linktarget = '_blank';
+        $link['target'] !=0 && $linktarget = '_self';
+      ?>
+         
+         <a  class="list-group-item dropdown-item linkid-<?php echo $link['linkid'];?>" href="<?php echo $link['url'];?>" target="<?php echo $linktarget;?>">
+            <?php if($huux_os_link['icon_io']){ ?><img class="pull-left m-r-xs" src="<?php echo $iconurl; ?>"><?php }?> <?php echo $link['name'];?>
+          </a>
+        <?php }} ?>
+      </div>
+    </div>
+  </div>
+
+  <?php }?>
+    
+<?php }?>

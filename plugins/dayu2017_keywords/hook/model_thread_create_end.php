@@ -1,0 +1,1 @@
+	thread__update($tid, array('keywords'=>$arr['keywords']));

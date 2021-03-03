@@ -1,0 +1,415 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<style type="text/css">
+#wrapper{ background: #fff}
+.fr{float: right;}
+.fl{float: left;}
+.card{border: 1px solid rgba(0, 0, 0, 0.125);box-shadow: 0px 0px 10px 0px #e2e2e2; margin-top:0px;}
+.btn-default {color: #333;background-color: #fff;border-color: #ccc;}
+.btn-default:hover {color: #333;background-color: #e6e6e6;border-color: #adadad;}
+.card-header .label {display: inline-block;padding: .25em .4em;font-size: 75%;line-height: 1;color: #fff;white-space: nowrap;vertical-align: baseline;border-radius: .25rem;}
+.card-header .label-success {background-color: #5cb85c;}
+/*标题行*/
+.card-title{border-bottom:1px dashed rgb(245, 245, 245); height: 50px;line-height: 30px;}
+.card-title i,.nav-item i{display: inline-block; margin-right: 5px;}
+/*TAB行*/
+#myTab li{ padding: 0; }
+#myTab li.nav-item.pull-right{ float: right; }
+#myTab a{ display: inline-block;text-decoration: none; padding: 0.5rem 1rem 0.5rem 1rem }
+#myTab a:hover{color:#000; background: #F9F9F9}
+#myTab a.active{ background-color:#fff; }
+/*TAB内容*/
+.tab-content{ margin-bottom: 10px;border-bottom-right-radius:5px;border-bottom-left-radius:5px;}
+/*form内容*/
+.form-group { padding: 0.5rem 1rem;border-bottom: 1px dashed rgba(226, 226, 226, 0.46);margin-bottom: 0;}
+.form-group b{ font-weight: normal; }
+.form-group p,.form-group label{ margin-bottom: 0; }
+.form-group p em{ font-style: normal; padding: 0 1rem }
+.form-group label{font-size:0.85rem;}
+.form-group .form-control-label b{font-size: 12px;padding:0px 4px; border:solid 1px #e2e2e2;display:inline-block;color:#333;background: #f2f2f2;border-radius: 2px; font-weight: normal;font-family:courier new, sans-serif; margin: 0px 2px 2px 0px;}
+.form-group .form-control-label b.z-js{background: #f0ad4e;color:#fff;border:none;}
+.form-group .form-control-label b.z-jq{background: #6AB3DE;color:#fff;border:none;}
+.form-group .form-control{box-shadow:0px 1px 5px 0px #e2e2e2 inset;}
+.form-group .form-control:focus { box-shadow:0px 1px 5px 0px #E2F1FF inset;border-color: #9BC9EF;}
+/*table */
+.table-responsive table th,.table-responsive table td{font-size: 0.75rem}
+.table-responsive table .form-control{font-size: 0.75rem;padding: 0.25rem}
+.table-responsive table .custom-select{font-size: 0.75rem;padding: 0.25rem 1.5rem 0.25rem 0.5rem}
+/*代码*/
+.codepre .form-control{    width: 100%;
+    height: 300px;
+    background: #4c4c4c;
+    color: #fff;
+    box-shadow: 0px 1px 5px 0px #242424 inset;
+    font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important;
+}
+.form-group .form-control:focus{box-shadow: 0px 1px 5px 0px #242424 inset;border-color: #333;}
+</style>
+<div class="row">
+	<div class="col-lg-12">
+
+		<div class="card">
+
+			<div class="card-header"> 
+					<div class="row">
+						<div class="col-lg-4"><p class="m-y-xs text-muted fl"><img src="../plugin/huux_os_link/icon.png" height="24" width="24" class="m-r-xs">大白链接<span class="m-l-xs label label-success">v1.6</span></p></div>
+						<div class="col-lg-8 text-right ">
+						<div class="btn-group">
+							    <a class="btn btn-default text-muted btn-sm" target="_blank" href="//www.huux.cc" role="button">问题反馈</a>
+								<a class="btn btn-default text-muted btn-sm" target="_blank" href="https://jq.qq.com/?_wv=1027&k=4B02i5s" role="button"><i class="icon-qq"></i></a>
+								<a class="btn btn-default text-muted btn-sm" href="<?php echo url("plugin-setting-huux_os_link");?>" role="button"><i class="icon-refresh"></i></a>
+								<a class="btn btn-default text-muted btn-sm" href="<?php echo url("plugin");?>" role="button"><i class="icon-times"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- card-block start -->
+			<div class="card-block">
+			
+				<!-- tab -->
+				<ul class="nav nav-tabs" role="tablist" id="myTab">
+				  <li class="nav-item active"><a href="#tab1"  class="nav-link">基本设置</a></li>
+				  <li class="nav-item"><a href="#tab2"  class="nav-link">组件开关</a></li>
+				  <li class="nav-item"><a href="#tab99"  class="nav-link">数据调用（供开发者）</a></li>
+				</ul>
+
+				<div class="tab-content card-block">
+<!-- tab1 -->
+<div class="tab-pane" id="tab1">
+
+     <form action="<?php echo url('plugin-setting-huux_os_link-link');?>" method="post" id="form2">
+			<div class="table-responsive arrlist">
+				<table class="table" style="min-width: 800px">
+					<thead>
+						<tr align="center">
+							<th width="20">ID</th>
+							<th width="60" align="left">图标</th>
+							<th width="130"></th>
+							<th width="100">名称</th>
+							<th width="100">描述</th>
+							<th width="100">备注</th>
+							<th>链接</th>
+							<th width="100">打开</th>
+							<th width="100">排序</th>
+							<th width="100">类别</th>
+							<th width="100" class="text-center">删除</th>
+						</tr>
+					<thead>
+					<tbody>
+						<?php if($linklist){foreach($linklist as $arr) { 
+						$rowid = $arr['linkid'];
+						$icon = $arr['icon'];
+						$iconurl = 'view/img/logo.png';
+						$icon !=0 && $iconurl ='upload/huux_os_link/'.$rowid.'.png';
+						?>
+						<tr align="center" rowid="<?php echo $rowid; ?>">
+							<td><input type="text" class="form-control" name="rowid[<?php echo $rowid;?>]" value="<?php echo $rowid; ?>"  placeholder="版块ID" /></td>
+							<td align="left">
+								<img src="../<?php echo $iconurl; ?>" class="forum" width="28" id="img_<?php echo $rowid;?>" />
+							</td>
+							<td>
+								<input type="file" multiple="multiple" accept=".jpg,.jpeg,.png,.gif,.bmp" class="form-control" name="icon[<?php echo $rowid;?>]" value="" data-assoc="img_<?php echo $rowid;?>" placeholder="<?php echo lang('forum_icon');?>" />
+							</td>
+							<td><input type="text" class="form-control" name="name[<?php echo $rowid;?>]" value="<?php echo $arr['name']; ?>" placeholder="名称" /></td>
+							<td><input type="text" class="form-control" name="note[<?php echo $rowid;?>]" value="<?php echo $arr['note']; ?>"  placeholder="描述" /></td>
+							<td><input type="text" class="form-control" name="str[<?php echo $rowid;?>]" value="<?php echo $arr['str']; ?>"  placeholder="备注" /></td>
+							<td><input type="text" class="form-control" name="url[<?php echo $rowid;?>]" value="<?php echo $arr['url']; ?>"  placeholder="链接" /></td>
+							<td><select name="target[<?php echo $rowid;?>]" class="custom-select" > 
+									<option value="0" <?php echo ($arr['target']==0 ? 'selected="selected"':''); ?> >新窗口</option> 
+									<option value="1" <?php echo ($arr['target']==1 ? 'selected="selected"':''); ?> >本地窗口</option> 
+							</select></td>
+							<td><input type="text" class="form-control" name="rank[<?php echo $rowid;?>]" value="<?php echo $arr['rank']; ?>" placeholder="顺序" /></td>
+							<td>
+							<select name="type[<?php echo $rowid;?>]" class="custom-select" > 
+									<option value="99" <?php echo ($arr['type']==99 ? 'selected="selected"':''); ?> >不显示</option>
+									<option value="0" <?php echo ($arr['type']==0 ? 'selected="selected"':''); ?> >友情链接0</option> 
+									<option value="1" <?php echo ($arr['type']==1 ? 'selected="selected"':''); ?> >导航栏链接1</option> 
+									<option value="2" <?php echo ($arr['type']==2 ? 'selected="selected"':''); ?> >类别=2</option> 
+									<option value="3" <?php echo ($arr['type']==3 ? 'selected="selected"':''); ?> >类别=3</option> 
+									<option value="4" <?php echo ($arr['type']==4 ? 'selected="selected"':''); ?> >类别=4</option> 
+									<option value="5" <?php echo ($arr['type']==5 ? 'selected="selected"':''); ?> >类别=5</option> 
+									<option value="6" <?php echo ($arr['type']==6 ? 'selected="selected"':''); ?> >类别=6</option> 
+									<option value="7" <?php echo ($arr['type']==7 ? 'selected="selected"':''); ?> >类别7</option> 
+									<option value="8" <?php echo ($arr['type']==8 ? 'selected="selected"':''); ?> >类别=8</option> 
+									<option value="9" <?php echo ($arr['type']==9 ? 'selected="selected"':''); ?> >类别=9</option> 
+									<option value="10" <?php echo ($arr['type']==10 ? 'selected="selected"':''); ?> >类别=10</option> 
+									<option value="11" <?php echo ($arr['type']==11 ? 'selected="selected"':''); ?> >类别=11</option> 
+									<option value="12" <?php echo ($arr['type']==12 ? 'selected="selected"':''); ?> >类别=12</option> 
+									<option value="13" <?php echo ($arr['type']==13 ? 'selected="selected"':''); ?> >类别=13</option> 
+									<option value="14" <?php echo ($arr['type']==14 ? 'selected="selected"':''); ?> >类别=14</option> 
+									<option value="15" <?php echo ($arr['type']==15 ? 'selected="selected"':''); ?> >类别=15</option> 
+									<option value="16" <?php echo ($arr['type']==16 ? 'selected="selected"':''); ?> >类别=16</option> 
+									<option value="17" <?php echo ($arr['type']==17 ? 'selected="selected"':''); ?> >类别=17</option> 
+									<option value="18" <?php echo ($arr['type']==18 ? 'selected="selected"':''); ?> >类别=18</option>
+									<option value="19" <?php echo ($arr['type']==19 ? 'selected="selected"':''); ?> >类别=19</option>
+									<option value="20" <?php echo ($arr['type']==20 ? 'selected="selected"':''); ?> >类别=20</option>
+							</select>
+								</td>
+							<td><a class="btn row_delete btn-sm btn-default" role="btn">删除</a></td>
+						</tr>
+						<?php }}else{$rowid = 0;} ?>
+						<tr align="center" rowid="<?php echo $rowid; ?>" class="hidden">
+							<td><input type="text" class="form-control" name="rowid[0]" value=""  placeholder="ID" /></td>
+							<td align="left">
+								<img src="../upload/huux_os_link/0.png" class="forum" width="28" id="img_0" />
+							</td>
+							<td>
+								<input type="file" multiple="multiple" accept=".jpg,.jpeg,.png,.gif,.bmp" class="form-control" name="icon[0]" value="" data-assoc="img_<?php echo $rowid;?>" placeholder="<?php echo lang('forum_icon');?>" />
+							</td>
+							<td><input type="text" class="form-control" name="name[0]" value="" placeholder="名称" /></td>
+							<td><input type="text" class="form-control" name="note[0]" value="" placeholder="描述" /></td>
+							<td><input type="text" class="form-control" name="str[0]" value="" placeholder="备注" /></td>
+							<td><input type="text" class="form-control" name="url[0]" value=""  placeholder="链接" /></td>
+							<td><select name="target[0]" class="custom-select" > 
+									<option value="0" selected="selected">新窗口</option> 
+									<option value="1">本地窗口</option> 
+								</select></td>
+							<td><input type="text" class="form-control" name="rank[0]" value="" placeholder="顺序" /></td>
+							<td><select name="type[0]" class="custom-select" >  
+									<option value="99">不显示</option>
+									<option value="0" selected="selected">友情链接0</option> 
+									<option value="1">导航栏链接1</option>
+									<option value="2">类别=2</option> 
+									<option value="3">类别=3</option> 
+									<option value="4">类别=4</option> 
+									<option value="5">类别=5</option> 
+									<option value="6">类别=6</option> 
+									<option value="7">类别=7</option> 
+									<option value="8">类别=8</option> 
+									<option value="9">类别=9</option> 
+									<option value="10">类别=10</option>
+									<option value="11">类别=11</option>
+									<option value="12">类别=12</option> 
+									<option value="12">类别=13</option> 
+									<option value="14">类别=14</option> 
+									<option value="15">类别=15</option> 
+									<option value="16">类别=16</option> 
+									<option value="17">类别=17</option> 
+									<option value="18">类别=18</option> 
+									<option value="19">类别=19</option>
+									<option value="20">类别=20</option>
+								</select></td>
+							<td><a class="btn row_delete btn-sm btn-default" role="btn">删除</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p><a role="button" class="btn row_add">[+]增加一行</a></p>
+			<p class="text-center">
+				<button type="submit" class="btn btn-primary" id="submit2" data-loading-text="<?php echo lang('submiting');?>..." style="width: 10rem;"><?php echo lang('confirm');?></button>
+			</p>
+		</form>
+
+
+
+</div>
+<!-- tab1 end -->
+<!-- tab2 -->
+<div class="tab-pane active" id="tab2">
+<form action="<?php echo url('plugin-setting-huux_os_link-io');?>" method="post" id="form">
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label">显示链接图标：</label>
+	<div class="col-sm-10 small">
+		<?php echo $input['icon_io']; ?> 
+	</div>
+</div>
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label">导航栏链接：</label>
+	<div class="col-sm-10 small">
+		<?php echo $input['link_index_headernav']; ?> 
+	</div>
+</div>
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label">友情链接：</label>
+	<div class="col-sm-10 small">
+		<?php echo $input['link_index_friendlink']; ?> 
+	</div>
+</div>
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label"></label>
+	<div class="col-sm-2 m-b-sm">
+		<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+	</div>
+	<div class="col-sm-2 m-b-sm">
+		<a role="button" class="btn btn-secondary btn-block" href="javascript:history.back();"><?php echo lang('back');?></a>
+	</div>
+</div>
+</form>
+</div>
+<!-- tab2 end -->
+<!-- tab99 -->
+<!-- tab1 -->
+<div class="tab-pane" id="tab99">
+<div class="form-group row">
+<label class="col-sm-3 form-control-label" ><b class="z-jq">第一步</b><br/>通过设置conf.json：<br/><b class="z-js">绑定大白链接插件</b></label>
+<div class="col-sm-9  codepre">
+<textarea class="form-control text-small" style="width: 100%; height: 300px; ">
+//参考下面的案例，绑定huux_os_link插件，最低版本号1.4
+{
+"name": "您的插件名称",
+"brief": "您的插件简介",
+"version": "1.0",
+"bbs_version": "4.0",
+"installed": 0,
+"enable": 0,
+"hooks_rank": [],
+"overwrites_rank": [],
+"dependencies": {
+    "huux_os_link": "1.4"
+}
+}
+</textarea>
+								</div>
+	</div>
+
+	<div class="form-group row">
+								<label class="col-sm-3 form-control-label" ><b class="z-jq">第二步</b><br/>页面加入php代码：<br/><b class="z-js">使用前先绑定插件</b></label>
+								<div class="col-sm-9  codepre">
+								<textarea class="form-control text-small" style="width: 100%; height: 300px; ">
+
+	&lt;?php
+	/*
+	大白链接的数据调用
+	$link['url'] ：链接
+	$link['name'] ：名称
+	$link['note'] ：描述
+	$link['str'] ：备注 实际应用中可使用 explode('|',$link['str']) 函数把字符串打散为数组，或者填写json
+	$link['icon'] ：图标url
+	*/
+	// 查询数据表huux_os_link ，满足条件：字段type(类别)等于0，字段rank倒序，1页，每页1000条数据，查询linkid
+	$linklist = db_find('huux_os_link', array('type'=>0), array('rank'=>-1), 1, 1000, 'linkid');
+	if($linklist){
+	    foreach ($linklist as $link) { 
+	            $iconurl = 'view/img/logo.png';//如果不需要小图标，则这行代码请去掉
+	            $link['icon'] !=0 && $iconurl ='upload/huux_os_link/'.$link['linkid'].'.png?'.$link['icon'];//如果不需要小图标，则这行代码请去掉
+	            $linktarget = '_blank';
+                $link['target'] !=0 && $linktarget = '_self';
+	            echo '<a href="'.$link['url'].'target="'.$linktarget.'"><img class="pull-left m-r-xs" src="'.$iconurl.'">'.$link['name'].'</a>';
+	            // 如果不需要小图标，就去掉<img>标签，演示如下：
+	            // echo '<a href="'.$link['url'].'target="'.$linktarget.'">'.$link['name'].'</a>';
+	    }  
+	}
+	?&gt;
+
+								</textarea>
+								</div>
+	</div>
+		
+
+
+
+</div>
+<!-- tab99 end -->
+
+
+			  </div>
+			  <!-- tab end-->
+
+			</div>
+			<!-- card-block end -->
+			<div class="card-footer text-right"><p class="m-y-xs text-muted  text-small"><i class="icon-battery-4 m-r-sm"></i></p></div>
+	    </div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+$("#body").removeClass("container");
+$("#body").addClass("container-fluid");
+var jform = $("#form");
+var jsubmit = $("#submit");
+jform.on('submit', function(){
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serialize();
+	console.log(postdata);
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message.b);
+			jsubmit.text(message.a).delay(1000).button('reset');
+			return;
+		} else {
+			$.alert(message.c);
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+//大白链接-对xn_friendlink插件，进行二次增强
+
+				var maxid = <?php echo $maxid;?>;
+
+				var jform2 = $("#form2");
+				var jsubmit2 = $("#submit2");
+				var jarrlist = $('.arrlist');
+				jform2.base64_encode_file(); // 对文件进行 base64 编码，处理文件上传，很方便
+
+				jform2.on('submit', function(){
+					jform2.reset();
+					var postdata = jform2.serialize();
+					jsubmit2.button('loading');
+					$.xpost(jform2.attr('action'), postdata, function(code, message) {
+						if(code == 0) {
+							$.alert(message);
+							//jsubmit2.text(message).delay(3000).location();
+							jsubmit2.text(message).delay(3000);
+							jsubmit2.button('reset');
+							return;
+						} else {
+							alert(message);
+							jsubmit2.button('reset');
+						}
+					});
+					return false;
+				});
+
+				// 删除
+				var jdelete = $('a.row_delete');
+				jarrlist.on('click', 'a.row_delete', function() {
+					var jthis = $(this);
+					var jtr = jthis.parents('tr');
+					var rowid = jtr.attr('rowid');
+					if(jform2.find('tbody').find('tr').length <= 2) {
+						$.alert('不能删除系统保留的版块。');
+						return;
+					}
+					jtr.remove();
+					return false;
+				});
+				// 增加
+				var jadd = $('a.row_add');
+				jadd.on('click', function() {
+					var jclone = jarrlist.find('tr').last().clone();
+					jclone.insertAfter(jarrlist.find('tr').last()).show();
+					var jrowid = jclone.find('input[name^="rowid"]');
+					//var rowid = xn.intval(jrowid.val()) + 1;
+					var rowid = ++maxid;
+					jrowid.val(rowid);
+					jclone.attr('rowid', rowid);
+					
+					// 清空值
+					jclone.find('input').not('[name^="rowid"]').val('');
+					
+					// 修改 [] 中的值为 rowid
+					jclone.find('input').attr_name_index(rowid);
+					jclone.find('select').attr_name_index(rowid);
+
+					// 图片缩略
+					jclone.find('img.forum').attr('id', 'img_'+rowid).attr('src', '../view/img/logo.png');
+					jclone.find('input[type="file"]').attr('data-assoc', 'img_'+rowid);
+					
+					return false;
+				});
+
+
+
+//tab
+$(function () {
+    $('#myTab a:first').tab('show');
+    $('#myTab a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+    });
+})
+
+</script>

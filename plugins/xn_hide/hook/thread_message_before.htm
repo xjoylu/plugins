@@ -1,0 +1,22 @@
+<?php
+    $a = $first['message_fmt'];
+    $b= (strpos($a,"[hide]"));
+    $c= (strpos($a,"[/hide]"));
+    $hide_content = substr($a,$b+6,$c-6); 
+
+	//查看用户是否已登录
+	if($uid && $uid!==$first['uid']){
+		//查看该用户是否已经回复过了
+		if( db_find_one('post', array('uid'=>$uid,'tid'=>$tid))){
+			//如果已经回复过
+			$first['message_fmt'] = str_replace("[hide]".$hide_content."[/hide]","$hide_content",$first['message_fmt']);
+		}else{
+			//如果没有回复
+			$first['message_fmt'] = str_replace("[hide]".$hide_content."[/hide]","<span style='color:red'>隐藏内容,回复后可见</span>",$first['message_fmt']);
+		}
+	}else{
+		$first['message_fmt'] = str_replace("[hide]".$hide_content."[/hide]","<a href='?user-login.htm' style='color:red'>隐藏内容,登录后查看</a>",$first['message_fmt']);
+	}
+	
+
+?>

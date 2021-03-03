@@ -1,0 +1,24 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');
+$_tid=param(2,0);
+if(!$uid || empty($_tid)) die();
+if(isset($gid) AND $gid!=1) die(); ?><div style="text-align: center;width:100%;margin-left:auto;margin-right:auto;">
+<div>根据百度站长平台的建议，请不要一次性推送过多的帖子、也不要推送时间过早的帖子，请尽量推送原创帖子！</div>
+<form action="<?php echo url('post-tt_seo');?>" method="post" id="mod_seo_form"><div style="text-align: center;width:100%;margin-left:auto;margin-right:auto;">
+<input type="checkbox" value="auto" name="auto" id="auto"/><label for="auto">自动推送</label>&nbsp;
+<input type="checkbox" value="xzh" name="xzh" id="xzh"/><label for="xzh">熊掌号</label>&nbsp;
+<input type="checkbox" value="auto_mip" name="auto_mip" id="auto_mip"/><label for="auto_mip">自动推送MIP</label>&nbsp;
+<input type="checkbox" value="xzh_mip" name="xzh_mip" id="xzh_mip"/><label for="xzh_mip">熊掌号MIP</label><br>
+<button type="button" class="btn btn-outline-primary" id="submit_seo">提交</button></div></form>
+</div><?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+<script ajax-eval="true">
+    var jsubmit_SEO=$("#submit_seo");var jform_SEO=$("#mod_seo_form");
+    jsubmit_SEO.on('click',function(){
+        jsubmit_SEO.button('loading');
+        var postdata=jform_SEO.serialize()+"&tid="+"<?php echo $_tid;?>";
+        $.xpost(jform_SEO.attr("action"), postdata,function(code,message){
+            if(code!=0) alert(message);
+            else location.reload();
+            jsubmit_SEO.button('reset');
+        });
+    });
+</script>

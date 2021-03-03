@@ -1,0 +1,46 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<!--{hook my_index_start.htm}-->
+<div class="row">
+	<div class="col-lg-6 offset-lg-3">
+		<div class="mdui-card card-block m-t-1">
+			<div class="mdui-typo">
+			<img class="avatar-lg center-block" src="<?php echo $user['avatar_url']; ?>">
+			<h4 class="text-center"><?php echo $user['username']; ?></h4>
+			<p class="text-center">[<?php echo $user['groupname']; ?>]</p>
+			<!--{hook my_index_groupname_before.htm}-->
+			</div>
+			<div class="mdui-divider"></div>			
+			<div class="row">
+			
+				<!--{hook my_index_profile_before.htm}-->
+				<div class="col-xs-6 col-sm-3 m-b-1 text-center">
+					<a class="mdui-btn mdui-ripple mdui-btn-icon" href="<?php echo url('my-profile'); ?>"><i class="mdui-icon material-icons">settings</i></a><br>
+					<a class="mdui-btn mdui-ripple" href="<?php echo url('my-profile'); ?>"><?php echo lang('my_profile'); ?></a>
+				</div>
+				<!--{hook my_index_profile_after.htm}-->
+				<div class="col-xs-6 col-sm-3 m-b-1 text-center">
+					<a class="mdui-btn mdui-ripple mdui-btn-icon" href="<?php echo url('my-password'); ?>"><i class="mdui-icon material-icons">lock</i></a><br>
+					<a class="mdui-btn mdui-ripple" href="<?php echo url('my-password'); ?>"><?php echo lang('modify_password'); ?></a>
+				</div>
+				<!--{hook my_index_password_after.htm}-->
+				<div class="col-xs-6 col-sm-3 m-b-1 text-center">
+					<a class="mdui-btn mdui-ripple mdui-btn-icon" href="<?php echo url('my-avatar'); ?>"><i class="mdui-icon material-icons">person</i></a><br>
+					<a class="mdui-btn mdui-ripple" href="<?php echo url('my-avatar'); ?>"><?php echo lang('modify_avatar'); ?></i></a>
+				</div>
+				<!--{hook my_index_avatar_after.htm}-->
+				<div class="col-xs-6 col-sm-3 m-b-1 text-center">
+					<a class="mdui-btn mdui-ripple mdui-btn-icon" href="<?php echo url('my-thread'); ?>"><i class="mdui-icon material-icons">mode_comment</i></a><br>
+					<a class="mdui-btn mdui-ripple" href="<?php echo url('my-thread'); ?>"><?php echo lang('my_post'); ?></a>
+				</div>
+				<!--{hook my_index_thread_after.htm}-->
+			</div>
+		</div>
+	</div>
+</div>
+	
+<!--{hook my_index_end.htm}-->
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<!--{hook my_index_js.htm}-->

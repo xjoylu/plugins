@@ -1,0 +1,5 @@
+'get_money'=>'提現',
+'get_success'=>'提現成功,等待審核。',
+'charge'=>'充值',
+'value_'=>'金額 (單位:分)',
+'willcharge'=>'將充值',

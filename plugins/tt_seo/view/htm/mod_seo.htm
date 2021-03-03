@@ -1,0 +1,50 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+<div class="card">
+	<div class="card-header">推送到百度搜索引擎</div>
+	<div class="card-body ajax-body">
+		<form action="<?php echo url('mod-seo');?>" method="post" id="mod_seo_form">
+			<div class="form-group row"><label class="col-3 form-control-label text-right"><?php echo lang('total');?>：</label><div class="col-9"><span class="total font-weight-bold text-danger"></span> <?php echo lang('piece');?></div></div><div style="text-align: center;width:100%;margin-left:auto;margin-right:auto;">
+			<div>根据百度站长平台的建议，请不要一次性推送过多的帖子、也不要推送时间过早的帖子，请尽量推送原创帖子！</div>
+			<input type="checkbox" value="auto" name="auto" id="auto"/><label for="auto">自动推送</label>&nbsp;
+			<input type="checkbox" value="xzh" name="xzh" id="xzh"/><label for="xzh">熊掌号</label>&nbsp;
+			<input type="checkbox" value="auto_mip" name="auto_mip" id="auto_mip"/><label for="auto_mip">自动推送MIP</label>&nbsp;
+			<input type="checkbox" value="xzh_mip" name="xzh_mip" id="xzh_mip"/><label for="xzh_mip">熊掌号MIP</label><br>
+			<button type="submit" class="btn btn-primary mr-2" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button><button type="button" class="btn btn-secondary"><?php echo lang('close');?></button></div>
+</form></div></div>
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm'); ?>
+<script ajax-eval="true">
+    var args = args || {jmodal: null, callback: null, arg: null};
+    var jmodal = args.jmodal;
+    var callback = args.callback;
+    var arg = args.arg;
+    var jthreadlist = $(arg);  // .threadlist
+    var tidarr = jthreadlist.find('input[name="modtid"]').checked();
+    var jform = $('#mod_seo_form');
+    var jsubmit = jform.find('button[type="submit"]');
+    var jcancel = jform.find('button[type="button"]');
+    var jtotal = jform.find('span.total');
+    jtotal.text(tidarr.length);
+    jform.on('submit', function(){
+        jform.reset();
+        jsubmit.button('loading');
+        var postdata = jform.serializeObject();
+        postdata.tidarr = tidarr;
+        $.xpost(jform.attr('action'), postdata, function(code, message) {
+            if(code == 0) {
+                jsubmit.button(message);
+                setTimeout(function() {
+                    if(jmodal) jmodal.modal('dispose');
+                    if(callback) callback(message);
+                    window.location.reload();
+                }, 1000);
+            } else {
+                alert(message);
+                jsubmit.button('reset');
+            }
+        });
+        return false;
+    });
+    jcancel.on('click', function() {
+        if(jmodal) jmodal.modal('dispose');
+    });
+</script>

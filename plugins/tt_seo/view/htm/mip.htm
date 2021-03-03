@@ -1,0 +1,55 @@
+<?php include _include(APP_PATH.'plugin/tt_seo/view/htm/header_mip.inc.htm');?>
+
+<!--{hook thread_start.htm}-->
+
+<div class="row">
+	<div class="col-lg-12 main">
+		<?php if(empty($hide_breadcrumb)) { ?>
+		<ol class="breadcrumb d-md-flex">
+			<li class="breadcrumb-item"><a href="./" aria-label="<?php echo lang('index_page');?>"><i class="icon-home"></i></a></li>
+			<li class="breadcrumb-item"><a href="<?php echo url("forum-$fid");?>"><?php echo $forum['name'];?></a></li>
+		</ol>
+		<?php } ?>
+		<div class="card card-thread">
+			<div class="card-body">
+				<div class="media">
+					<a href="<?php echo url("user-$thread[uid]");?>" tabindex="-1">
+					<mip-img class="avatar-3 mr-3" src="<?php echo $thread['user_avatar_url'];?>"></mip-img>
+					</a>
+					<div class="media-body">
+						<h4 class="break-all">
+							<?php echo $thread['subject'];?>
+						</h4>
+						<div class="d-flex justify-content-between small">
+							<div>
+								<span class="username">
+									<a href="<?php echo url("user-$thread[uid]");?>" class="text-muted font-weight-bold"><?php echo $thread['username'];?></a>
+								</span>
+							</div>
+							<div>
+								<span class="date text-grey ml-2"><?php echo $thread['create_date_fmt'];?></span>
+								<span class="text-grey ml-2"><i class="icon-eye"></i> <?php echo $thread['views'];?></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div>
+					<!--{hook thread_message_before.htm}-->
+					<?php echo MipFormat($first['message_fmt']);?>
+					<!--{hook thread_message_after.htm}-->
+				</div>
+
+			</div>
+		</div>
+		<!--{hook thread_postlist_before_mip.htm}-->
+		<!--{hook thread_page_after.htm}-->
+<br>
+		<a role="button" class="btn btn-info btn-block col-lg-12" href="<?php echo url('thread-'.$tid);?>">查看完整版网页</a>
+
+	</div>
+</div>
+
+<!--{hook thread_end.htm}-->
+
+<?php include _include(APP_PATH.'plugin/tt_seo/view/htm/footer_mip.inc.htm');?>

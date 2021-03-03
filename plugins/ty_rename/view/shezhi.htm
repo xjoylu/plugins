@@ -1,0 +1,52 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<div class="row">
+	<div class="col-lg-6 offset-lg-3">
+		<div class="card card-block">
+			<h4 class="card-title">
+				<?php echo '设置';?>
+			</h4>
+			<form action="<?php echo url('renamesetting');?>&type=update" method="post" id="form">
+				<p class="input-group">
+					<input type="text" class="form-control" placeholder="改名所需金币" id="number" name="number" value="<?php echo $number; ?>">
+				</p>
+				<p class="text-xs-right">
+					<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo '设置改名所需金币';?></button>
+				</p>
+			</form>
+		</div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+var jform = $('#form');
+var jsubmit = $('#submit');
+var jweishu = $('#weishu');
+var jgeshu = $('#geshu');
+var jmianzhi = $('#mianzhi');
+var jdaochu_quanbu = $('#daochu_quanbu');
+jform.on('submit', function() {
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serializeObject();
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message);
+			jsubmit.button('reset');
+		} else if(code == 'weishu') {
+			jweishu.alert(message).focus();
+			jsubmit.button('reset');
+		} else if(code == 'geshu') {
+			jgeshu.alert(message).focus();
+			jsubmit.button('reset');
+		} else if(code == 'mianzhi') {
+			jmianzhi.alert(message).focus();
+			jsubmit.button('reset');
+		} else {
+			alert(message);
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+</script>

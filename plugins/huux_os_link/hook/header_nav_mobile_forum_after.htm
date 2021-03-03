@@ -1,0 +1,10 @@
+<?php 
+$linklist = db_find('huux_os_link', array('type'=>1), array('rank'=>-1), 1, 1000, 'linkid');
+if($linklist){
+foreach ($linklist as $link) { 
+$linktarget = '_blank';
+$link['target'] !=0 && $linktarget = '_self';
+?>
+<li class="nav-item link-index-mobile-headernav"><a class="nav-link m-l-2" href="<?php echo $link['url'];?>" target="<?php echo $linktarget;?>"><i class="icon-circle-blank"></i><?php echo $link['name'];?></a></li>
+<?php }} ?>
+

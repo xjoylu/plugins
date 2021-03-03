@@ -1,0 +1,10 @@
+{
+    "name": "move_top",
+    "brief": "点击页面小火箭即可回到页面最顶部-来自Love4cherry",
+    "version": "1.0.2",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

@@ -1,0 +1,35 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<div class="row"><div class="col-lg-10 mx-auto"><div class="card"><div class="card-body" ><h3>后期技术支持</h3>官方网站：http://www.6rabbit.com/ <a href="http://www.6rabbit.com"target="_blank" style="text-decoration: none">点击进入</a><br>官方QQ群：58911696</div></div>
+<div class="card"><div class="card-body"><h3>板块字段设置</h3>不要出现特殊字符，禁止输入竖线字符|。最多可以设置20个，每一个字段不要过长！没有请填0。
+<form action="<?php echo url('plugin-setting-tt_structure');?>" method="post" id="form"><table border="1px" style="text-align: center; margin-left:auto;margin-right:auto;"><tr><th>板块</th><th>
+<select name="forum_select" id="forum_select"><?php foreach($forumlist as  $_forum){?>
+<option value="fid_<?php echo $_forum['fid'];?>"><?php echo $_forum['name'];?></option><?php }?></select>
+    <button type="button" class="btn btn-primary" id="inquire" data-loading-text="<?php echo lang('submiting');?>...">查询</button>
+</th></tr><tr><th>编号</th><th>字段</th></tr>
+<?php for($i=0;$i<20;$i++){?><tr><td><?php echo ($i+1);?></td><td><input maxlength="15" width="200px" name="in_<?php echo ($i+1)?>" id="in_<?php echo ($i+1)?>"/></td></tr><?php }?>
+</table><br><button type="button" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button></form>
+</div></div></div></div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+var jinquire=$("#inquire"); var jform=$("#form"); var jsubmit=$("#submit");
+jinquire.on('click',function(){ jinquire.button('loading');var postdata = jform.serializeObject(); postdata.op=0;
+    $.xpost(jform.attr('action'),postdata,function(code,message){
+        if(code==0)
+        {
+            var s= message.split('|'); var s_count = s.length; var i=0;
+            for(i=0;i<s_count;i++)
+                $("#in_"+(i+1).toString()).val(s[i]);
+            for(;i<20;i++)
+                $("#in_"+(i+1).toString()).val('0');
+        }
+        else $.alert(message);
+        jinquire.button('reset');
+    });
+});
+jsubmit.on('click',function(){ jsubmit.button('loading');
+    var postdata = jform.serializeObject(); postdata.op=1;
+    $.xpost(jform.attr('action'),postdata,function(code,message){
+        $.alert(message); jsubmit.button('reset');
+    });
+});
+</script>

@@ -1,0 +1,22 @@
+<?php
+function get_between($input, $start, $end) {
+  $substr = substr($input, strlen($start)+strpos($input, $start),
+
+ (strlen($input) - strpos($input, $end))*(-1));
+
+  return $substr;
+
+}
+//查询当前登录会员是否已经回复当前主题
+
+$post = db_find_one('post', array('tid'=>$tid,'isfirst'=>0,'uid'=>$uid));
+
+if($uid!=$thread['uid'] && empty($post) && $uid!=1){
+$hide_content=get_between($first['message_fmt'],"[hide]","[/hide]");
+$first['message_fmt']=str_replace("[hide]".$hide_content."[/hide]","<span style='border:1px dashed #f17c67;padding:0 10px;margin:0 10px;font-size:18px;background-color:#DDF0ED '>回复可见</span>",$first['message_fmt']);
+}else{
+$first['message_fmt']=str_replace("[hide]","",$first['message_fmt']);
+$first['message_fmt']=str_replace("[/hide]","",$first['message_fmt']);
+
+}
+?>

@@ -1,0 +1,14 @@
+{
+    "name": "自定义导航链接",
+    "brief": "开启插件直接会替换导航模板采用自定义，如果恢复禁用或卸载即可。插件作者：迷途",
+    "version": "1.3",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": {
+        "index_site_brief_after.htm": -10,
+        "header_link_after.htm": -10
+    },
+    "overwrites_rank": [],
+    "dependencies": []
+}

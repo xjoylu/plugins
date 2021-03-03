@@ -1,0 +1,26 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm'); ?>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			
+			<div class="card">
+				<div class="card-block">
+					<h4 class="card-title">插件说明</h4>
+					
+					<div class="form-group row m-b-1">
+						<div class="col-sm-12">
+							该插件主要用于对后台导航进行重新布局，添加二级菜单。
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm'); ?>
+
+<script>
+$('#nav_pc li.plugin, #nav_mobile li.plugin').tab('show');
+</script>

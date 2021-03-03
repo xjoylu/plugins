@@ -1,0 +1,10 @@
+{
+    "name": "改名卡",
+    "brief": "<span style='color:#ccc;text-decoration:line-through;'>可以销售改名卡或收取金币改名(划掉</span><br>写着写着突然懒了.. 于是只剩了简单直接的改名功能",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

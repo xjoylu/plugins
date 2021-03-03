@@ -1,0 +1,4 @@
+.wxbg{ width: 600px; height: 790px ; margin:0 auto; background: url(../img/wxbg.jpg) top center no-repeat; background-size:cover  }
+#qrcode{ padding-top: 21rem }#qrcode img{ width: 225px; height: 225px; }
+.wxpaytxt{ text-align: center; font-weight: bold;font-size: 1.2rem; }
+.wxpaytz{ text-align: center; padding-top: 3rem; font-size: 1.1rem; }

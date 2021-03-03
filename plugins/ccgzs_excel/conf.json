@@ -1,0 +1,11 @@
+{
+    "name": "通用EXCEL表格查询",
+    "brief": "1、Excel表格单元格格式必须是文本。2、查询关键字是身份证号，Excel表格中必须有此列。3、用户数据库idnumber需要有数据。",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

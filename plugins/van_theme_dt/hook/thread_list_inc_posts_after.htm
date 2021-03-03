@@ -1,0 +1,14 @@
+</div></div>
+<!--显示摘要--->
+<div class="context">
+<span style="font-size:95%;color:#aaa">
+<?php  
+	$post  =  post_read($_thread['firstpid']);
+	$content  =($post['message']);
+	$message  =  strip_tags($content);
+echo  mb_substr($message  ,  0  ,  150);
+?>
+</span>
+</div>
+<div style="display:none">
+<div style="display:none">

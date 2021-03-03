@@ -1,0 +1,20 @@
+<script type="text/javascript" src="plugin/xn_simditor_vk/simditor/js/module.min.js"></script>
+<script type="text/javascript" src="plugin/xn_simditor_vk/simditor/js/hotkeys.min.js"></script>
+<script type="text/javascript" src="plugin/xn_simditor_vk/simditor/js/uploader.min.js"></script>
+<script type="text/javascript" src="plugin/xn_simditor_vk/simditor/js/simditor.min.js"></script>
+<script>
+    var up_url = '/' + xn.url('attach-create')
+    console.log(up_url)
+    var editor = new Simditor({
+        textarea: $('#message'),
+        placeholder: '有什么想说的吗？',
+        pasteImage: true,
+        toolbarFloat: true,
+        toolbar: ['bold', 'italic', 'underline', 'strikethrough', 'color',
+            'ol', 'ul', 'code', 'link', 'image', 'hr', 'alignment'],
+        upload: {
+            url: up_url,
+            fileKey: "name"
+        }
+    });
+</script>

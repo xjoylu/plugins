@@ -1,0 +1,11 @@
+{
+    "name": "帖子标签",
+    "brief": "帖子加标签;卸载需谨慎，卸载会删除该插件的标签数据。<br><span class='small text-small text-success'>v1.1版本:改正了说明文字，更改了小图标，加标签支持空格，本版本开始不再淀余无用标签。</span><a style='font-size:12px;' href='https://jq.qq.com/?_wv=1027&k=4BVp05x' target='_blank'>反馈问题<a>",
+    "version": "1.1",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

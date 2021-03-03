@@ -1,0 +1,13 @@
+{
+    "name": "回帖排序",
+    "brief": "回帖排序，设置贴子查看顺序方式。作者：deatil",
+    "version": "1.5.5",
+    "author": "deatil",
+    "id": "haya_post_type",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

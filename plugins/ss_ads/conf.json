@@ -1,0 +1,10 @@
+{
+    "name": "自适应广告管理器",
+    "brief": "用于自适应模板体系的广告管理器。<br/><span class='small text-success'>如果觉得这个插件还不错的话,<a href='http://www.baiup.com/thread-145.htm' target='_blank'>点我打赏作者</a></span>",
+    "version": "1.5",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

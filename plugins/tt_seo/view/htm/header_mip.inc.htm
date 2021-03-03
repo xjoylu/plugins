@@ -1,0 +1,63 @@
+<?php $conf = G('conf');?>
+<?php $header = G('header');?>
+<?php $user = G('user');?>
+<?php $uid = G('uid');?>
+<?php $gid = G('gid');?>
+<?php $fid = G('fid');?>
+<?php $tid = G('tid');?>
+<?php $pid = G('pid');?>
+<?php $route = G('route');?>
+<?php $forumlist_show = G('forumlist_show');?>
+<?php $static_version = $conf['static_version'];?>
+<?php $set_seo=setting_get('tt_seo');?>
+<!DOCTYPE html>
+<html mip>
+<head>
+	<?php echo defined('BASE_HREF') ? '<base href="'.BASE_HREF.'" />' : '' ;?>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<?php if(!empty($header['keywords'])) { ?>
+	<meta name="keywords" content="<?php echo strip_tags($header['keywords']);?>" />
+	<?php } ?>
+
+	<meta name="description" content="<?php echo strip_tags($header['description']);?>" />
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+
+	<title><?php echo $header['title'];?></title>
+	<link rel="shortcut icon" href="<?php echo $conf['view_url'];?>img/favicon.ico" />
+	<link rel="icon" sizes="32x32" href="<?php echo $conf['view_url'];?>img/favicon.ico">
+	<link rel="Bookmark" href="<?php echo $conf['view_url'];?>img/favicon.ico" />
+	<?php $bootstrap_css = !empty($bootstrap_css) ? $bootstrap_css : $conf['view_url']."css/bootstrap.css".$static_version; ?>
+	<link rel="stylesheet" href="<?php echo $bootstrap_css;?>">
+
+	<?php $bootstrap_bbs_css = !empty($bootstrap_bbs_css) ? $bootstrap_bbs_css : $conf['view_url']."css/bootstrap-bbs.css".$static_version; ?>
+	<link rel="stylesheet" href="<?php echo $bootstrap_bbs_css;?>">
+	<!--{hook header_bootstrap_bbs_after_mip.htm}-->
+
+	<script type="application/ld+json">
+{
+    "@context": "https://ziyuan.baidu.com/contexts/cambrian.jsonld",
+    "@id": "<?php echo $set_seo['sitemap_site'].url('mip-'.$tid);?>",
+    "appid": "<?php echo $set_seo['xzh_appid'];?>",
+    "title": "<?php echo $header['title'];?>",
+    "pubDate": "<?php echo date('Y-m-d\TH:i:s',$thread['create_date']);?>"
+}
+</script>
+	<link rel="canonical" href="<?php echo $set_seo['sitemap_site'],url('thread-'.$tid);?>"/>
+	<link rel="stylesheet" type="text/css" href="https://c.mipcdn.com/static/v1/mip.css">
+	<style mip-custom>
+		.mip_logo{width:32px;height:32px;margin-right:auto;margin-left:auto;display:inline-block;margin-top:6px;margin-bottom:6px;}
+		.navbar-toggler{color:white !important;}
+	</style>
+</head>
+<body>
+<script src="https://c.mipcdn.com/static/v1/mip.js"></script>
+<?php if($set_seo['xzh']=='1'){?>
+<script src="https://c.mipcdn.com/extensions/platform/v1/mip-cambrian/mip-cambrian.js"></script>
+<mip-cambrian site-id="<?php echo $set_seo['xzh_appid'];?>"></mip-cambrian>
+<?php }?>
+	<?php include _include(APP_PATH.'plugin/tt_seo/view/htm/header_nav_mip.inc.htm');?>
+	<main id="body">
+		<div class="container">

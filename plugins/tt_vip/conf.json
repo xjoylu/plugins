@@ -1,0 +1,27 @@
+{
+    "name": "VIP插件",
+    "brief": "本插件需要预先安装积分插件！VIP充值和续费功能，VIP尊享红名、提升阅读权限、免积分下载附件、免积分查看主题、免回帖看内容特权。",
+    "version": "1.00",
+    "bbs_version": "4.0.4",
+    "installed": 1,
+    "enable": 0,
+    "hooks_rank": {
+        "user_common_mobile_thread_after.htm": -100,
+        "user_profile_username_after.htm": 100,
+        "my_common_avatar_before.htm": -100,
+        "my_common_username_after.htm": 100,
+        "thread_username_before.htm": -100,
+        "thread_views_after.htm": 100,
+        "post_list_inc_username_before.htm": -100,
+        "post_list_inc_username_after.htm": 100,
+        "thread_list_inc_username_before.htm": -100,
+        "thread_list_inc_username_after.htm": 100,
+        "thread_list_inc_lastuid_before.htm": -100,
+        "thread_list_inc_lastuid_after.htm": 100,
+        "my_credits_after.htm": -100
+    },
+    "overwrites_rank": [],
+    "dependencies": {
+        "tt_credits": "1.06"
+    }
+}

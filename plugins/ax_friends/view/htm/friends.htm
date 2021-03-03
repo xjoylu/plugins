@@ -1,0 +1,194 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<link rel="stylesheet" type="text/css" href="./plugin/ax_friends/view/css/mip.css">
+<link rel="stylesheet" href="./plugin/ax_friends/view/photo/baguetteBox.css">
+<link rel="stylesheet" type="text/css" href="./plugin/ax_friends/view/photo/style.css">
+<!--<script type="text/javascript" src="./plugin/ax_friends/view/photo/protect.js"></script>-->
+<?php if($ax_friends['friends_bg']){?>
+<?php 
+if(strlen($ax_friends['friends_bg']) > 7){
+ $bg = "background:url(".$ax_friends['friends_bg'].") fixed  center no-repeat ";
+}else{
+ $bg = "background:".$ax_friends['friends_bg'];	
+}
+?>
+<style type="text/css">
+	body{  background-size:cover;  <?php echo $bg;?>}
+</style>
+<?php }?>
+<div class="row">
+
+	<div class="col-lg-9 main">
+		<!--{hook index_main_start.htm}-->
+			<div class="panel panel-default card-body card">
+				<div class="clearfix">
+					<h5>发布说说</h5>               
+				</div>
+
+				<form id="form" action="<?php echo url("friends-add");?>" method="post">
+					<div class="form-group field-md-input required">
+						<textarea id="message" class="form-control" name="message" rows="5"  data-at-topic="" aria-required="true" <?php if(!$user) echo 'readonly'?>></textarea>
+						<div class="help-block"></div>
+					</div>
+					<div class="form-group">
+					<?php if(!empty($uid)){?>
+						<div class="attachlist_parent pull-left">
+							<a class="small text-left" href="javascript:void(0)">
+								<label class="addattach" id="addattach">
+									<i class="icon-photo"></i> 
+									上传图片
+									<input type="file"  multiple="multiple" class="invisible"  accept=".jpg,.jpeg,.png,.gif,.bmp"/>
+								</label>
+							</a>
+							<?php $filelist = (array)_SESSION('tmp_files');echo post_file_list_html($filelist, TRUE);?>
+						</div>
+					<?php }?>
+						<div class="pull-right">
+							<button type="submit" id="submit" class="btn btn-primary">发 布</button>           
+						</div>
+					</div>
+				</form>
+       
+			</div>
+
+			<div class="card-body card">
+				<!--{hook index_threadlist_before.htm}-->	
+				<?php if($friends_list){foreach($friends_list as $v){?>	
+				<?php $_user = user_read_cache($v['uid'])?>      			
+					<div class="list-group-item item">
+						<div class="media">
+						    <div class="media-left">
+						        <a href="<?php echo url("user-$v[uid]")?>"><img class="avatar" src="<?php echo $_user['avatar_url'];?>" alt="<?php echo $_user['username'];?>" ></a>   
+						    </div>
+						    <div class="media-body">
+						        <div class="small  username text-grey mr-1">
+						           <span class="lva"><?php echo ax_lvs($v['uid']);?></span> <?php echo $_user['username'];?> • <span><?php echo humandate($v['create_date'])?></span>
+								
+								<?php if(!empty($user)){if($user['uid'] == $v['uid'] or $uid == 1) { ?>
+							        <div class="title-info pull-right">
+									<a href="javascript:void(0);" class="ax_del" friendsid="<?php echo $v['friendsid']?>">删除</a>
+	        						</div>  
+	        						<?php }}?>      
+						        </div>
+						        <div class="media-heading" >
+
+							<?php $attch_img = attch_img($v['friendsid']);?>
+
+						          <mip-showmore bottomshadow='1' maxheight='screen:.5' id="showmore<?php echo $v['friendsid']?>" >
+								<div class="row ptal">  
+								
+									<div class="baguetteBoxTwo gallery">
+									<?php foreach($attch_img as $vl){?>
+									        <a href="upload/friends/<?php echo $vl['filename'];?>" data-at-450="upload/friends/<?php echo $vl['filename'];?>" data-at-800="upload/friends/<?php echo $vl['filename'];?>" data-at-1366="upload/friends/<?php echo $vl['filename'];?>" data-at-1920="upload/friends/<?php echo $vl['filename'];?>">
+									            <img src="upload/friends/<?php echo $vl['filename'];?>" alt="">
+									        </a>
+									<?php }?>  
+									<div class="clearfix"></div>
+									</div>
+
+							         </div> 
+								<p><?php echo $v['message'];?></p>
+							   </mip-showmore>
+							   <center><div on="tap:showmore<?php echo $v['friendsid']?>.toggle" data-closetext="收起" class="click_zs"><span class="view_wz_all">展开</span></div></center>
+
+						        </div>
+
+						        <div class="dz-dibu">
+							        <div class="title-info pull-left">
+							        <?php $z_user = z_user($v['friendsid']);if($z_user){foreach($z_user as $z){?>
+							        <?php $z_user = user_read_cache($z['uid_like'])?>   
+									<a  href="<?php echo url("user-$z[uid_like]")?>" >
+										<img class="avatar-2" src="<?php echo $z_user['avatar_url'];?>" title="<?php echo $z_user['username'];?>" >
+									</a>
+								<?php } echo "<i class='text-info dztxt'>等人觉得很赞&nbsp;~</i>";}?>
+	        						</div>
+								<div class="title-info pull-right">
+									<a class="z" uid="<?php echo $v['uid']?>" href="javascript:void(0);" friendsid="<?php echo $v['friendsid']?>"><i class="icon icon-thumbs-o-up"></i> <span><?php echo ax_like_num($v['friendsid'])?></span></a>
+	        						</div>
+	        						<div class="clearfix"></div>
+        						</div>
+
+						    </div>
+						</div>
+					</div>
+				<?php }}?>
+				<!--{hook index_threadlist_after.htm}-->
+			</div>
+
+		<!--{hook forum_page_before.htm}-->
+		<nav class="my-3"><ul class="pagination justify-content-center flex-wrap"><?php echo $pagination; ?></ul></nav>
+		<!--{hook forum_page_after.htm}-->
+	</div>
+<div class="col-lg-3 d-none d-lg-block aside">
+		<a role="button" class="btn btn-primary btn-block mb-3" href="<?php echo url('thread-create-'.$fid);?>"><?php echo lang('thread_create_new');?></a>
+		<!--{hook index_site_brief_before.htm}-->
+		<div class="card card-site-info">
+			<!--{hook index_site_brief_start.htm}-->
+			<div class="m-3">
+				<h5 class="text-center"><?php echo $conf['sitename'];?></h5>
+				<div class="small line-height-3"><?php echo $conf['sitebrief'];?></div>
+			</div>
+			<div class="card-footer p-2">
+				<table class="w-100 small">
+					<tr align="center">
+						<td>
+							<span class="text-muted"><?php echo lang('threads');?></span><br>
+							<b><?php echo $runtime['threads'];?></b>
+						</td>
+						<td>
+							<span class="text-muted"><?php echo lang('posts');?></span><br>
+							<b><?php echo $runtime['posts'];?></b>
+						</td>
+						<td>
+							<span class="text-muted"><?php echo lang('users');?></span><br>
+							<b><?php echo $runtime['users'];?></b>
+						</td>
+						<?php if($runtime['onlines'] > 0) { ?>
+						<td>
+							<span class="text-muted"><?php echo lang('online');?></span><br>
+							<b><?php echo $runtime['onlines'];?></b>
+						</td>
+						<?php } ?>
+					</tr>
+				</table>
+			</div>
+			<!--{hook index_site_brief_end.htm}-->
+		</div>
+		<!--{hook index_site_brief_after.htm}-->
+	</div>
+</div>
+
+
+<script src="./plugin/ax_friends/view/photo/baguetteBox.js" ></script>
+<script src="./plugin/ax_friends/view/photo/highlight.min.js" ></script>
+<script>
+    window.onload = function() {
+        baguetteBox.run('.baguetteBoxOne');
+        baguetteBox.run('.baguetteBoxTwo');
+        baguetteBox.run('.baguetteBoxThree', {
+            animation: 'fadeIn',
+            noScrollbars: true
+        });
+        baguetteBox.run('.baguetteBoxFour', {
+            buttons: false
+        });
+        baguetteBox.run('.baguetteBoxFive', {
+            captions: function(element) {
+                return element.getElementsByTagName('img')[0].alt;
+            }
+        });
+
+        if (typeof oldIE === 'undefined' && Object.keys) {
+            hljs.initHighlighting();
+        }
+    };
+</script>
+
+
+<!--{hook index_end.htm}-->
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<!--{hook index_js.htm}-->
+
+<?php include _include(APP_PATH.'./plugin/ax_friends/view/htm/friends_js.htm');?>

@@ -1,0 +1,8 @@
+<span class="text-grey m-l-1">
+	<i class="icon-eye"></i>
+	<?php if (!empty($haya_sign_see_user)) { ?>
+		<a class="text-grey" href="<?php echo url('thread-'.$tid);?>">取消查看</a>
+	<?php } else { ?>
+		<a class="text-grey" href="<?php echo url('thread-'.$tid, array('user' => $_post['uid']));?>">只看Ta</a>
+	<?php } ?>
+</span>

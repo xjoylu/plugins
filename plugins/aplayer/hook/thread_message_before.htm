@@ -1,0 +1,23 @@
+<!--本插件由魔趣吧高仿发布，更多下载：http://www.moqu8.com-->
+<?php include _include(APP_PATH.'plugin/aplayer/api/function.php');?>
+<?php
+$str = $first['message_fmt'];
+$arr = array();
+preg_match("/\[playlist](.*)\[\/playlist\]/",$str,$arr);
+$list = array_value($arr,1);
+
+
+
+$str2 = $first['message_fmt'];
+$arr2 = array();
+preg_match("/\[song](.*)\[\/song\]/",$str2,$arr2);
+$song = array_value($arr2,1);
+    
+
+$first['message_fmt'] = preg_replace('/\[playlist].*?\[\/playlist\]/','',$first['message_fmt']);
+$first['message_fmt'] = preg_replace('/\[song].*?\[\/song\]/','',$first['message_fmt']);
+    
+?>
+
+
+<?php include _include(APP_PATH.'plugin/aplayer/api/aplayer.php');?>

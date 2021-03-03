@@ -1,0 +1,10 @@
+{
+    "name": "小清新模板修改版 V1.0",
+    "brief": "此风格模板基于呵呵大神的模版。",
+    "version": "1.0",
+    "bbs_version": "4.0.4",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "dependencies": []
+}

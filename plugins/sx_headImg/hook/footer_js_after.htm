@@ -1,0 +1,39 @@
+    <!--
+    <img src="" class="img-circle headImg-1" alt="User Image">
+    <canvas id="headImg-1" class="headImg" alt="User Image" style="display:none"></canvas>
+	-->
+
+    <script type="text/javascript">
+        $(".headImg").each(function (){     // 里面放class名字 把你想遍历的标签 class名改成一样的 
+            textToImg($(this).attr('id'),$(this).attr('alt')); 
+        });
+        
+        function textToImg(uid,uname_str) {
+            var uname = uname_str;
+            var name = uname.charAt(0).toUpperCase();
+            var fontSize = 32;
+            var fontWeight = 'bold';
+            var hid=uid;
+            var color_id=uid.substring(uid.length-1);
+            var canvas = document.getElementById(hid);
+            var img1 = document.getElementById(hid);
+            canvas.width = 64;
+            canvas.height = 64;
+            var context = canvas.getContext('2d');
+            context.fillStyle = getArrColor(color_id);
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = '#FFFFFF';
+            context.font = fontWeight + ' ' +'48px sans-serif';
+            context.textAlign = 'center';
+            context.textBaseline="middle";
+            context.fillText(name, fontSize, fontSize);
+            $('.'+hid).attr('src',canvas.toDataURL("image/png"));
+        };
+        function getRandomColor(){
+              return '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).substr(-6); 
+        };
+        function getArrColor(index){
+            var arrColors=['2196F3','3F51B5','9C27B0','E91E63','FF9800','CDDC39','4CAF50','009688','607D8B','9E9E9E'];
+                return '#'+arrColors[index%10];
+        };
+    </script>

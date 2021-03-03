@@ -1,0 +1,11 @@
+{
+    "name": "大白插件市场",
+    "brief": "打造干净整洁的xiuno插件环境，所有插件经过严格审查认证",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

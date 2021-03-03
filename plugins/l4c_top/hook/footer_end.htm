@@ -1,0 +1,27 @@
+<!--以下为样式代码.-->
+<style type="text/css">
+/* actGotop */
+.actGotop{
+position:fixed;_position:absolute;bottom:80px;right:10px;width:70px;height:70px;display:none;}
+
+.actGotop a,.actGotop a:link{width:70px;height:70px;display:inline-block;background:url(plugin/l4c_top/other/images/gotop.png) no-repeat;_background:url(plugin/l4c_top/other/images/gotop.gif) no-repeat;outline:none;}
+.actGotop a:hover{background:url(plugin/l4c_top/other/images/gotopd.gif) no-repeat;outline:none;}
+</style>
+
+
+<div class="actGotop"><a href="javascript:;" title="返回顶部"></a></div>
+
+<!--以下为参数js代码.-->
+<script type="text/javascript">
+$(function(){	
+	$(window).scroll(function() {		
+		if($(window).scrollTop() >= 100){
+			$('.actGotop').fadeIn(300); 
+		}else{    
+			$('.actGotop').fadeOut(300);    
+		}  
+	});
+	$('.actGotop').click(function(){
+	$('html,body').animate({scrollTop: '0px'}, 800);});	
+});
+</script>

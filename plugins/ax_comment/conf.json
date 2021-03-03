@@ -1,0 +1,12 @@
+{
+    "name": "最新评论小插件",
+    "brief": "本插件由<a href='http://www.moqu8.com' style='color:red'>魔趣吧</a>提供下载",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": [],
+    "username": ""
+}

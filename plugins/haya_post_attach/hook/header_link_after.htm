@@ -1,0 +1,37 @@
+<style>
+.message > .fieldset {
+	margin-top: 20px;
+}
+.attachlist {
+	padding: 0;
+}
+.attachlist li {
+	padding: 8px 10px;
+	list-style-type: none;
+	font-size: 15px;
+}
+.attachlist li:last-child {
+	border-bottom: 0;
+}
+.attachlist li .haya-post-attach-info {
+	display: inline-block;
+	position: relative;
+	max-width:50%;
+	cursor: pointer;
+	transition: all 0.5s linear;
+}
+.attachlist li .haya-post-attach-info.open {
+	max-width:100%;
+	transition: all 0.5s linear;
+}
+.attachlist li .haya-post-attach-search {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	text-decoration: none;
+	border: 1px solid rgba(234, 229, 229, 0.28);
+	border-radius: 4px;
+	background: rgba(234, 229, 229, 0.28);
+	padding: 0 5px;
+}
+</style>

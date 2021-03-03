@@ -1,0 +1,14 @@
+{
+    "name": "大白链接",
+    "brief": "自定义各种链接，链接可以当导航栏链接，也可以当友情链接，有图标和描述，还有类别选择，便于数据调用。",
+    "version": "1.6",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": {
+        "index_site_brief_after.htm": -10,
+        "header_link_after.htm": -10
+    },
+    "overwrites_rank": [],
+    "dependencies": []
+}

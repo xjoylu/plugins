@@ -1,0 +1,6 @@
+<?php
+// 修改post页面新建主题时doctype的格式，0：html，1：text，2：markdown，3：ubb
+if($route == 'thread'||$route=='post' && $action == 'create') {
+    $form_doctype = 0;
+}
+?>

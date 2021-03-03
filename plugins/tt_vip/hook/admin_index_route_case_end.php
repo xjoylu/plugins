@@ -1,0 +1,1 @@
+case 'vip': include APP_PATH.'plugin/tt_vip/admin_vip.php'; break;

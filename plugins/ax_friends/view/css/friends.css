@@ -1,0 +1,29 @@
+.file {position: relative;display: inline-block;background: #D0EEFF;border: 1px solid #99D3F5; border-radius: 4px;padding: 4px 12px;overflow: hidden;color: #1E88C7;text-decoration: none; text-indent: 0;line-height: 20px;}
+.file input {position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;}
+.file:hover {background: #AADFFD;border-color: #78C3F3;color: #004974;text-decoration: none;}
+.modal{ width: 50%;margin: 0 auto;margin-top:5%; }
+.modal-body{ position: relative; }
+.close{ position: absolute;top: 4%;right: 3%; z-index: 99999 }
+#img1{ width: 220px;  }
+.media-left, .media-right, .media-body {display: table-cell;vertical-align: top;}
+.media-left{ padding-right:10px;  }
+.avatar{width: 3rem;height: 3rem;border-radius: 3rem;}
+.axtxt {height: 22px;width: 200px;border-right: none;border: 0;background: none;}
+.list-view{ position: absolute;top: 0;left: 0; }
+.wangEditor-menu-container .menu-group{ border-right: 0 !important }
+.wangEditor-container{ border-radius: 5px; }
+.wangEditor-menu-container{ border-radius: 5px 5px 0px 0px; }
+/*.media-heading img{width: 220px; cursor: pointer; }*/
+.media-heading img{ max-width: 100%; max-height: 100%}
+.click_zs{ cursor: pointer;border: 1px solid #666;color: #333;text-decoration: none;padding: 1px 10px;border-radius: 8px; display: none }
+.ptal{padding-top: 1%}
+.view_wz_all{ cursor: pointer;} 
+.fimg{ width: 33.333333%; float: left;margin-bottom:1rem;text-align: center; padding-left: 1%; padding-right: 1%; }
+.fimg img{ max-height: 228px; width: 100% }
+.attachlist li{list-style: none}
+.attachlist { padding-left: 0 }
+.lva{ position: relative; top: -2px ; padding-right: 0.3rem}
+a:hover{text-decoration: none !important}
+.dztxt{ font-size: 0.1rem; display: inline-block; position: relative;top: 0.3rem }
+.media-heading p{ margin: 0 !important; padding: 0 !important; }
+.dz-dibu{ margin-top: 0.7rem;  }

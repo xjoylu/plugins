@@ -1,0 +1,61 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+
+<div class="row">
+	<div class="col-lg-10 mx-auto">
+		<div class="card">
+			<div class="card-body">
+				<form action="<?php echo url('plugin-setting-Last_Top');?>" method="post" id="form">
+					<h4 class="card-title">萌化返回顶部</h4>
+					<div class="row text-center">
+						<div class="col ">
+							<img id="body_img" class="img-rounded" src="../plugin/Last_Top/list/<?php echo $setting['body_start']; ?>/img.png">
+						</div>
+					</div>
+					<div class="row text-center" style="padding-top: 2rem">
+						<div class="col">
+						<label class="btn btn-primary" onclick="rarara(this)" id="Marisa">まりさ</label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="Flandre">フランドール</label>
+						<label class="btn btn-primary" onclick="rarara(this)" id="Reimu">れいむ</label>
+						<input id="body_start" name="body_start" value="" style="display:none" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+$("#<?php echo $setting['body_start']; ?>").addClass("active"); // 追加默认选中
+
+// 高亮方案
+function rarara(th){ 
+	var id = $(th).attr("id");
+	$("#body_start").val(id);
+	ajaxform();
+	$("#body_img").attr("src","../plugin/Last_Top/list/"+id+"/img.png");
+	$(th).siblings().removeClass("active");
+	$(th).addClass("active"); // 选中状态
+}
+
+// AJAX
+function ajaxform(){
+	var jform = $("#form");
+	var postdata = jform.serialize();
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$("#body").prepend('<div class="alert alert-success" role="alert" style="position:fixed;top:4rem;left:50%;margin-left:-160px;width:320px;z-index:9999;"><strong>更新成功!</strong> 设定已应用.</div>');
+			setTimeout(function () {
+				$(".alert-success").hide(300, function(){ $(this).remove() });
+			}, 6000);
+			return;
+		} else {
+			$.alert(message);
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+}
+</script>

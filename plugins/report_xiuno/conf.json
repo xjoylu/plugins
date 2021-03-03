@@ -1,0 +1,11 @@
+{
+	"name":"xiuno插件需求定制平台",
+	"brief":"反馈插件需求，最多人想要，最多人想要；解决无法得知需求，盲目开发插件导致的无人购买痛点，插件定制，接单和定制开发；非常感谢@山东-上天的技术支持。",
+	"version":"1.0.2",
+	"bbs_version":"4.0",
+	"installed":1,
+	"enable":0,
+	"hooks_rank":[],
+	"overwrites_rank":[],
+	"dependencies":[]
+}

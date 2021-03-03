@@ -1,0 +1,11 @@
+{
+    "name": "评论可见_大鱼插件",
+    "brief": "使用短代码[hide]内容[/hide]隐藏",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

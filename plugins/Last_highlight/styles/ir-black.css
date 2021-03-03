@@ -1,0 +1,81 @@
+/*
+  IR_Black style (c) Vasily Mikhailitchenko <vaskas@programica.ru>
+*/
+/* 伪元素 滚动条 边角修饰 **/
+pre  { border-radius: 5px; }
+pre code::-webkit-scrollbar { width: 8px; height: 8px; background: rgba(0,0,0,0); } /*滚动槽*/
+pre code::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }         /*滚动轴*/
+pre code::-webkit-scrollbar-corner { background: rgba(0,0,0,0);}                    /*交点  */
+.hljs ul { list-style: decimal-leading-zero ! important; }
+.hljs ul li::before { position: relative; left: -12px; content:' '; background:#000 ! important; margin-right: -10px }
+
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #000;
+  color: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-meta {
+  color: #7c7c7c;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-tag,
+.hljs-name {
+  color: #96cbfe;
+}
+
+.hljs-attribute,
+.hljs-selector-id {
+  color: #ffffb6;
+}
+
+.hljs-string,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-addition {
+  color: #a8ff60;
+}
+
+.hljs-subst {
+  color: #daefa3;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #e9c062;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-doctag {
+  color: #ffffb6;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-literal {
+  color: #c6c5fe;
+}
+
+.hljs-number,
+.hljs-deletion {
+  color:#ff73fd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}

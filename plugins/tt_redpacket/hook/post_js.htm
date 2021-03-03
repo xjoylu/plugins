@@ -1,0 +1,27 @@
+<script>
+    $(function(){
+        if($(":radio[name='post_red']:checked").val()==1)
+            $('#redpacket_div').fadeIn();
+        else
+            $('#redpacket_div').fadeOut();
+        $(":radio[name='post_red']").click(function(){
+            if($(this).val()==1) {$('#redpacket_div').fadeIn();$("#red_num").val('1');}
+            else {$('#redpacket_div').fadeOut();$("#red_num").val('-1');}
+        });
+        $("#red_type").change(function(){
+            var red_type = $("#red_type").val();$("#red_command_div").val('0');
+            if(red_type == '0') {$('#red_total_money_div').html('单个红包金额(分) : ');$("#red_command_div").fadeOut();}
+            else if(red_type == '1') {$('#red_total_money_div').html('红包累计金额(分) : ');$("#red_command_div").fadeOut();}
+            else if(red_type=='2') {$('#red_total_money_div').html('红包累计金额(分) : ');$("#red_command_div").fadeIn();}
+        });
+        $("#red_type").change();
+        function check_input(input){
+            input.val(input.val().replace(/[^0-9]/g, ''));
+        }
+        $("#red_num").on('input',function(){check_input($("#red_num"));});
+        $("#red_num").attr('maxlength','3');
+        $("#red_total_money").on('input',function(){check_input($("#red_total_money"));});
+        $("#red_total_money").attr('maxlength','10');
+        $("#red_command").attr('maxlength','30');
+    });
+</script>

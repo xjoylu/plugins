@@ -1,0 +1,41 @@
+<div class="card">
+				<div class="card-header">
+				<ul class="nav">
+					<li class="nav-item">
+						最新评论
+					</li>		
+				</ul>
+			</div>
+				<ul class="list-unstyled threadlist mb-0">
+<?php 
+function ax_get_comment_list() {
+	$cachename = "ax_get_comment_list";
+	$threadlist = cache_get($cachename);
+	if($threadlist === NULL) {
+		$threadlist = post_find( array( "isfirst" => 0, "quotepid" => 0 ), array( "create_date" => "-1" ), 1, 5 );
+		cache_set($cachename, $threadlist, 600);
+	}
+	return $threadlist;
+}
+	$ax_posts = ax_get_comment_list();
+	foreach($ax_posts as &$post){
+?>
+					<li class="media thread tap " data-href="<?php echo url("thread-$post[tid]")?>">
+					<a href="<?php echo url("user-$post[uid]")?>" tabindex="-1" class="ml-1 mt-1 mr-3">
+							<img class="avatar-3" src="<?php echo $post['user_avatar_url'];?>">
+						</a>				
+						<div class="media-body">
+							<div class="subject">
+								<a href="<?php echo url("thread-$post[tid]")?>"><?php echo xn_substr($post['message_fmt'], 0, 25);?></a>
+							</div>
+							<div class="d-flex justify-content-between small mt-1">
+								<div>									
+									<span class="username text-grey mr-1"><?php echo $post['username']?></span>
+									<span class="date text-grey"><?php echo $post['create_date_fmt']?></span>
+								</div>
+							</div>
+						</div>
+					</li>
+<?php }?>									
+				</ul>
+			</div>

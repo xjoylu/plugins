@@ -1,0 +1,13 @@
+<?php $haya_edit_log_config = kv_get('haya_edit_log'); ?>
+<?php if(isset($haya_edit_log_config['edit_log_is_ip']) && ($haya_edit_log_config['edit_log_is_ip'] == 1)) { ?>
+	<?php if(!empty($user)) { ?>
+		<span class="m-l-1 text-grey">
+			<i class="icon-gittip" aria-hidden="true"></i>
+			<?php if($gid == 1) { ?>
+				<?php echo long2ip($thread['userip']); ?>
+			<?php } else { ?>
+				<?php echo preg_replace('/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/', "$1.*.$3.*", long2ip($thread['userip'])); ?>
+			<?php } ?>
+		</span>
+	<?php } ?>
+<?php } ?>

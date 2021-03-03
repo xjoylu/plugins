@@ -1,0 +1,10 @@
+{
+    "name": "文字按钮手风琴炫酷列表插件",
+    "brief": "1、六种背景随意选择，顺序随意设置！ <br>2、按钮可无限添加文字炫酷列表<br> 3、由八彩五月官制作<a href='http://www.8c5.cn'  target='_blank'><span class='text-success' style='padding-left:10px;'><b>www.8c5.cn</b></span></a><br>4、使用有问题联系客服QQ/微信：312215120 <br>5、更多精品插件点<a href='http://www.8c5.cn'  target='_blank'><span style='color:red; padding:0 6px;'><b>这里</b></span></a><span class='text-success' style='padding-left:1px;'><b>插件请勿外传!</b></span> ",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

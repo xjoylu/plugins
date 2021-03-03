@@ -1,0 +1,6 @@
+<?php exit;?>	2018-01-26 15:15:40	59.51.81.146	/plugin/lc_pay/alipay_touch/notify_url.php	0	UPDATE bbs_pay_log SET `recharge_zt`='1',`trade_no`='2018012621001004830573411890'  WHERE `recharge_order_sn`='1516950684' 
+<?php exit;?>	2018-01-26 15:15:40	59.51.81.146	/plugin/lc_pay/alipay_touch/notify_url.php	0	UPDATE bbs_user SET `golds`='100.07'  WHERE `uid`='1' 
+<?php exit;?>	2018-01-26 15:16:05	59.51.81.172	/plugin/lc_pay/alipay_touch/notify_url.php	0	UPDATE bbs_pay_log SET `recharge_zt`='1',`trade_no`='2018012621001004830573199727'  WHERE `recharge_order_sn`='1516950958' 
+<?php exit;?>	2018-01-26 15:16:05	59.51.81.172	/plugin/lc_pay/alipay_touch/notify_url.php	0	UPDATE bbs_user SET `golds`='100.08'  WHERE `uid`='1' 
+<?php exit;?>	2018-01-26 15:16:46	59.51.81.166	/plugin/lc_pay/alipay_touch/notify_url.php	0	UPDATE bbs_pay_log SET `recharge_zt`='1',`trade_no`='2018012621001004830572988211'  WHERE `recharge_order_sn`='1516950998' 
+<?php exit;?>	2018-01-26 15:16:46	59.51.81.166	/plugin/lc_pay/alipay_touch/notify_url.php	0	UPDATE bbs_user SET `golds`='100.09'  WHERE `uid`='1' 

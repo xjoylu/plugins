@@ -1,0 +1,10 @@
+{
+    "name": "自动删除日志",
+    "brief": "每天自动删除log目录7天以上的日志（包含7天）",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

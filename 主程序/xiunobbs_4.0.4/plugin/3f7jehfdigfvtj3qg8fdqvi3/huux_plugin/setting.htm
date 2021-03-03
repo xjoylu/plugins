@@ -1,0 +1,114 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<style type="text/css">
+#wrapper{ background: #fff}
+.fr{float: right;}
+.fl{float: left;}
+.card{border: 1px solid rgba(0, 0, 0, 0.125);box-shadow: 0px 0px 10px 0px #e2e2e2; margin-top:0px;}
+.btn-default {color: #333;background-color: #fff;border-color: #ccc;}
+.btn-default:hover {color: #333;background-color: #e6e6e6;border-color: #adadad;}
+.card-header .label {display: inline-block;padding: .25em .4em;font-size: 75%;line-height: 1;color: #fff;white-space: nowrap;vertical-align: baseline;border-radius: .25rem;}
+.card-header .label-success {background-color: #5cb85c;}
+/*TAB行*/
+#myTab li{ padding: 0; }
+#myTab li.nav-item.pull-right{ float: right; }
+#myTab a{ display: inline-block;text-decoration: none; padding: 0.5rem 1rem 0.5rem 1rem }
+#myTab a:hover{color:#000; background: #F9F9F9}
+#myTab a.active{ background-color:#fff; }
+/*TAB内容*/
+.tab-content{ margin-bottom: 10px;border-bottom-right-radius:5px;border-bottom-left-radius:5px;}
+/*form内容*/
+.form-group { padding: 0.5rem 1rem;border-bottom: 1px dashed rgba(226, 226, 226, 0.46);margin-bottom: 0;}
+.form-group b{ font-weight: normal; }
+.form-group p,.form-group label{ margin-bottom: 0; }
+.form-group p em{ font-style: normal; padding: 0 1rem }
+.form-group label{font-size:0.85rem;}
+.form-group .form-control-label b{font-size: 12px;padding:0px 4px; border:solid 1px #e2e2e2;display:inline-block;color:#333;background: #f2f2f2;border-radius: 2px; font-weight: normal;font-family:courier new, sans-serif; margin: 0px 2px 2px 0px;}
+.form-group .form-control-label b.z-js{background: #f0ad4e;color:#fff;border:none;}
+.form-group .form-control-label b.z-jq{background: #6AB3DE;color:#fff;border:none;}
+.form-group .form-control{box-shadow:0px 1px 5px 0px #e2e2e2 inset;}
+.form-group .form-control:focus { box-shadow:0px 1px 5px 0px #E2F1FF inset;border-color: #9BC9EF;}
+/*table */
+.table-responsive table th,.table-responsive table td{font-size: 0.75rem}
+.table-responsive table .form-control{font-size: 0.75rem;padding: 0.25rem}
+.table-responsive table .custom-select{font-size: 0.75rem;padding: 0.25rem 1.5rem 0.25rem 0.5rem}
+</style>
+<div class="row">
+	<div class="col-lg-12">
+
+		<div class="card">
+
+			<div class="card-header"> 
+					<div class="row">
+						<div class="col-lg-4"><p class="m-y-xs text-muted fl">大白插件<a href="//www.huux.cc" target="_blank" ><span class="m-l-xs label label-success">官网</span></a></p></div>
+						<div class="col-lg-8 text-right ">
+							<div class="btn-group">
+							    <a class="btn btn-default text-muted btn-sm" target="_blank" href="//www.huux.cc" role="button">问题反馈</a>
+								<a class="btn btn-default text-muted btn-sm" target="_blank" href="https://jq.qq.com/?_wv=1027&k=4B02i5s" role="button"><i class="icon-qq"></i></a>
+								<a class="btn btn-default text-muted btn-sm" href="<?php echo url("plugin-setting-huux_plugin");?>" role="button"><i class="icon-refresh"></i></a>
+								<a class="btn btn-default text-muted btn-sm" href="<?php echo url("plugin");?>" role="button"><i class="icon-times"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- card-block start -->
+			<div class="card-block">
+			    <form action="<?php echo url('plugin-setting-huux_plugin');?>" method="post" id="form">
+				<!-- tab -->
+				<div class="form-group row">
+					<label class="col-sm-2 form-control-label">插件接口切换</label>
+					<div class="col-sm-10 small">
+						<?php echo $input['plugin_io']; ?> 
+					</div>
+				</div>
+				
+			    <div class="form-group row">
+							<label class="col-sm-2 form-control-label"></label>
+							<div class="col-sm-2 m-b-sm">
+								<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>...">立即切换</button>
+							</div>
+							<?php if($setting['plugin_io']==1){?>
+								<div class="col-sm-3 m-b-sm"><a target="_blank" class="btn btn-success btn-block" href="<?php echo url("plugin-official");?>">打开大白插件</a>
+								</div>
+							<?php }else{?>
+							<div class="col-sm-3 m-b-sm"><a target="_blank" class="btn btn-secondary btn-block" href="<?php echo url("plugin-official");?>">打开官方插件</a>
+								</div>
+
+							<?php }?>
+
+			    </div>
+			    
+
+				</form>
+
+			</div>
+			<!-- card-block end -->
+			<div class="card-footer text-right"><p class="m-y-xs text-muted  text-small"><i class="icon-battery-4 m-r-sm"></i></p></div>
+	    </div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+var jform = $("#form");
+var jsubmit = $("#submit");
+var referer = '<?php echo url("plugin-setting-huux_plugin");?>';
+jform.on('submit', function(){
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serialize();
+	console.log(postdata);
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message);
+			jsubmit.text(message).delay(500).button('reset').location(referer);
+			return;
+		} else {
+			$.alert(message);
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+
+</script>

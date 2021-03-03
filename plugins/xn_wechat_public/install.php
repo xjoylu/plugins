@@ -14,7 +14,7 @@ $sql = "CREATE TABLE {$tablepre}user_open_wechat (
   openid char(40) NOT NULL COMMENT '微信 OPENID 标识',
   PRIMARY KEY (id),
   KEY openid (openid)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;8";
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 
 $r = db_exec($sql);
 

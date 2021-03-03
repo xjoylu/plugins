@@ -1,0 +1,64 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<style type="text/css">
+.a8c5_theme_bbs {display: block;border: 1px solid #ced4da;border-radius: 0.25rem;width: 100% !important;color: #84878a;}
+.a8c5_theme_bbs_hr_1 {margin-bottom: 1.8rem;}
+.a8c5_theme_bbs_hr_2 {margin-top: 1.5rem; margin-right: 6.5rem; margin-bottom: 1.5rem; margin-left: 3.85rem;}
+.a8c5_theme_bbs_hr_3 {margin-bottom: 0.3rem; width: 795px; height: 309px; border: 1px solid #e0e1e2;}
+textarea {
+  display: block;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 22px;
+  padding-left: 5px;
+}
+</style>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+		    <div class="card-body" >
+		       <h4 class="card-title mb-3">用户交流渠道</h4>
+                  官方网站：www.8c5.cn/ <a href="http://www.8c5.cn" target="_blank" style="text-decoration: none">点击进入</a><br>
+                  客服QQ群/微信：312215120<br>
+		          QQ交流分享群：146126201  <a target='_blank' href='//shang.qq.com/wpa/qunwpa?idkey=419e79c4fd427f516556b1e496a6ab3691e575bd5fbd765f569f50eaa1c32e84'><img border='0' src='//pub.idqqimg.com/wpa/images/group.png' alt='xiuno插件-8c5.cn' title='xiuno插件-8c5.cn'></a><br>
+		          我们的服务范围：xiuno功能插件，xiuno模板主题开发，xiuno网站体系建设，为您提供一站式服务！
+				 
+		    </div>
+			 <hr class="a8c5_theme_bbs_hr_2" />
+			
+			<div class="card-body">
+			
+				<form action="<?php echo url("plugin-setting-a8c5_daohang");?>" method="post" id="form">
+				
+				<h4 class="card-title mb-3">自定义导航设置</h4>
+				<h4 class="card-title mb-3">写法：<xmp style="font-size:8px;"><li class="nav-item"><a class="nav-link" href="http://www.8c5.cn"><i class="icon-circle-o d-md-none"></i>类目</a></li></xmp>请修改href的地址和分类名称即可，支持多行重复！</h4> 
+                <!-- 首页之前 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">首页之前</label>
+			    <div class="col-sm-9">
+                <textarea name="a8c5_theme_bbs_name_1_htm" class="a8c5_theme_bbs" style="height: 100px; resize: none;"><?php echo $setting['a8c5_theme_bbs_name_1_htm'];?></textarea>			
+		        </div>
+	            </div>
+				<!-- 自定义类目 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">自定义类目</label>
+			    <div class="col-sm-9">
+                <textarea name="a8c5_theme_bbs_name_2_htm" class="a8c5_theme_bbs" style="height: 200px; resize: none;"><?php echo $setting['a8c5_theme_bbs_name_2_htm'];?></textarea>			
+		        </div>
+	            </div>
+
+				
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label"></label>
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+							<a role="button" class="btn btn-secondary btn-block mt-3" href="javascript:history.back();"><?php echo lang('back');?></a>
+						</div>
+					</div>
+				</form>
+  </div>
+</div>
+</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>

@@ -1,0 +1,11 @@
+{
+    "name": "兔兔超级SEO",
+    "brief": "自动sitemap、主动提交、自动Ping提交、熊掌号提交、熊掌号页面改版、手动提交、MIP页面生成功能！",
+    "version": "1.07",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

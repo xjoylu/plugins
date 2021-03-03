@@ -1,0 +1,17 @@
+.pay-view .btn-primary{
+    background-color: #2196f3 !important;
+    border-color: #2196f3 !important;
+}
+
+.pay-view button{
+    width: 120px !important;
+}
+
+.page-item {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.ivu-page-item-active a, .ivu-page-item-active:hover a {
+    color: #fff !important;
+}

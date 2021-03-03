@@ -1,0 +1,102 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<div class="row">
+	<div class="col-lg-10 mx-auto">
+		<div class="card">
+			<div class="card-body">
+				<form action="<?php echo url("plugin-setting-ax_friends");?>" method="post" id="form">
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">是否加入导航：</label>
+						<div class="col-sm-10">
+							<?php echo $friends_nav; ?>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">是否设为首页：</label>
+						<div class="col-sm-10">
+							<?php echo $friends_index; ?>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">显示数目：</label>
+						<div class="col-sm-10">
+							<?php echo $friends_num; ?>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">活跃用户图标：<img src="../plugin/ax_friends/view/img/lv1.png"></label>
+						<div class="col-sm-10">
+							<?php echo $friends_uid_lv1; ?> 
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">活跃用户图标：<img src="../plugin/ax_friends/view/img/lv2.png"></label>
+						<div class="col-sm-10">
+							<?php echo $friends_uid_lv2; ?> 
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">活跃用户图标：<img src="../plugin/ax_friends/view/img/lv3.png"></label>
+						<div class="col-sm-10">
+							<?php echo $friends_uid_lv3; ?> 
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">活跃用户图标：<img src="../plugin/ax_friends/view/img/lv4.png"></label>
+						<div class="col-sm-10">
+							<?php echo $friends_uid_lv4; ?> 
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">发布间隔(秒)：</label>
+						<div class="col-sm-10">
+							<?php echo $friends_time; ?> 
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label">背景设置：</label>
+						<div class="col-sm-10">
+							<?php echo $friends_bg; ?> 
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 form-control-label"></label>
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+							<a role="button" class="btn btn-secondary btn-block mt-3" href="javascript:history.back();">
+								<?php echo lang('back');?>
+							</a>
+						</div>
+					</div>
+				</form>
+
+					<div class="form-group card-body">
+						用户图标显示根据填写数字显示，当用户达到填写的或者默认的值以上时候会显示小图标，小图标自行更换路径plugin\ax_friends\view\img<br>
+						<span class="text-danger">PS:上面设置输入框如果为空均使用默认值输出。</span>
+					</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+var jform = $("#form");
+var jsubmit = $("#submit");
+var referer = '<?php echo url("plugin-setting-ax_friends");?>';
+jform.on('submit', function(){
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serialize();
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			$.alert(message);
+			jsubmit.text(message).delay(1000).button('reset').location(referer);
+		} else {
+			$.alert('提交失败');
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+</script>

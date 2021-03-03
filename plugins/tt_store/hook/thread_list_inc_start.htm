@@ -1,0 +1,39 @@
+<?php if(isset($active) AND $active == 'Store') {?>
+<style>
+    .buy_button{border:0px;display:inline-block; height:32px; width:81px; border-radius:16px;color:dodgerblue;background-color: lightcyan; cursor:pointer;float:right;}
+    .buy_a{text-decoration: none!important;}
+    .buy_a:hover .buy_button,.buy_button:hover{color: lightcyan; background-color: dodgerblue; opacity: 0.9;}
+</style>
+<?php $cache = cache_get('storelist'); $need_update=0;
+if($threadlist) { foreach($threadlist as &$_thread) { ?>
+<li class="media thread tap <?php echo $_thread['top_class'];?> " data-href="<?php echo url("thread-$_thread[tid]");?>" data-tid="<?php echo $_thread['tid'];?>">
+<?php $content_pay_type=$_thread['content_buy_type'];$content_pay=$_thread['content_buy'];
+if($content_pay_type=='1') $content_pay_type='<i class="icon-flask" aria-hidden="true"></i> ';
+else if($content_pay_type=='2') $content_pay_type='<i class="icon-diamond" aria-hidden="true"></i> ';
+else if ($content_pay_type=='3') {$content_pay_type='<i class="icon-jpy" aria-hidden="true"></i> ';$content_pay/=100.0;}
+if(isset($cache[$_thread['tid']])) $temp=$cache[$_thread['tid']];
+else{
+    $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/";
+    $content= db_find_one('post', array('tid'=>$_thread['tid']))['message'];
+    preg_match_all($pattern,$content,$matchContent);
+    if(isset($matchContent[1][0]))
+        $temp = $matchContent[1][0];
+    else{ $temp=$_thread['user_avatar_url'];}
+    $cache[$_thread['tid']]=$temp;$need_update=1;
+} ?>
+<a href="<?php echo url("thread-$_thread[tid]");?>" tabindex="-1" class="ml-1 mt-1 mr-3">
+<img class="avatar-3" src="<?php echo $temp;?>" style="border-radius:5px;">
+</a>
+<div class="media-body" style="padding-top: 10px;padding-bottom: 10px;">
+    <div class="subject break-all" >
+        <a class="buy_a" href="<?php echo url("thread-$_thread[tid]");?>"><?php echo $_thread['subject'];?><button class="buy_button" style="float:right;transition-duration: 0.3s;"><?php echo $content_pay_type,$content_pay; ?></button></a>
+    </div>
+</div>
+</li>
+<?php } if($need_update==1) cache_set('storelist',$cache,43200); } else { ?>
+<li><div><?php echo lang('none');?></div></li>
+<?php } ?>
+<?php }else { ?>
+
+
+板块

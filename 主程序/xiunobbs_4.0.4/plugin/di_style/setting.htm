@@ -1,0 +1,40 @@
+<?php
+/*
+	插件配置界面文件 (无配置则不需要此文件)
+*/
+?>
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-header"> 
+				<div class="d-flex justify-content-between">
+					<h4 class="mb-0">插件配置</h4>
+					<div class="btn-group">
+						<a class="btn btn-outline-secondary btn-sm" href="javascript:location.reload();" role="button"><i class="icon-refresh"></i></a>
+						<a class="btn btn-outline-secondary btn-sm" href="<?php echo url("plugin");?>" role="button"><i class="icon-times"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body"> 
+			<table class="table">
+				<thead>
+				    	<tr>
+				      		<th scope="col">名称</th>
+				      		<th scope="col">链接</th>
+				    	</tr>
+				</thead>
+			  	<tbody>
+				    	<tr>
+				      		<th scope="row">开发文档：</th>
+				      		<td><a target="_blank" href="https://bbs.xiuno.com/thread-13108.htm">Xiuno BBS 4.0 开发文档 & XiunoPHP 4.0 开发文档</a></td>
+				    	</tr>
+			  	</tbody>
+			</table> 
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>

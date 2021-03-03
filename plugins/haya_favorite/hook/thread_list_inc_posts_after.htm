@@ -1,11 +1,5 @@
-<?php 
-if ( 
-	(isset($haya_favorite_config['thread_show_favorite']) && $haya_favorite_config['thread_show_favorite'] == 1)
-	|| ($route == 'my' || $route == 'user')
-) { 
-?>
-<span class="ml-2" title="<?php echo intval($_thread['favorites']);?> <?php echo lang('haya_favorite_name'); ?>">
-	<i class="icon-star-o" aria-hidden="true"></i> 
-	<?php echo intval($_thread['favorites']);?>
+<?php $haya_favorite_count = db_count('haya_favorite', array('tid'=>$_thread['tid'])); ?>
+<span class="ml-3 mr-2">
+	<i class="icon-heart text-danger" aria-hidden="true"></i> 
+	<?php echo $haya_favorite_count;?>
 </span>
-<?php } ?>

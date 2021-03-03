@@ -1,0 +1,8 @@
+<?php
+$ss_ttk = setting_get('ss_ttk');
+if($ss_ttk){
+	$ss_ttk['tpl'] = htmlspecialchars_decode($ss_ttk['tpl']);
+	$ss_ttk_c = xn_json_encode($ss_ttk);
+	echo '<script>var ss_ttk = '.$ss_ttk_c.'</script><div id="ss_ttk"><iframe width="100%" height="'.$ss_ttk['height'].'" frameborder="0" src="./plugin/ss_ttk/up/index.html?v=1.1.0"></iframe></div>';
+}
+?>

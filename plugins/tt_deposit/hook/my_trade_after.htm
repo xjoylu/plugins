@@ -1,0 +1,5 @@
+<div class="tt_card"><div class="tt_card_title"><?php echo lang('get_money');?></div><div class="tt_content">
+<form method="post" id="form_d">
+    <input type="text" id="d_rmb" name="d_rmb"class="form-control" placeholder="人民币(单位:分)" aria-describedby="basic-addon1" style="display:inline-block;width: 45%;" maxlength="10"/>&nbsp;&nbsp;&nbsp;可提现¥<span style="color:red;" id="d_rmbs">0</span>元<br>
+    <input type="text" id="d_code" name="d_code" class="form-control" placeholder="输入您的支付宝/微信等账号信息" aria-describedby="basic-addon1" style="width: 85%;margin-top:5px;" maxlength="120"/>
+    <button type="button" class="btn btn-info" id="submit_d" data-loading-text="<?php echo lang('submiting');?>..." data-active="<?php echo url('my-deposit');?>" style="right:12%;position:absolute;margin-top:5px;"><?php echo lang('get_money');?></button></form></div></div>

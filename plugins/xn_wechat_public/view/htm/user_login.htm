@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-lg-5 offset-lg-3">
         <!--{hook user_login_card_before.htm}-->
-        <div class="card card-body">
+        <div class="card card-block">
             <h4 class="card-title">
                 绑定/新增
                 <!--{hook user_login_title_after.htm}-->
@@ -24,12 +24,12 @@
                 </p>
                 <input type="hidden" class="form-control" id="openid" value="<?php echo $openid ?>" name="openid">
                 <!--{hook user_login_password_after.htm}-->
-                <p class="text-right">
+                <p class="text-xs-right">
                     <button type="submit" class="btn btn-primary btn-block" id="submit"
                             data-loading-text="<?php echo lang('submiting'); ?>..."><?php echo lang('login'); ?></button>
                 </p>
                 <!--{hook user_login_submit_after.htm}-->
-                <p class="text-right">
+                <p class="text-xs-right">
                     <a type="submit" class="btn btn-primary btn-block"
                        href="<?php echo url('wxlogin-auto')?>"
                        data-loading-text="<?php echo lang('submiting'); ?>..."><span class="icon-qq"></span> 一键自动登</a>

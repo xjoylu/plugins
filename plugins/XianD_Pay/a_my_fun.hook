@@ -1,0 +1,130 @@
+public function payPlugin()
+{
+    $User = M("User");
+    $data = $User->read(NOW_UID);
+    // 获取用户金币
+    $gold =  $User->get_gold(NOW_UID);
+    $data['avatar'] = $this->avatar($data['user']);
+    $plugin_inc = get_plugin_inc('XianD_Pay');
+
+    // 生成订单号
+    $orderNum = date("YmdHis") . mt_rand(100, 999);
+    $this -> v('orderNum', $orderNum);
+
+    $order = S('xiand_pay');
+    $page_count = $order->count("*", ['AND' => ['uid' => $this->_uid]]);
+    $this->v("page_count", $page_count);
+
+    $this -> v('title', '金币充值');
+    $this -> v('data', $data);
+    $this -> v('gold', $gold);
+    $this -> v('plugin_inc', $plugin_inc);
+
+    $this->menu_action['pay'] = 'active';
+    $this -> v('menu_action', $this->menu_action);
+    $this -> display('plugin.XianD_Pay::pay');
+}
+
+
+public function payApi() {
+    $plugin_inc = get_plugin_inc('XianD_Pay');
+
+    //构造要请求的参数数组
+    $parameter = [
+        "pid" => trim($plugin_inc['partner']),
+        "type" => $_POST['type'],
+        "notify_url" => WWW . "u/payNotify.html",
+        "return_url" => WWW . "u/returnUrl.html",
+        "out_trade_no" => $_POST['WIDout_trade_no'],
+        "name" => $_POST['WIDsubject'],
+        "money"	=> $_POST['WIDtotal_fee'],
+        "sitename" => $this->conf['title']
+    ];
+
+    require_once(PLUGIN_PATH . "XianD_Pay/lib/muzhifu_submit.class.php");
+
+    $alipaySubmit = new \AlipaySubmit($this->payConfig());
+    $html_text = $alipaySubmit->buildRequestForm($parameter);
+
+    $type = 0;
+    switch ($_POST['type'])
+    {
+        case 'qqpay':
+            $type = 2;
+            break;
+        case 'wxpay':
+            $type = 1;
+            break;
+    }
+
+    $plugin_inc = get_plugin_inc('XianD_Pay');
+
+    // 预下单
+    $xiandPay = S('xiand_pay');
+    $xiandPay->insert([
+        'trade_no' => $_POST['WIDout_trade_no'],
+        'uid' => $this->_uid,
+        'money' => $_POST['WIDtotal_fee'] * 100,
+        'type' => $type,
+        'gold' => $_POST['WIDtotal_fee'] * $plugin_inc['proportion'],
+        'add_time' => date('Y-m-d H:i:s')
+    ]);
+    echo $html_text;
+}
+
+public function payNotify() {
+    require_once(PLUGIN_PATH . "XianD_Pay/lib/muzhifu_notify.class.php");
+    $alipayNotify = new \AlipayNotify($this->payConfig());
+
+    // 获取请求参数
+    $data = $_GET;
+    unset($data['s'], $data['HY_URL']);
+    $verify_result = $alipayNotify->verifyNotify($data);
+    $xiandPay = S('xiand_pay');
+    if($verify_result) {
+        $orderData = $xiandPay->get("*", ['AND' => ['trade_no' => $data['out_trade_no']]]);
+        if($orderData['status'] == 0) {
+            $User = M("User");
+            $User->update_int($orderData['uid'],'gold','+',$orderData['gold']);
+            $xiandPay->update(['status' => 1, 'pay_time' => date('Y-m-d H:i:s')], ['trade_no' => $data['out_trade_no']]);
+        }
+    }else {
+        echo "验证失败";
+    }
+}
+
+public function returnUrl() {
+    require_once(PLUGIN_PATH . "XianD_Pay/lib/muzhifu_notify.class.php");
+    $alipayNotify = new \AlipayNotify($this->payConfig());
+    // 获取请求参数
+    $data = $_GET;
+    unset($data['s'], $data['HY_URL']);
+    $verify_result = $alipayNotify->verifyNotify($data);
+    if($verify_result) {
+        header("Location:" . WWW . 'u/payPlugin.html?status=success');
+    }else {
+        header("Location:" . WWW . 'u/payPlugin.html?status=error');
+    }
+}
+
+public function getOrderList() {
+    $index = $_GET['index'] ? $_GET['index'] : 1;
+    // 获取订单列表
+    $order = S('xiand_pay');
+    $orderList = $order->select(['trade_no', 'money', 'type', 'gold', 'status', 'pay_time', 'add_time'], ['AND' => ['uid' => $this->_uid], "ORDER" => ['add_time'=>'DESC'], 'LIMIT' => [($index - 1) * 10, 10]]);
+    $this->json($orderList);
+}
+
+private function payConfig() {
+    $plugin_inc = get_plugin_inc('XianD_Pay');
+    $alipay_config = [
+        'partner' => $plugin_inc['partner'],
+        'key' => $plugin_inc['key'],
+        'sign_type' => strtoupper('MD5'),
+        'input_charset' => strtolower('utf-8'),
+        'transport' => 'http',
+        'apiurl' => 'https://pay.moexian.com/'
+    ];
+    return $alipay_config;
+}
+

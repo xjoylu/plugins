@@ -1,0 +1,1 @@
+case 'lc_sign': include APP_PATH.'plugin/lc_sign/lc_sign.php'; break;

@@ -1,0 +1,75 @@
+<div class="change">
+ <div class="changestyle ftnav">
+ 	<a href="." class="minsc" title="首页"><img src="plugin/van_theme_dt/images/home.png"><br><span class="mindh">首页</span></a>
+	<a href="my.htm" class="minsc" title="个人中心"><img src="plugin/van_theme_dt/images/my.png"><br><span class="mindh">我的</span></a>
+	<a href="javascript:void(0);" onclick="jumpview()" class="minsc" id="viewopen" title="视图"><img src="plugin/van_theme_dt/images/view.png"><br><span class="mindh">视图</span></a>
+    <script type="text/javascript">
+    function jumpview(){
+        var cd = document.getElementById("showview");
+        if (cd.style.display=="none"){
+            cd.style.display = "block";
+        }else{
+            cd.style.display = "none";
+        }
+    }
+    </script>
+	<a href="<?php echo url('search');?>" class="minsc" title="搜索"><img src="plugin/van_theme_dt/images/sc.png"><br><span class="mindh">搜索</span></a>
+	<a href="javascript:void(0);"  onclick="jumpnav()" class="minsc"  title="更多"><img src="plugin/van_theme_dt/images/more.png"><br><span class="mindh">导航</span></a>
+	
+	
+	<script type="text/javascript">
+    function jumpnav(){
+        var cd = document.getElementById("fnnav");
+        if (cd.style.display=="none"){
+            cd.style.display = "block";
+        }else{
+            cd.style.display = "none";
+        }
+    }
+    </script>
+    <ul id="fnnav" class="fnnav" style="display:none"><!--临时修改-->
+        <?php foreach($forumlist_show as $_forum) { ?>
+        <li class="fnli" fid="<?php echo $_forum['fid'];?>">
+        <a class="fnlia" href="<?php echo url("forum-$_forum[fid]");?>"><?php echo $_forum['name'];?></a>
+        </li><span>∨</span>
+        <?php } ?>
+    </ul>
+	
+	
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ <div id="showview" style="display:none;">
+	<div class="changestyle changeview" id="changestyle">
+	<a href="javascript:;" id="blogstyle" title="博客导读"><img src="plugin/van_theme_dt/images/blog.png"><br><span class="mindh mvtxt">图文</span></a>
+	<a href="javascript:;" id="imgstyle" title="图片列表"><img src="plugin/van_theme_dt/images/img.png"><br><span class="mindh mvtxt">图片</span></a>
+	<a href="javascript:;" id="liststyle" title="文本列表"><img src="plugin/van_theme_dt/images/list.png"><br><span class="mindh mvtxt">文本</span></a>
+	<span class="mints">↓列表样式切换</span>
+
+	<script type="text/javascript">
+		var oA=document.getElementById('blogstyle');
+		var oLink=document.getElementById('changestyle');
+		oA.onclick=function(){
+	//alert(oLink.href);
+			oLink.href='plugin/van_theme_dt/css/blog.css';
+		};
+		var oA=document.getElementById('imgstyle');
+		var oLink=document.getElementById('changestyle');
+		oA.onclick=function(){
+	//alert(oLink.href);
+			oLink.href='plugin/van_theme_dt/css/img.css';
+		};
+		var oA=document.getElementById('liststyle');
+		var oLink=document.getElementById('changestyle');
+		oA.onclick=function(){
+	//alert(oLink.href);
+			oLink.href='plugin/van_theme_dt/css/list.css';
+		};
+	</script>
+	</div>
+ </div>
+</div>

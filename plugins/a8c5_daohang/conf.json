@@ -1,0 +1,11 @@
+{
+    "name": "自定义导航插件",
+    "brief": "1、自定义顶部导航！ <br>2、代码按照实例填写<br> 3、由八彩五月网制作<a href='http://www.8c5.cn'  target='_blank'><span style='color:red;'><b>www.8c5.cn</b></span></a><br>4、使用有问题联系客服QQ/微信：312215120 <br>",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

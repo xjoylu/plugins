@@ -1,0 +1,32 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<div class="row">
+	<div class="col-lg-8 offset-lg-2">
+		<div class="mdui-card">
+			<div class="mdui-card-header">
+				<div class="mdui-tab" mdui-tab>
+						<a id="re" class="mdui-ripple <?php echo $active == 'default' ? 'mdui-tab-active' : '';?>" href="#"><?php echo lang('my_join_thread');?> (<?php echo $user['threads'];?>)</a>
+						<!--{hook my_profile_nav_item_after.htm}-->
+						<script>
+								var $$ = mdui.JQ;
+								$$('#re').on('click',function () {
+									location.reload(true);
+								});
+								</script>
+					</div>
+			</div>
+			<div class="mdui-card-content">
+				<table class="mdui-table mdui-table-hoverable threadlist">
+					<tbody>
+						<?php include _include(APP_PATH.'view/htm/thread_list.inc.htm');?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<nav class="text-center"><ul class="pagination"><?php echo $pagination; ?></ul></nav>
+		<a role="button" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block" href="<?php echo url('my');?>"> <?php echo lang('back');?> </a>
+	</div>
+</div>
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>

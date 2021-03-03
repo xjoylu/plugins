@@ -1,0 +1,13 @@
+{
+    "name": "红包帖子插件",
+    "brief": "可以发表红包主题，支持普通红包、口令红包。",
+    "version": "1.03",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": {
+        "tt_credits": "1.16"
+    }
+}
